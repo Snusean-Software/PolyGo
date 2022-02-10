@@ -2,6 +2,8 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using PolyGo.Shells;
+
 namespace PolyGo
 {
     public partial class App : Application
@@ -10,7 +12,7 @@ namespace PolyGo
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new AppShell();
         }
 
         protected override void OnStart()
