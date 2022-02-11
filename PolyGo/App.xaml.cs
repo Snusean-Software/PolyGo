@@ -24,7 +24,6 @@ namespace PolyGo
 		protected override void OnStart()
 		{
 			FileInfo accInf = new FileInfo(AccountFilePath);
-			File.Delete(AccountFilePath);
 			if (!accInf.Exists)
 			{
 				FileStream fs = File.Create(AccountFilePath);
