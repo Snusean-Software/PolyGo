@@ -1,12 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PolyGo.Views.InitialSetup.TeacherListPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to TeacherListPage!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 x:Class="PolyGo.Views.InitialSetup.TeacherListPage">
+	<ContentPage.Content>
+		<StackLayout>
+			<Label Text="Welcome to TeacherListPage!"
+				VerticalOptions="CenterAndExpand" 
+				HorizontalOptions="CenterAndExpand" />
+			<Button Text="Next" Clicked="OnNextButtonClicked"/>
+			<Button Text="I'll do it later" Clicked="OnDoLaterButtonClicked"/>
+		</StackLayout>
+	</ContentPage.Content>
 </ContentPage>

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 	<TargetFramework>netstandard2.0</TargetFramework>
@@ -11,13 +11,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Views\MapPage.xaml.cs" />
-	  <Compile Remove="Views\SchedulePage.xaml.cs" />
+	<Compile Remove="Views\MapPage.xaml.cs" />
+	<Compile Remove="Views\SchedulePage.xaml.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Remove="Views\MapPage.xaml" />
-	  <EmbeddedResource Remove="Views\SchedulePage.xaml" />
+	<EmbeddedResource Remove="Views\MapPage.xaml" />
+	<EmbeddedResource Remove="Views\SchedulePage.xaml" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -28,34 +28,37 @@
 
 	<ItemGroup>
 	<EmbeddedResource Update="Shells\AppShell.xaml">
-		<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	</EmbeddedResource>
-	<EmbeddedResource Update="Shells\InitalSetupShell.xaml">
-	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	<EmbeddedResource Update="Shells\InitialSetupShell.xaml">
+	<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	</EmbeddedResource>
 	<EmbeddedResource Update="Views\InitialSetup\IsStudentPage.xaml">
-	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	</EmbeddedResource>
 	<EmbeddedResource Update="Views\InitialSetup\LangSelectionPage.xaml">
-	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	</EmbeddedResource>
 	<EmbeddedResource Update="Views\InitialSetup\NameAndGroupPage.xaml">
-	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	</EmbeddedResource>
 	<EmbeddedResource Update="Views\InitialSetup\TeacherListPage.xaml">
-	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	</EmbeddedResource>
 	<EmbeddedResource Update="Views\Profile\MainProfilePage.xaml">
-	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	</EmbeddedResource>
 	<EmbeddedResource Update="Views\Schedule\MainSchedulePage.xaml">
-	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	</EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\Map\MapCampusPage.xaml.cs">
-	    <DependentUpon>MapCampusPage.xaml</DependentUpon>
-	  </Compile>
+	<Compile Update="Shells\InitialSetupShell.xaml.cs">
+	  <DependentUpon>InitialSetupShell.xaml</DependentUpon>
+	</Compile>
+	<Compile Update="Views\Map\MapCampusPage.xaml.cs">
+		<DependentUpon>MapCampusPage.xaml</DependentUpon>
+	</Compile>
 	</ItemGroup>
 </Project>

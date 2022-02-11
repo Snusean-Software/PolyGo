@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using PolyGo.SupportFuncs;
+
 namespace PolyGo.Views.InitialSetup
 {
   [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -15,6 +17,10 @@ namespace PolyGo.Views.InitialSetup
     public NameAndGroupPage()
     {
       InitializeComponent();
+    }
+    void OnFinishButtonClicked(object sender, EventArgs e)
+    {
+      InSetupSupportFuncs.GoToMainShell(App.user);
     }
   }
 }
