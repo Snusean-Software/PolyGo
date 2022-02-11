@@ -3,12 +3,12 @@ using Xamarin.Forms.Xaml;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 
-namespace PolyGo.Views
+namespace PolyGo.Views.Map
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class MapPage : ContentPage
+	public partial class MapCampusPage : ContentPage
 	{
-		public MapPage()
+		public MapCampusPage()
 		{
 			InitializeComponent();
 		}

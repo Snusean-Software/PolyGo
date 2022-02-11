@@ -11,6 +11,16 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Views\MapPage.xaml.cs" />
+	  <Compile Remove="Views\SchedulePage.xaml.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Remove="Views\MapPage.xaml" />
+	  <EmbeddedResource Remove="Views\SchedulePage.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
 	<PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
 	<PackageReference Include="Xamarin.Essentials" Version="1.7.1" />
 	<PackageReference Include="Xamarin.Forms.Maps" Version="5.0.0.2337" />
@@ -20,11 +30,32 @@
 	<EmbeddedResource Update="Shells\AppShell.xaml">
 		<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	</EmbeddedResource>
-	<EmbeddedResource Update="Views\MapPage.xaml">
-		<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	<EmbeddedResource Update="Shells\InitalSetupShell.xaml">
+	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	</EmbeddedResource>
-	<EmbeddedResource Update="Views\SchedulePage.xaml">
-		<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	<EmbeddedResource Update="Views\InitialSetup\IsStudentPage.xaml">
+	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	</EmbeddedResource>
+	<EmbeddedResource Update="Views\InitialSetup\LangSelectionPage.xaml">
+	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Views\InitialSetup\NameAndGroupPage.xaml">
+	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Views\InitialSetup\TeacherListPage.xaml">
+	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Views\Profile\MainProfilePage.xaml">
+	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Views\Schedule\MainSchedulePage.xaml">
+	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Views\Map\MapCampusPage.xaml.cs">
+	    <DependentUpon>MapCampusPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 </Project>
