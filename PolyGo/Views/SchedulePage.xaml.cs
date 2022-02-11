@@ -9,12 +9,12 @@ using Xamarin.Forms.Xaml;
 
 namespace PolyGo.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SchedulePage : ContentPage
-    {
-        public SchedulePage()
-        {
-            InitializeComponent();
-        }
-    }
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class SchedulePage : ContentPage
+	{
+		public SchedulePage()
+		{
+			InitializeComponent();
+		}
+	}
 }
