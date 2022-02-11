@@ -9,19 +9,19 @@ would keep its resources in the "Resources" directory of the application:
 
 Resources/
 	drawable-hdpi/
-		icon.png
+	icon.png
 
 	drawable-ldpi/
-		icon.png
+	icon.png
 
 	drawable-mdpi/
-		icon.png
+	icon.png
 
 	layout/
-		main.xml
+	main.xml
 
 	values/
-		strings.xml
+	strings.xml
 
 In order to get the build system to recognize Android resources, set the build action to
 "AndroidResource".	The native Android APIs do not operate directly with filenames, but 
@@ -32,16 +32,16 @@ for the above Resources layout, this is what the Resource class would expose:
 
 public class Resource {
 	public class drawable {
-		public const int icon = 0x123;
+	public const int icon = 0x123;
 	}
 
 	public class layout {
-		public const int main = 0x456;
+	public const int main = 0x456;
 	}
 
 	public class strings {
-		public const int first_string = 0xabc;
-		public const int second_string = 0xbcd;
+	public const int first_string = 0xabc;
+	public const int second_string = 0xbcd;
 	}
 }
 
