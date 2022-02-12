@@ -18,7 +18,7 @@ namespace PolyGo.Droid
 			Manifest.Permission.AccessFineLocation
 		};
 
-		protected override async void OnCreate(Bundle savedInstanceState)
+		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
 
