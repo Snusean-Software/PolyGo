@@ -1,28 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+						 xmlns:resources="clr-namespace:PolyGo.Resx"
 			 x:Class="PolyGo.Views.InitialSetup.IsStudentPage">
 	<ContentPage.Content>
 		<StackLayout>
-			<Label Text="Welcome to IsStudentPage!"
-				VerticalOptions="CenterAndExpand" 
-				HorizontalOptions="CenterAndExpand" />
-			<Label Text="You are..." 
+			<Label Text="{x:Static resources:AppResources.YouAre}" 
 						 FontSize="25" 
 						 VerticalOptions="CenterAndExpand"/>
 			<RadioButton x:Name="rbStudent"
-                Content="Student" 
+                Content="{x:Static resources:AppResources.Student}" 
                 HorizontalOptions="Center"
                 FontSize="22"
                />
 			<RadioButton x:Name="rbTeacher"
-                Content="Teacher" 
+                Content="{x:Static resources:AppResources.Teacher}" 
                 HorizontalOptions="Center"
                 FontSize="22"
                 />
-			<Button Text="Next" 
+			<Button Text="{x:Static resources:AppResources.Next}" 
 							Clicked="OnNextButtonClicked"/>
-			<Button Text="I'll do it later" 
+			<Button Text="{x:Static resources:AppResources.DoLater}" 
 							Clicked="OnDoLaterButtonClicked"/>
 		</StackLayout>
 	</ContentPage.Content>

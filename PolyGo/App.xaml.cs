@@ -1,10 +1,11 @@
 ﻿using System;
 using System.IO;
+using System.Globalization;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 using PolyGo.Shells;
 using PolyGo.Models;
+using PolyGo.Resx;
 
 namespace PolyGo
 {
@@ -26,6 +27,7 @@ namespace PolyGo
 			FileInfo accInf = new FileInfo(AccountFilePath);
 			if (!accInf.Exists)
 			{
+				AppResources.Culture = CultureInfo.InstalledUICulture;
 				FileStream fs = File.Create(AccountFilePath);
 				fs.Close();
 				MainPage = new InitialSetupShell();
