@@ -14,7 +14,7 @@ namespace PolyGo.Views.InitialSetup
     {
       InitializeComponent();
     }
-    void OnNextButtonClicked(object sender, EventArgs e)
+    void OnFinishButtonClicked(object sender, EventArgs e)
     {
       InSetupSupportFuncs.GoToMainShell(App.user);
     }

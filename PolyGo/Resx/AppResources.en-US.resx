@@ -144,8 +144,11 @@
   <data name="Notification" xml:space="preserve">
     <value>Notification</value>
   </data>
-  <data name="NotifText" xml:space="preserve">
+  <data name="NotifTextIsStudent" xml:space="preserve">
     <value>Please choose your position</value>
+  </data>
+  <data name="NotifTextLanguage" xml:space="preserve">
+    <value>Please choose language</value>
   </data>
   <data name="NotifYes" xml:space="preserve">
     <value>Yes, of course</value>

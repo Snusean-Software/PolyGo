@@ -9,6 +9,7 @@
 //------------------------------------------------------------------------------
 
 namespace PolyGo.Resx {
+    using System;
     
     
     /// <summary>
@@ -143,9 +144,18 @@ namespace PolyGo.Resx {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Пожалуйста, выберите ваше положение.
         /// </summary>
-        public static string NotifText {
+        public static string NotifTextIsStudent {
             get {
-                return ResourceManager.GetString("NotifText", resourceCulture);
+                return ResourceManager.GetString("NotifTextIsStudent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Пожалуйста, выберите язык.
+        /// </summary>
+        public static string NotifTextLanguage {
+            get {
+                return ResourceManager.GetString("NotifTextLanguage", resourceCulture);
             }
         }
         

@@ -6,7 +6,10 @@
 	<ContentPage.Content>
 		<StackLayout>
 			<Button Text="{x:Static resources:AppResources.FinishSetup}" 
+							BackgroundColor="Blue"
 							Clicked="OnFinishButtonClicked"/>
+			<Button Text="{x:Static resources:AppResources.DoLater}" 
+							Clicked="OnDoLaterButtonClicked"/>
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

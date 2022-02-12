@@ -4,6 +4,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using PolyGo.SupportFuncs;
+using PolyGo.Resx;
 
 namespace PolyGo.Views.InitialSetup
 {
@@ -28,7 +29,7 @@ namespace PolyGo.Views.InitialSetup
       }
       else
       {
-        await DisplayAlert("Уведомление", "Пожалуйста, выберите ваше положение", "Да, конечно");
+        await DisplayAlert(AppResources.Notification, AppResources.NotifTextIsStudent, AppResources.NotifYes);
       }
     }
     void OnDoLaterButtonClicked(object sender, EventArgs e)

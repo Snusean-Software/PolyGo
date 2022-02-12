@@ -32,7 +32,7 @@ namespace PolyGo.Views.InitialSetup
 			}
 			else
 			{
-				await DisplayAlert("Уведомление", "Пожалуйста, выберите язык", "Да, конечно");
+				await DisplayAlert(AppResources.Notification, AppResources.NotifTextLanguage, AppResources.NotifYes);
 			}
 		}
 	  void OnDoLaterButtonClicked(object sender, EventArgs e)

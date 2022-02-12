@@ -5,8 +5,9 @@
 			 x:Class="PolyGo.Views.InitialSetup.TeacherListPage">
 	<ContentPage.Content>
 		<StackLayout>
-			<Button Text="{x:Static resources:AppResources.Next}" 
-							Clicked="OnNextButtonClicked"/>
+			<Button Text="{x:Static resources:AppResources.FinishSetup}" 
+							BackgroundColor="Blue"
+							Clicked="OnFinishButtonClicked"/>
 			<Button Text="{x:Static resources:AppResources.DoLater}" 
 							Clicked="OnDoLaterButtonClicked"/>
 		</StackLayout>
