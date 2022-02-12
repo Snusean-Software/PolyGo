@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -18,10 +14,11 @@ namespace PolyGo.Views.InitialSetup
     {
       InitializeComponent();
     }
-    async void OnNextButtonClicked(object sender, EventArgs e)
+    void OnNextButtonClicked(object sender, EventArgs e)
     {
+      InSetupSupportFuncs.GoToMainShell(App.user);
     }
-    async void OnDoLaterButtonClicked(object sender, EventArgs e)
+    void OnDoLaterButtonClicked(object sender, EventArgs e)
     {
       InSetupSupportFuncs.GoToMainShell(App.user);
     }
