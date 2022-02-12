@@ -27,6 +27,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	<EmbeddedResource Update="Resx\AppResources.resx">
+	  <Generator>PublicResXFileCodeGenerator</Generator>
+	  <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+	</EmbeddedResource>
 	<EmbeddedResource Update="Shells\AppShell.xaml">
 	<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	</EmbeddedResource>
@@ -54,6 +58,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	<Compile Update="Resx\AppResources.Designer.cs">
+	  <DesignTime>True</DesignTime>
+	  <AutoGen>True</AutoGen>
+	  <DependentUpon>AppResources.resx</DependentUpon>
+	</Compile>
 	<Compile Update="Shells\InitialSetupShell.xaml.cs">
 	  <DependentUpon>InitialSetupShell.xaml</DependentUpon>
 	</Compile>

@@ -1,14 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+						 xmlns:resources="clr-namespace:PolyGo.Resx"
 			 x:Class="PolyGo.Views.InitialSetup.LangSelectionPage">
 	<ContentPage.Content>
 		<StackLayout>
-			<Label Text="Welcome to LangSelectionPage!"
-				VerticalOptions="CenterAndExpand" 
-				HorizontalOptions="CenterAndExpand" />
-			<Button Text="Next" Clicked="OnNextButtonClicked"/>
-			<Button Text="I'll do it later" Clicked="OnDoLaterButtonClicked"/>
+			<RadioButton x:Name="rbRu"
+                Content="{x:Static resources:AppResources.Russian}" 
+                HorizontalOptions="Center"
+                FontSize="22"
+               />
+			<RadioButton x:Name="rbEn"
+                Content="{x:Static resources:AppResources.English}" 
+                HorizontalOptions="Center"
+                FontSize="22"
+                />
+			<Button Text="{x:Static resources:AppResources.Next}" 
+							Clicked="OnNextButtonClicked"/>
+			<Button Text="{x:Static resources:AppResources.DoLater}" 
+							Clicked="OnDoLaterButtonClicked"/>
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

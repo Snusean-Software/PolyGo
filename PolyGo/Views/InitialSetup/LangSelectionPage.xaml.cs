@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using PolyGo.Models;
 using PolyGo.SupportFuncs;
+using PolyGo.Resx;
 
 namespace PolyGo.Views.InitialSetup
 {
@@ -21,7 +18,22 @@ namespace PolyGo.Views.InitialSetup
 		}
 		async void OnNextButtonClicked(object sender, EventArgs e)
 		{
-			await Shell.Current.GoToAsync($"{nameof(IsStudentPage)}");
+			if(rbRu.IsChecked)
+			{
+				App.user.Language = "ru-RU";
+				AppResources.Culture = new CultureInfo("ru-RU");
+				await Shell.Current.GoToAsync($"{nameof(IsStudentPage)}");
+			}
+			else if(rbEn.IsChecked)
+			{
+				App.user.Language = "en-US";
+				AppResources.Culture = new CultureInfo("en-US");
+				await Shell.Current.GoToAsync($"{nameof(IsStudentPage)}");
+			}
+			else
+			{
+				await DisplayAlert("Уведомление", "Пожалуйста, выберите язык", "Да, конечно");
+			}
 		}
 	  void OnDoLaterButtonClicked(object sender, EventArgs e)
 		{
