@@ -18,5 +18,9 @@ namespace PolyGo.Views.InitialSetup
     {
       InSetupSupportFuncs.GoToMainShell(App.user);
     }
+    void OnDoLaterButtonClicked(object sender, EventArgs e)
+    {
+      InSetupSupportFuncs.GoToMainShell(App.user);
+    }
   }
 }
