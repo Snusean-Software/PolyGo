@@ -49,6 +49,12 @@
 	<EmbeddedResource Update="Views\InitialSetup\TeacherListPage.xaml">
 	<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	</EmbeddedResource>
+	<EmbeddedResource Update="Views\Map\Map11corpusPage.xaml">
+	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Views\Map\MapMainBuildingPage.xaml">
+	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	</EmbeddedResource>
 	<EmbeddedResource Update="Views\Profile\MainProfilePage.xaml">
 	<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	</EmbeddedResource>

@@ -1,5 +1,6 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using PolyGo.Views.Map;
 
 namespace PolyGo.Shells
 {
@@ -9,6 +10,8 @@ namespace PolyGo.Shells
 		public AppShell()
 		{
 			InitializeComponent();
+			Routing.RegisterRoute(nameof(MapMainBuildingPage), typeof(MapMainBuildingPage));
+			Routing.RegisterRoute(nameof(Map11corpusPage), typeof(Map11corpusPage));
 		}
 	}
 }
