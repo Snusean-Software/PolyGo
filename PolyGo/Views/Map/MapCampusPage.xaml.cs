@@ -24,6 +24,20 @@ namespace PolyGo.Views.Map
 			}
 		}
 
+		async void OnCorpusPinClicked(object sender, EventArgs e)
+		{
+			Pin pin = sender as Pin;
+			switch (pin.Label)
+			{
+				case "Main building":
+					await Shell.Current.GoToAsync($"{nameof(MapMainBuildingPage)}?");
+					break;
+				case "11 corpus":
+					await Shell.Current.GoToAsync($"{nameof(Map11corpusPage)}?");
+					break;
+			}
+		}
+
 		void OnButtonClicked(object sender, EventArgs e)
 		{
 			Button button = sender as Button;
