@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.IO;
 
 using PolyGo.Models;
 
@@ -8,8 +7,9 @@ namespace PolyGo.SupportFuncs
 {
 	internal class MainAppSupportFuncs
 	{
-		public static void ParseAccString(string accInfo, ref User user)
+		public static void ParseAccFile(string accPath, ref User user)
 		{
+			string accInfo = File.ReadAllText(accPath);
 			string[] separator = { " ", "\n" };
 			string[] words = accInfo.Split(separator, StringSplitOptions.RemoveEmptyEntries);
 			for(int i = 0; i < words.Length; ++i)

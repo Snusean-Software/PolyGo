@@ -20,10 +20,8 @@ namespace PolyGo.Views.Profile
 		{
 			base.OnAppearing();
 
-			string accInfo = File.ReadAllText(App.AccountFilePath);
-			Console.WriteLine(accInfo);
 			User user = new User();
-			MainAppSupportFuncs.ParseAccString(accInfo, ref user);
+			MainAppSupportFuncs.ParseAccFile(App.AccountFilePath, ref user);
 
 			BindingContext = user;
 		}
