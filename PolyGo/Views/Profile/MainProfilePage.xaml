@@ -4,9 +4,31 @@
 			 x:Class="PolyGo.Views.Profile.MainProfilePage">
 	<ContentPage.Content>
 		<StackLayout>
-			<Label Text="Welcome to MainProfilePage!"
-				VerticalOptions="CenterAndExpand" 
-				HorizontalOptions="CenterAndExpand" />
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition></RowDefinition>
+					<RowDefinition></RowDefinition>
+					<RowDefinition></RowDefinition>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition></ColumnDefinition>
+					<ColumnDefinition></ColumnDefinition>
+					<ColumnDefinition></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+
+				<Label Grid.Column ="0" Grid.Row ="0" Text="Your name: " FontSize="22"/>
+				<Label Grid.Column ="1" Grid.Row ="0" Text="{Binding Name}" FontSize="22"/>
+				<Label Grid.Column ="0" Grid.Row ="1" Text="You are student: " FontSize="22"/>
+				<Label Grid.Column ="1" Grid.Row ="1" Text="{Binding IsStudent}" FontSize="22"/>
+				<Label IsVisible ="{Binding IsStudent}" Grid.Column ="0" Grid.Row ="2" 
+                       Text="Your group number: " FontSize="22"/>
+				<Label IsVisible ="{Binding IsStudent}" Grid.Column ="1" Grid.Row ="2" 
+                       Text="{Binding GroupNum}" FontSize="22"/>
+				<Button Grid.Column ="2" Grid.Row ="0" Text="edit"/>
+				<Button Grid.Column ="2" Grid.Row ="1" Text="edit"/>
+				<Button Grid.Column ="2" Grid.Row ="2" Text="edit"/>
+
+			</Grid>
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

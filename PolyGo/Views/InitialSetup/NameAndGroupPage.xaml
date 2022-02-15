@@ -5,6 +5,12 @@
 			 x:Class="PolyGo.Views.InitialSetup.NameAndGroupPage">
 	<ContentPage.Content>
 		<StackLayout>
+			<Editor x:Name="ed1"
+                    Placeholder="What would you like to be called"
+                    HeightRequest="50" />
+			<Editor x:Name="ed2"
+                    Placeholder="Enter your group number"
+                    HeightRequest="50" />
 			<Button Text="{x:Static resources:AppResources.FinishSetup}" 
 							BackgroundColor="Blue"
 							Clicked="OnFinishButtonClicked"/>

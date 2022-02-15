@@ -153,6 +153,9 @@
   <data name="NotifYes" xml:space="preserve">
     <value>Да, конечно</value>
   </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
   <data name="Russian" xml:space="preserve">
     <value>Русский</value>
   </data>
