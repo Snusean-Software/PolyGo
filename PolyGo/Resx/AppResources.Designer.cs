@@ -169,6 +169,15 @@ namespace PolyGo.Resx {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Profile.
+        /// </summary>
+        public static string Profile {
+            get {
+                return ResourceManager.GetString("Profile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Русский.
         /// </summary>
         public static string Russian {
