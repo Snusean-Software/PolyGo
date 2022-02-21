@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using PolyGo.Models;
@@ -20,10 +17,7 @@ namespace PolyGo.Views.Profile
 		{
 			base.OnAppearing();
 
-			User user = new User();
-			MainAppSupportFuncs.ParseAccFile(App.AccountFilePath, ref user);
-
-			BindingContext = user;
+			BindingContext = MainAppSupportFuncs.ParseAccFile(App.AccountFilePath); ;
 		}
 	}
 }

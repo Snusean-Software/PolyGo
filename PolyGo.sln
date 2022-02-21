@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolyGo.Android", "PolyGo.An
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolyGo.iOS", "PolyGo.iOS\PolyGo.iOS.csproj", "{C6E1F230-13D3-4E8A-BB6B-98125D20037E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolyGo", "PolyGo\PolyGo.csproj", "{5072CDBD-6955-4F5B-B728-304CEBFF648E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PolyGo", "PolyGo\PolyGo.csproj", "{5072CDBD-6955-4F5B-B728-304CEBFF648E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -11,12 +11,12 @@ namespace PolyGo.SupportFuncs
 	{
 		public static void GoToMainShell(User user)
 		{
-			if (user.Language == null) user.Language = "ru-Ru";
-
 			FileStream fs = File.OpenWrite(App.AccountFilePath);
 			StreamWriter sw = new StreamWriter(fs);
 
-		  sw.WriteLine("Language: {0}", user.Language);
+			if (user.Language == null) user.Language = "ru-Ru";
+			sw.WriteLine("Language: {0}", user.Language);
+
 			if(user.Name != null) sw.WriteLine("Name: {0}", user.Name);
 			if (user.IsStudent != null)
 			{

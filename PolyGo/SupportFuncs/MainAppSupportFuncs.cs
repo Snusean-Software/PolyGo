@@ -7,11 +7,13 @@ namespace PolyGo.SupportFuncs
 {
 	internal class MainAppSupportFuncs
 	{
-		public static void ParseAccFile(string accPath, ref User user)
+		public static User ParseAccFile(string accPath)
 		{
+			User user = new User();
 			string accInfo = File.ReadAllText(accPath);
 			string[] separator = { " ", "\n" };
 			string[] words = accInfo.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+
 			for(int i = 0; i < words.Length; ++i)
 			{
 				switch (words[i])
@@ -34,6 +36,7 @@ namespace PolyGo.SupportFuncs
 						break;
 				}
 			}
+			return user;
 		}
 	}
 }
