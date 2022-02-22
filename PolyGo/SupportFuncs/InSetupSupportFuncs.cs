@@ -11,7 +11,7 @@ namespace PolyGo.SupportFuncs
 	{
 		public static void GoToMainShell(User user)
 		{
-			FileStream fs = File.OpenWrite(App.AccountFilePath);
+			FileStream fs = File.OpenWrite(Constants.AccountPath);
 			StreamWriter sw = new StreamWriter(fs);
 
 			if (user.Language == null) user.Language = "ru-Ru";

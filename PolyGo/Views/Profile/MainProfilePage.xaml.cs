@@ -17,7 +17,7 @@ namespace PolyGo.Views.Profile
 		{
 			base.OnAppearing();
 
-			BindingContext = MainAppSupportFuncs.ParseAccFile(App.AccountFilePath); ;
+			BindingContext = MainAppSupportFuncs.ParseAccFile(Constants.AccountPath);
 		}
 	}
 }
