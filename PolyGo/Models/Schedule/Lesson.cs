@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace PolyGo.Models.Schedule
 {
@@ -8,7 +6,7 @@ namespace PolyGo.Models.Schedule
 	{
 		public string Title { get; set; }
 		public string Type { get; set; }
-		public Tuple<string, string> TimeInterval { get; set; }
+		(string start, string end) TimeInterval { get; set; }
 		public List<string> Groups { get; set; }
 		public string Teacher { get; set; }
 		public string Place { get; set; }
