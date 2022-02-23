@@ -5,7 +5,7 @@ namespace PolyGo.Models.Schedule
 	internal class Lesson
 	{
 		public string Title { get; set; }
-		public string Type { get; set; }
+		public string Type { get; set; }	
 		public (string start, string end) TimeInterval { get; set; }
 		public List<string> Groups { get; set; }
 		public string Teacher { get; set; }
