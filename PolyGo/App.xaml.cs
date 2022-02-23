@@ -11,25 +11,21 @@ namespace PolyGo
 {
 	public partial class App : Application
 	{
-		public static string AccountFilePath { get; private set; }
 		internal static User user = new User();
 		public App()
 		{
 			InitializeComponent();
-			AccountFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-							 $"account.txt");
 
 			MainPage = new AppShell();
 		}
 
 		protected override void OnStart()
 		{
-			//File.Delete(AccountFilePath);
-			FileInfo accInf = new FileInfo(AccountFilePath);
+			FileInfo accInf = new FileInfo(Constants.AccountPath);
 			if (!accInf.Exists)
 			{
 				AppResources.Culture = CultureInfo.InstalledUICulture;
-				FileStream fs = File.Create(AccountFilePath);
+				FileStream fs = File.Create(Constants.AccountPath);
 				fs.Close();
 				MainPage = new InitialSetupShell();
 			}
