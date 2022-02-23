@@ -13,8 +13,15 @@ namespace PolyGo.Models.Schedule
 		{ 
 			get
 			{
+				if(Days != null)
 				return (Days[0], Days[Days.Count - 1]);
+				else return (new Day(), new Day());
 			} 
+		}
+
+		public Week()
+		{
+			Days = new List<Day>();
 		}
 	}
 }

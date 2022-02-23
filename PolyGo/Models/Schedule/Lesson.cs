@@ -6,10 +6,15 @@ namespace PolyGo.Models.Schedule
 	{
 		public string Title { get; set; }
 		public string Type { get; set; }
-		(string start, string end) TimeInterval { get; set; }
+		public (string start, string end) TimeInterval { get; set; }
 		public List<string> Groups { get; set; }
 		public string Teacher { get; set; }
 		public string Place { get; set; }
 		public string SDL { get; set; } //СДО (ссылка)
+
+		public Lesson()
+		{
+			Groups = new List<string>();
+		}
 	}
 }

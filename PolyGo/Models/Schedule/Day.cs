@@ -6,5 +6,10 @@ namespace PolyGo.Models.Schedule
 	{
 		public (int num, int numWeek, int numMonth) Date { get; set; }
 		public List<Lesson> Lessons { get; set; }
+
+		public Day()
+		{
+			Lessons = new List<Lesson>();
+		}
 	}
 }
