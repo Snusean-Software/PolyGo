@@ -16,17 +16,21 @@
 					<ColumnDefinition></ColumnDefinition>
 				</Grid.ColumnDefinitions>
 
-				<Label Grid.Column ="0" Grid.Row ="0" Text="Your name: " FontSize="22"/>
-				<Label Grid.Column ="1" Grid.Row ="0" Text="{Binding Name}" FontSize="22"/>
-				<Label Grid.Column ="0" Grid.Row ="1" Text="You are student: " FontSize="22"/>
-				<Label Grid.Column ="1" Grid.Row ="1" Text="{Binding IsStudent}" FontSize="22"/>
-				<Label IsVisible ="{Binding IsStudent}" Grid.Column ="0" Grid.Row ="2" 
-                       Text="Your group number: " FontSize="22"/>
-				<Label IsVisible ="{Binding IsStudent}" Grid.Column ="1" Grid.Row ="2" 
-                       Text="{Binding GroupNum}" FontSize="22"/>
-				<Button Grid.Column ="2" Grid.Row ="0" Text="edit"/>
-				<Button Grid.Column ="2" Grid.Row ="1" Text="edit"/>
-				<Button Grid.Column ="2" Grid.Row ="2" Text="edit"/>
+				<Label Grid.Column ="0" Grid.Row ="0" Text="Your name: " FontSize="18"/>
+				<Editor x:Name ="EditorName" Grid.Column ="1" Grid.Row ="0" BackgroundColor="White"  IsReadOnly ="true" Text="{Binding Name}" FontSize="18"/>
+				<Label Grid.Column ="0" Grid.Row ="1" Text="You are student: " FontSize="18"/>
+				<Editor x:Name ="EditorIsStudent" Grid.Column ="1" Grid.Row ="1" IsReadOnly ="true" Text="{Binding IsStudent}" FontSize="18"/>
+				<Label IsVisible ="{Binding IsStudent}" Grid.Column ="0" Grid.Row ="2"
+                       Text="Your group number: " FontSize="18"/>
+				<Editor x:Name ="EditorGroupNum" IsVisible ="{Binding IsStudent}" Grid.Column ="1" Grid.Row ="2" IsReadOnly ="true"
+                       Text="{Binding GroupNum}" FontSize="15"/>
+				<Button x:Name="ButtonEditName" Grid.Column ="2" Grid.Row ="0" Text="edit" Clicked='OnEditNameClicked'/>
+				<Button x:Name="ButtonEditIsStudent" Grid.Column ="2" Grid.Row ="1" Text="edit" Clicked='OnEditIsStudentClicked'/>
+				<Button IsVisible ="{Binding IsStudent}" x:Name="ButtonEditGroupNum" Grid.Column ="2" Grid.Row ="2" Text="edit" Clicked='OnEditGroupNumClicked'/>
+
+				<Button x:Name="ButtonSaveName" IsVisible ="false" Grid.Column ="2" Grid.Row ="0" Text="save" Clicked='OnSaveNameClicked'/>
+				<Button x:Name="ButtonSaveIsStudent" IsVisible ="false" Grid.Column ="2" Grid.Row ="1" Text="save" Clicked='OnSaveIsStudentClicked'/>
+				<Button x:Name="ButtonSaveGroupNum" IsVisible ="false" Grid.Column ="2" Grid.Row ="2" Text="save" Clicked='OnSaveGroupNumClicked'/>
 
 			</Grid>
 		</StackLayout>

@@ -4,9 +4,26 @@
 			 x:Class="PolyGo.Views.Schedule.MainSchedulePage">
 	<ContentPage.Content>
 		<StackLayout>
-			<Label Text="Welcome to MainSchedulePage!"
-				VerticalOptions="CenterAndExpand" 
-				HorizontalOptions="CenterAndExpand" />
+			<Label x:Name="LabelNetworkError" 
+						 IsVisible="False"
+						 Text="Error: you don't have internet"
+						 TextColor="OrangeRed"/>
+
+			<CollectionView x:Name="collectionViewDays"
+                    SelectionMode="Single">
+
+				<CollectionView.ItemsLayout>
+					<LinearItemsLayout Orientation="Vertical"
+                               ItemSpacing="10" />
+				</CollectionView.ItemsLayout>
+				<CollectionView.ItemTemplate>
+					<DataTemplate>
+						<StackLayout>
+							<Label Text="{Binding DateNum}"/>
+						</StackLayout>
+					</DataTemplate>
+				</CollectionView.ItemTemplate>
+			</CollectionView>
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

@@ -7,7 +7,7 @@ using PolyGo.Models;
 
 namespace PolyGo.SupportFuncs
 {
-	internal class InSetupSupportFuncs
+	internal static class InSetupSupportFuncs
 	{
 		public static void GoToMainShell(User user)
 		{
