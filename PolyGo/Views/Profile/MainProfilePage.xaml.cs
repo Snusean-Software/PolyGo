@@ -3,24 +3,39 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using PolyGo.SupportFuncs;
+using PolyGo.Models;
 
 namespace PolyGo.Views.Profile
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MainProfilePage : ContentPage
 	{
+		private User user;
+		private struct AccFileData
+		{
+			public bool Name { get; set; }
+			public bool IsStudent { get; set; }
+			public bool GroupNum { get; set; }
+		}
+
+		AccFileData AFD;
 		public MainProfilePage()
 		{
 			InitializeComponent();
+
+			user = MainAppSupportFuncs.ParseAccFile();
+			AFD.Name = !(user.Name is null);
+			AFD.IsStudent = !(user.IsStudent is null);
+			AFD.GroupNum = !(user.GroupNum is null);
 		}
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
 
-			BindingContext = MainAppSupportFuncs.ParseAccFile();
+			BindingContext = user;
 		}
 
-	  void OnEditNameClicked(object sender, EventArgs e)
+		void OnEditNameClicked(object sender, EventArgs e)
 		{
 			Button button = (Button)sender;
 			EditorName.IsReadOnly = false;
@@ -47,33 +62,39 @@ namespace PolyGo.Views.Profile
 		void OnSaveNameClicked(object sender, EventArgs e)
 		{
 			EditorName.IsReadOnly = true;
-			MainAppSupportFuncs.ChangeAccParam(EditorName.Text, MainAppSupportFuncs.AccParams.Name);
+			MainAppSupportFuncs.ChangeAccParam(EditorName.Text, 
+				MainAppSupportFuncs.AccParams.Name, AFD.Name);
 
 			Button button = (Button)sender;
 			button.IsVisible = false;
 			ButtonEditName.IsVisible = true;
+			AFD.Name = true;
 			OnAppearing();
 		}
 
 		void OnSaveIsStudentClicked(object sender, EventArgs e)
 		{
 			EditorIsStudent.IsReadOnly = true;
-			MainAppSupportFuncs.ChangeAccParam(EditorIsStudent.Text, MainAppSupportFuncs.AccParams.IsStudent);
+			MainAppSupportFuncs.ChangeAccParam(EditorIsStudent.Text, 
+				MainAppSupportFuncs.AccParams.IsStudent, AFD.IsStudent);
 
 			Button button = (Button)sender;
 			button.IsVisible = false;
 			ButtonEditIsStudent.IsVisible = true;
+			AFD.IsStudent = true;
 			OnAppearing();
 		}
 
 		void OnSaveGroupNumClicked(object sender, EventArgs e)
 		{
 			EditorGroupNum.IsReadOnly = true;
-			MainAppSupportFuncs.ChangeAccParam(EditorGroupNum.Text, MainAppSupportFuncs.AccParams.GroupNum);
+			MainAppSupportFuncs.ChangeAccParam(EditorGroupNum.Text, 
+				MainAppSupportFuncs.AccParams.GroupNum, AFD.GroupNum);
 
 			Button button = (Button)sender;
 			button.IsVisible = false;
 			ButtonEditGroupNum.IsVisible = true;
+			AFD.GroupNum = true;
 			OnAppearing();
 		}
 	}

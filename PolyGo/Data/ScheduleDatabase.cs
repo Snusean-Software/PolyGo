@@ -1,151 +1,258 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.IO;
 using System.Collections.Generic;
+
 using SQLite;
 
 using PolyGo.Models.Schedule;
-using System;
-using System.IO;
 
 namespace PolyGo.Data
 {
   public class ScheduleDatabase
-	{
+  {
     readonly SQLiteConnection database;
-
     public ScheduleDatabase()
     {
-      database = new SQLiteConnection(Constants.DatabasePath, Constants.Flags);
-      try
-      {
-        database.CreateTable<Lesson>();
-        database.CreateTable<Day>();
-        database.CreateTable<Week>();
-      }
-      catch(Exception e)
-			{
-				Console.WriteLine(e.Message);
-			}
+      database = new SQLiteConnection(Constants.DatabasePath);
+
+      database.CreateTable<Root>();
+      database.CreateTable<Day>();
+      database.CreateTable<Lesson>();
+      database.CreateTable<Group>();
+      database.CreateTable<Teacher>();
+      database.CreateTable<Auditory>();  
     }
 
     public bool Empty
-		{
-			get
-			{
-        return database.Table<Week>().Count() == 0;
+    {
+      get
+      {
+        return database.Table<Root>().Count() == 0;
       }
-		}
-
-    public List<Week> GetWeeks()
-    {
-      //Get all schedule.
-      return database.Table<Week>().ToList();
     }
 
-    public List<Day> GetDays()
+    public int SaveRoot(Root rt)
     {
-      //Get all schedule.
-      return database.Table<Day>().ToList();
-    }
+      if (rt.ID != 0)
+      {
+        var result = database.Update(rt);
+        foreach (var day in rt.days)
+        {
+          day.IjRootID = rt.ID;
+          database.Update(day);
+          foreach (var les in day.lessons)
+          {
+            les.IjDaysID = day.ID;
+            database.Update(les);
 
-    public List<Lesson> GetLessons()
-    {
-      //Get all schedule.
-      return database.Table<Lesson>().ToList();
-    }
+            foreach (var gr in les.groups)
+            {
+              gr.IjLessonID = les.ID;
+              database.Update(gr);
+            }
 
-    public Week GetWeek(int id)
-    {
-      // Get a specific week.
-      return database.Table<Week>()
-                      .Where(i => i.ID == id)
-                      .FirstOrDefault();
-    }
+            try
+            {
+              foreach (var ad in les.auditories)
+              {
+                ad.IjLessonID = les.ID;
+                database.Update(ad);
+              }
+            }
+            catch (Exception) { }
 
-    public List<Day> GetAllDaysByID(int IJid)
+            try
+            {
+              foreach (var teacher in les.teachers)
+              {
+                teacher.IjLessonID = les.ID;
+                database.Update(teacher);
+              }
+            }
+            catch (Exception) { }
+          }
+        }
+        return result;
+      }
+      else
+      {
+        var result = database.Insert(rt);
+        foreach (var day in rt.days)
+        {
+          day.IjRootID = rt.ID;
+          database.Insert(day);
+          foreach (var les in day.lessons)
+          {
+            les.IjDaysID = day.ID;
+            database.Insert(les);
+
+            foreach (var gr in les.groups)
+            {
+              gr.IjLessonID = les.ID;
+              database.Insert(gr);
+            }
+
+            try
+            {
+              foreach (var ad in les.auditories)
+              {
+                ad.IjLessonID = les.ID;
+                database.Insert(ad);
+              }
+            }
+            catch (Exception) { }
+
+            try
+            {
+              foreach (var teacher in les.teachers)
+              {
+                teacher.IjLessonID = les.ID;
+                database.Insert(teacher);
+              }
+            }
+            catch (Exception) { }
+          }
+        }
+        return result;
+      }
+    }
+    private List<Day> getAllDaysByID(int IJid)
     {
       List<Day> days = new List<Day>();
-      foreach(var day in database.Table<Day>())
-			{
-        if(day.InnerJoinWeekID == IJid) days.Add(day);
-			}
+      foreach (var day in database.Table<Day>())
+      {
+        if (day.IjRootID == IJid) days.Add(day);
+      }
       return days;
     }
-
-    public List<Lesson> GetAllLessonsByID(int IJid)
+    private List<Lesson> getAllLessonsByID(int IJid)
     {
       List<Lesson> lessons = new List<Lesson>();
-      foreach (var day in database.Table<Lesson>())
+      foreach (var lesson in database.Table<Lesson>())
       {
-        if (day.InnerJoinDayID == IJid) lessons.Add(day);
+        if (lesson.IjDaysID == IJid) lessons.Add(lesson);
       }
       return lessons;
     }
-
-    public List<Week> GetAllData()
+    private List<Teacher> getAllTeachersByID(int IJid)
     {
-      List<Week> weeks = new List<Week>();
-      foreach (var week in database.Table<Week>())
+      List<Teacher> teachers = new List<Teacher>();
+      foreach (var teacher in database.Table<Teacher>())
       {
-        foreach (Day day in GetAllDaysByID(week.InnerJoinID))
-				{
-          foreach (Lesson lesson in GetAllLessonsByID(day.InnerJoinLessonID))
-					{
-            day.Lessons.Add(lesson);
-					}
-          week.Days.Add(day);
-				}
-        weeks.Add(week);
+        if (teacher.IjLessonID == IJid) teachers.Add(teacher);
       }
-      return weeks;
+      return teachers;
+    }
+    private List<Auditory> getAllAuditoriesByID(int IJid)
+    {
+      List<Auditory> auds = new List<Auditory>();
+      foreach (var au in database.Table<Auditory>())
+      {
+        if (au.IjLessonID == IJid) auds.Add(au);
+      }
+      return auds;
+    }
+    private List<Group> getAllGroupsByID(int IJid)
+    {
+      List<Group> groups = new List<Group>();
+      foreach (var group in database.Table<Group>())
+      {
+        if (group.IjLessonID == IJid) groups.Add(group);
+      }
+      return groups;
     }
 
-    public int SaveWeek(Week week)
+    private Root findRootByStartDay(string sDay)
     {
-      if (week.ID != 0)
+      foreach (var rt in database.Table<Root>())
       {
-        // Update an existing week.
-        return database.Update(week);
+        if (rt.week_date_start == sDay) return rt;
       }
-      else
+      return null;
+    }
+    public List<Root> GetAllData()
+    {
+      List<Root> roots = new List<Root>();
+
+      foreach (var rt in database.Table<Root>())
       {
-        // Save a new week.
-        return database.Insert(week);
+        foreach (var day in getAllDaysByID(rt.ID))
+        {
+          foreach (var lesson in getAllLessonsByID(day.ID))
+          { 
+
+            foreach (var gr in getAllGroupsByID(lesson.ID))
+            {
+              lesson.groups.Add(gr);
+            }
+
+            try
+            {
+              foreach (var au in getAllAuditoriesByID(lesson.ID))
+              {
+                lesson.auditories.Add(au);
+              }
+            }
+            catch (Exception) { }
+
+            try
+            {
+              foreach (var teacher in getAllTeachersByID(lesson.ID))
+              {
+                lesson.teachers.Add(teacher);
+              }
+            }
+            catch (Exception) { }
+
+            day.lessons.Add(lesson);
+          }
+          rt.days.Add(day);
+        }
+        roots.Add(rt);
       }
+
+      return roots;
     }
 
-    public int SaveDay(Day day)
-    {
-      if (day.ID != 0)
-      {
-        // Update an existing week.
-        return database.Update(day);
-      }
-      else
-      {
-        // Save a new week.
-        return database.Insert(day);
-      }
-    }
+    public Root GetRootByStartDay(string sDay)
+		{
+      Root rt = findRootByStartDay(sDay);
 
-    public int SaveLesson(Lesson lesson)
-    {
-      if (lesson.ID != 0)
+      foreach (var day in getAllDaysByID(rt.ID))
       {
-        // Update an existing week.
-        return database.Update(lesson);
-      }
-      else
-      {
-        // Save a new week.
-        return database.Insert(lesson);
-      }
-    }
+        foreach (var lesson in getAllLessonsByID(day.ID))
+        {
 
-    public int DeleteWeek(Week week)
-    {
-      // Delete a week.
-      return database.Delete(week);
-    }
+          foreach (var gr in getAllGroupsByID(lesson.ID))
+          {
+            lesson.groups.Add(gr);
+          }
 
+          try
+          {
+            foreach (var au in getAllAuditoriesByID(lesson.ID))
+            {
+              lesson.auditories.Add(au);
+            }
+          }
+          catch (Exception) { }
+
+          try
+          {
+            foreach (var teacher in getAllTeachersByID(lesson.ID))
+            {
+              lesson.teachers.Add(teacher);
+            }
+          }
+          catch (Exception) { }
+
+          day.lessons.Add(lesson);
+        }
+        rt.days.Add(day);
+      }
+
+      return rt;
+    }
   }
 }
+

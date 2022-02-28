@@ -12,7 +12,7 @@ namespace PolyGo
 {
 	public partial class App : Application
 	{
-		internal static User user = new User();
+		internal static User user;
 
 	  static ScheduleDatabase database;
 
@@ -32,7 +32,7 @@ namespace PolyGo
 		{
 			InitializeComponent();
 
-			//MainPage = new AppShell();
+			user = new User();
 		}
 
 		protected override void OnStart()
