@@ -16,5 +16,45 @@ namespace PolyGo.Views.Map
 		{
 			InitializeComponent();
 		}
+
+		int floor = 1;
+		
+		private void upButton(object sender, EventArgs e)
+		{
+            if (floor < 3)
+            {
+				if(floor == 1)
+                {
+					floorImage.Source = "gz2floor.png";
+				}
+                else
+                {
+					floorImage.Source = "gz3floor.png";
+				}
+				floor++;
+				floorNumber.Text = Convert.ToString(floor);
+
+			}
+		}
+		private void downButton(object sender, EventArgs e)
+		{
+			if (floor > 1)
+			{
+				if (floor == 3)
+				{
+					floorImage.Source = "gz2floor.png";
+				}
+				else
+				{
+					floorImage.Source = "gz1floor.png";
+				}
+				floor--;
+				floorNumber.Text = Convert.ToString(floor);
+			}
+		}
+
+		
+
 	}
 }
+

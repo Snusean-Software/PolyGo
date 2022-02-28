@@ -1,12 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PolyGo.Views.Map.MapMainBuildingPage">
+             x:Class="PolyGo.Views.Map.MapMainBuildingPage"
+             xmlns:pinch="clr-namespace:Xamarin.Forms.PinchZoomImage;assembly=Xamarin.Forms.PinchZoomImage">
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to main building map!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+       
+        <AbsoluteLayout VerticalOptions="CenterAndExpand">
+
+            <BoxView Color="Ivory"
+                     AbsoluteLayout.LayoutBounds="1, 1, 1, 0.85" AbsoluteLayout.LayoutFlags="All"/>
+
+            <pinch:PinchZoom AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                <pinch:PinchZoom.Content>
+                    <Image x:Name="floorImage" Source="gz1floor.png"/>
+                </pinch:PinchZoom.Content>
+            </pinch:PinchZoom>
+
+            <BoxView Color="#E1F17B"
+                     AbsoluteLayout.LayoutBounds="1, 0, 1, 0.15" AbsoluteLayout.LayoutFlags="All"/>
+
+
+            <ImageButton Source="upButton.png"  Clicked="upButton"
+                         AbsoluteLayout.LayoutBounds="0.05, 0.90, 0.1, 0.1" AbsoluteLayout.LayoutFlags="All"
+                         BackgroundColor="Color.Transparent"/>
+            <ImageButton Source="downButton.png" Clicked="downButton"
+                         AbsoluteLayout.LayoutBounds="0.05, 1, 0.1, 0.1" AbsoluteLayout.LayoutFlags="All"
+                         BackgroundColor="Color.Transparent"/>
+
+            <Button  Text="Start" 
+                     AbsoluteLayout.LayoutBounds="0.95, 0.01, 0.87, 0.06" AbsoluteLayout.LayoutFlags="All"
+                     BackgroundColor="Color.Transparent"
+                     TextColor="#1E1E1F"
+                     BorderWidth="1"
+                     BorderColor="Gray"
+                     CornerRadius="15"/>
+            <Button  Text="Finish"
+                     AbsoluteLayout.LayoutBounds="0.95, 0.084, 0.87, 0.06" AbsoluteLayout.LayoutFlags="All"
+                     BackgroundColor="Color.Transparent"
+                     TextColor="#1E1E1F"
+                     BorderWidth="1"
+                     BorderColor="Gray"
+                     CornerRadius="15"/>
+
+            <Image Source="icoStartToFinish.png"
+                   AbsoluteLayout.LayoutBounds="0.007, 0.015, 0.1, 0.12" AbsoluteLayout.LayoutFlags="All"/>
+
+            <Label x:Name="floorNumber" Text="1" TextColor="Black" FontSize="22"
+                   AbsoluteLayout.LayoutBounds="0.085, 0.923, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+
+
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
