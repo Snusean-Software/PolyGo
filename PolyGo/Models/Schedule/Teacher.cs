@@ -6,9 +6,9 @@ namespace PolyGo.Models.Schedule
   public class Teacher
   {
     [PrimaryKey, AutoIncrement, Column("main_id")]
-    public int ID { get; set; }
+    public int ID { get; set; } // ID for SQLite
     public int IjLessonID { get; set; }
-    public int id { get; set; }
+    public int id { get; set; } // ID from json code of page
     public int oid { get; set; }
     public string full_name { get; set; }
     public string first_name { get; set; }
