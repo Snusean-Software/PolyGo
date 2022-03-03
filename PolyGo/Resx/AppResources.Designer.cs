@@ -169,7 +169,7 @@ namespace PolyGo.Resx {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Profile.
+        ///   Ищет локализованную строку, похожую на Профиль.
         /// </summary>
         public static string Profile {
             get {
