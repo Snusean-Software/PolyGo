@@ -29,7 +29,7 @@ namespace PolyGo.SupportFuncs
 			fs.Close();
 
 			Shell.Current.IsVisible = false;
-			App.Current.MainPage = new AppShell();
+			Application.Current.MainPage = new AppShell();
 		}
 	}
 }

@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
 
 using PolyGo.SupportFuncs;
 using PolyGo.Models.Schedule;
-using Xamarin.Essentials;
-using System.Linq;
 
 namespace PolyGo.Views.Schedule
 {
@@ -17,9 +15,19 @@ namespace PolyGo.Views.Schedule
 			InitializeComponent();
 		}
 
-		protected override void OnAppearing()
+		private async void ParseAdjacentWeeksAsync(Week current)
+		{
+			await ScheduleSupportFuncs.ParseWeek(ScheduleSupportFuncs.ChangeWeekUrl(current, -1));
+
+			await ScheduleSupportFuncs.ParseWeek(ScheduleSupportFuncs.ChangeWeekUrl(current, 2));
+
+			await ScheduleSupportFuncs.ParseWeek(ScheduleSupportFuncs.ChangeWeekUrl(current, 1));
+		}
+
+		protected override async void OnAppearing()
 		{
 			base.OnAppearing();
+			Week current = new Week();
 
 			if (App.Database.Empty)
 			{
@@ -28,17 +36,14 @@ namespace PolyGo.Views.Schedule
 				{
 					case NetworkAccess.Internet:
 					{
-						Week currentWeek = ScheduleSupportFuncs.ParseWeek(Constants.RefToSchedule);
-						App.Database.SaveWeek(currentWeek);
+						current = await ScheduleSupportFuncs.ParseWeek(Constants.RefToSchedule);
 
-						App.Database.SaveWeek(ScheduleSupportFuncs.ParseWeek(
-						ScheduleSupportFuncs.GetWeekURL(ScheduleSupportFuncs.ChangeWeek(currentWeek.Start, -1))));
+						await ScheduleSupportFuncs.ParseWeek(ScheduleSupportFuncs.ChangeWeekUrl(current, -1));
 
-						App.Database.SaveWeek(ScheduleSupportFuncs.ParseWeek(
-						ScheduleSupportFuncs.GetWeekURL(ScheduleSupportFuncs.ChangeWeek(currentWeek.Start, 2))));
+						await ScheduleSupportFuncs.ParseWeek(ScheduleSupportFuncs.ChangeWeekUrl(current, 2));
 
-						App.Database.SaveWeek(ScheduleSupportFuncs.ParseWeek(
-						ScheduleSupportFuncs.GetWeekURL(ScheduleSupportFuncs.ChangeWeek(currentWeek.Start, 1))));
+						await ScheduleSupportFuncs.ParseWeek(ScheduleSupportFuncs.ChangeWeekUrl(current, 1));
+
 						break;
 					}
 					default:
@@ -51,7 +56,7 @@ namespace PolyGo.Views.Schedule
 
 			var data = App.Database.GetAllData();
 
-			collectionViewDays.ItemsSource = data[1].Days;
+			collectionViewDays.ItemsSource = data;
 		}
 	}
 }
