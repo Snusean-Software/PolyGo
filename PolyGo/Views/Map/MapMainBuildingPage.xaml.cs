@@ -17,44 +17,54 @@ namespace PolyGo.Views.Map
 			InitializeComponent();
 		}
 
-		int floor = 1;
-		
-		private void upButton(object sender, EventArgs e)
+        public enum Floor: ushort
 		{
-            if (floor < 3)
+			First = 1,
+			Second = 2, 
+			Third = 3,
+        }
+		Floor floor = Floor.First;
+
+		private void onUpButtonClicked(object sender, EventArgs e)
+		{
+			switch(floor)
             {
-				if(floor == 1)
-                {
-					floorImage.Source = "gz2floor.png";
-				}
-                else
-                {
-					floorImage.Source = "gz3floor.png";
-				}
-				floor++;
-				floorNumber.Text = Convert.ToString(floor);
+				case Floor.First:
+					floor_Image.Source = "mb_Floor_2_Image.png";
+					floor = Floor.Second;
+					floor_Number.Text = Convert.ToInt32(Floor.Second).ToString();
+					break;
 
+				case Floor.Second:
+					floor_Image.Source = "mb_Floor_3_Image.png";
+					floor = Floor.Third;
+					floor_Number.Text = Convert.ToInt32(Floor.Third).ToString();
+					break;
+
+				case Floor.Third:
+					break;
 			}
 		}
-		private void downButton(object sender, EventArgs e)
+		private void onDownButtonClicked(object sender, EventArgs e)
 		{
-			if (floor > 1)
+			switch (floor)
 			{
-				if (floor == 3)
-				{
-					floorImage.Source = "gz2floor.png";
-				}
-				else
-				{
-					floorImage.Source = "gz1floor.png";
-				}
-				floor--;
-				floorNumber.Text = Convert.ToString(floor);
+				case Floor.First:
+					break;
+
+				case Floor.Second:
+					floor_Image.Source = "mb_Floor_1_Image.png";
+					floor = Floor.First;
+					floor_Number.Text = Convert.ToInt32(Floor.First).ToString();
+					break;
+
+				case Floor.Third:
+					floor_Image.Source = "mb_Floor_2_Image.png";
+					floor = Floor.Second;
+					floor_Number.Text = Convert.ToInt32(Floor.Second).ToString();
+					break;
 			}
 		}
-
-		
-
 	}
 }
 

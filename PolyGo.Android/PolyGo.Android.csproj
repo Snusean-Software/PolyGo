@@ -99,9 +99,6 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\gz1floor.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\PolyGo\PolyGo.csproj">
       <Project>{7AD6717F-9A2A-44D3-AAE5-DB8CB788E203}</Project>
       <Name>PolyGo</Name>
@@ -111,19 +108,22 @@
     <AndroidResource Include="Resources\drawable\snusean.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\gz2floor.png" />
+    <AndroidResource Include="Resources\drawable\mb_Floor_3_Image.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\gz3floor.png" />
+    <AndroidResource Include="Resources\drawable\mb_Floor_1_Image.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\upButton.png" />
+    <AndroidResource Include="Resources\drawable\mb_Floor_2_Image.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\downButton.png" />
+    <AndroidResource Include="Resources\drawable\up_Button.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\icoStartToFinish.png" />
+    <AndroidResource Include="Resources\drawable\down_Button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\start_To_Finish_Image.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
