@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
 
 using SQLite;
@@ -23,6 +22,9 @@ namespace PolyGo.Data
       database.CreateTable<Auditory>();  
     }
 
+    /// <summary>
+    /// If table Root is empty
+    /// </summary>
     public bool Empty
     {
       get
@@ -31,6 +33,12 @@ namespace PolyGo.Data
       }
     }
 
+    /// <summary>
+    /// Save Root to database and creates ID
+    /// connections between tables
+    /// </summary>
+    /// <param name="rt">Object Root which will be written to the database</param>
+    /// <returns>The number of rows inserted or updated in Root table</returns>
     public int SaveRoot(Root rt)
     {
       if (rt.ID != 0)
@@ -161,7 +169,6 @@ namespace PolyGo.Data
       }
       return groups;
     }
-
     private Root findRootByStartDay(string sDay)
     {
       foreach (var rt in database.Table<Root>())
@@ -170,6 +177,11 @@ namespace PolyGo.Data
       }
       return null;
     }
+
+    /// <summary>
+    /// Returns all data from all tables
+    /// </summary>
+    /// <returns>List of Roots from database</returns>
     public List<Root> GetAllData()
     {
       List<Root> roots = new List<Root>();
@@ -214,6 +226,53 @@ namespace PolyGo.Data
       return roots;
     }
 
+    /// <summary>
+    /// Returns data from database which will be displayed on the schedule page
+    /// </summary>
+    /// <returns>List of roots from database without groups lists in Lessons</returns>
+    public List<Root> GetDataForSchedule()
+		{
+      List<Root> roots = new List<Root>();
+
+      foreach (var rt in database.Table<Root>())
+      {
+        foreach (var day in getAllDaysByID(rt.ID))
+        {
+          foreach (var lesson in getAllLessonsByID(day.ID))
+          {
+            try
+            {
+              foreach (var au in getAllAuditoriesByID(lesson.ID))
+              {
+                lesson.auditories.Add(au);
+              }
+            }
+            catch (Exception) { }
+
+            try
+            {
+              foreach (var teacher in getAllTeachersByID(lesson.ID))
+              {
+                lesson.teachers.Add(teacher);
+              }
+            }
+            catch (Exception) { }
+
+            day.lessons.Add(lesson);
+          }
+          rt.days.Add(day);
+        }
+        roots.Add(rt);
+      }
+
+      return roots;
+    }
+
+    /// <summary>
+    /// Returns one Root from database with definite start day of week
+    /// </summary>
+    /// <param name="sDay">Start day of week</param>
+    /// <returns>Root with definite start day of week</returns>
     public Root GetRootByStartDay(string sDay)
 		{
       Root rt = findRootByStartDay(sDay);

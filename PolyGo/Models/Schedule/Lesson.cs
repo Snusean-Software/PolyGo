@@ -31,7 +31,7 @@ namespace PolyGo.Models.Schedule
     public string webinar_url { get; set; }
     public string lms_url { get; set; }
 
-    //TypeObj for SQLite
+    //TypeObj for SQLite (SQLite does not support non-standard types)
     public int typeObj_id
 		{
 			get

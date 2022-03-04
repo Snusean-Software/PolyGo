@@ -21,6 +21,7 @@ namespace PolyGo.Views.Profile
 		AccFileData AFD;
 		public MainProfilePage()
 		{
+	
 			InitializeComponent();
 
 			user = MainAppSupportFuncs.ParseAccFile();

@@ -14,16 +14,6 @@ namespace PolyGo.Views.Schedule
 		{
 			InitializeComponent();
 		}
-
-		private async void ParseAdjacentWeeksAsync(Week current)
-		{
-			await ScheduleSupportFuncs.ParseWeek(ScheduleSupportFuncs.ChangeWeekUrl(current, -1));
-
-			await ScheduleSupportFuncs.ParseWeek(ScheduleSupportFuncs.ChangeWeekUrl(current, 2));
-
-			await ScheduleSupportFuncs.ParseWeek(ScheduleSupportFuncs.ChangeWeekUrl(current, 1));
-		}
-
 		protected override async void OnAppearing()
 		{
 			base.OnAppearing();
@@ -54,7 +44,7 @@ namespace PolyGo.Views.Schedule
 				}
 			}
 
-			var data = App.Database.GetAllData();
+			var data = App.Database.GetDataForSchedule();
 
 			collectionViewDays.ItemsSource = data;
 		}
