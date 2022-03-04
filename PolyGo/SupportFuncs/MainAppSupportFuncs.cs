@@ -15,6 +15,11 @@ namespace PolyGo.SupportFuncs
 			IsStudent,
 			GroupNum,
 		}
+
+		/// <summary>
+		/// Parse Account.txt and writes all data to User object
+		/// </summary>
+		/// <returns>Object User with fields from Account.txt</returns>
 		public static User ParseAccFile()
 		{
 			User user = new User();
@@ -44,6 +49,15 @@ namespace PolyGo.SupportFuncs
 			return user;
 		}
 
+		/// <summary>
+		/// Change one field of User in Account.txt 
+		/// or create new field if not exist
+		/// </summary>
+		/// <param name="value">New value of field</param>
+		/// <param name="ap">TType of field 
+		/// (Name, Language, GroupNum or IsStudent)</param>
+		/// <param name="isParamInFile">Is there a corresponding parameter
+		/// in Account.txt</param>
 		public static void ChangeAccParam(string value, AccParams ap, bool isParamInFile)
 		{
 			if (isParamInFile)

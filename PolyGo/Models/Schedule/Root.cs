@@ -18,7 +18,7 @@ namespace PolyGo.Models.Schedule
     [Ignore]
     public Group group { get; set; }
 
-    //Week for SQLite
+    //Week for SQLite (SQLite does not support non-standard types)
     public string week_date_start 
     { 
       get
@@ -56,7 +56,7 @@ namespace PolyGo.Models.Schedule
       }
     }
 
-    //Group for SQLite
+    //Group for SQLite (SQLite does not support non-standard types)
     public int group_IjLessonID
 		{
 			get

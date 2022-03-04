@@ -14,7 +14,7 @@ namespace PolyGo.Models.Schedule
     [Ignore]
     public Building building { get; set; }
 
-    //Building for SQLite
+    //Building for SQLite (SQLite does not support non-standard types)
     public int building_id
 		{
       get 

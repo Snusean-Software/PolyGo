@@ -9,6 +9,11 @@ namespace PolyGo.SupportFuncs
 {
 	internal static class InSetupSupportFuncs
 	{
+		/// <summary>
+		/// Writes to Account.txt the data that the user entered during the initial setup
+		/// and change shell to main App shell
+		/// </summary>
+		/// <param name="user">Object User whose fields will be written to the file</param>
 		public static void GoToMainShell(User user)
 		{
 			FileStream fs = File.OpenWrite(Constants.AccountPath);

@@ -19,7 +19,7 @@ namespace PolyGo.Models.Schedule
     [Ignore]
     public Faculty faculty { get; set; }
 
-    //Faculty for SQLite
+    //Faculty for SQLite (SQLite does not support non-standard types)
     public int faculty_id
 		{
 			get

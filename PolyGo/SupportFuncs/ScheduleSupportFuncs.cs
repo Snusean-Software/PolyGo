@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net.Http;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
@@ -10,6 +9,12 @@ namespace PolyGo.SupportFuncs
 {
 	internal static class ScheduleSupportFuncs
 	{
+
+		/// <summary>
+		/// Parse Internet page with JSON code and save it to schedule database
+		/// </summary>
+		/// <param name="url">Url of Internet page to parse</param>
+		/// <returns>Week from parsed page</returns>
 		public static async Task<Week> ParseWeek(string url)
 		{
 			HttpClient httpClient = new HttpClient();
@@ -24,6 +29,12 @@ namespace PolyGo.SupportFuncs
 			return root.week;
 		}
 
+
+		/// <summary>
+		/// Counts the starting day of the week
+		/// </summary>
+		/// <param name="day">String with date of start day of week</param>
+		/// <returns>Tuple with year-day-month date of start day</returns>
 		private static (int year, int day, int month) getWeekDate(string day)
 		{
 			var nums = day.Split(new char[] { '-', '.' });
@@ -34,12 +45,26 @@ namespace PolyGo.SupportFuncs
 
 			return res;
 		}
+
+		/// <summary>
+		/// Create url to schedule of week with a given starting day 
+		/// </summary>
+		/// <param name="firstDay">Start day of week</param>
+		/// <returns>Url to schedule of week with given start day</returns>
 		private static string GetWeekURL(string firstDay)
 		{
 			var date = getWeekDate(firstDay);
 			return Constants.RefToSchedule + "?date=" + date.year.ToString() + '-' 
 					+ date.month.ToString() + '-' + date.day.ToString();
 		}
+
+		/// <summary>
+		/// Change the current schedule week to a new
+		/// </summary>
+		/// <param name="week">Current week
+		/// !!!FUNC CHANGES THIS OBJECT</param>
+		/// <param name="numOfWeeks">How many weeks to add to the current one</param>
+		/// <returns>Url of new week</returns>
 		public static string ChangeWeekUrl(Week week, int numOfWeeks)
 		{
 			var temp = week;
