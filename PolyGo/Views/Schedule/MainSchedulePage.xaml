@@ -9,6 +9,10 @@
 						 Text="Error: you don't have internet"
 						 TextColor="OrangeRed"/>
 
+			<Label x:Name="xxx" 
+						 Text="{Binding Count}"
+						 TextColor="CornflowerBlue"/>
+
 			<CollectionView x:Name="collectionViewDays"
                     SelectionMode="Single">
 
@@ -19,7 +23,7 @@
 				<CollectionView.ItemTemplate>
 					<DataTemplate>
 						<StackLayout>
-							<Label Text="{Binding DateNum}"/>
+							<Label Text="{Binding week_date_start}"/>
 						</StackLayout>
 					</DataTemplate>
 				</CollectionView.ItemTemplate>

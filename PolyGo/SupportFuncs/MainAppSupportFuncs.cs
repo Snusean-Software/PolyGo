@@ -14,73 +14,114 @@ namespace PolyGo.SupportFuncs
 			Name,
 			IsStudent,
 			GroupNum,
-			//All = Language | Name | IsStudent | GroupNum
 		}
+
+		/// <summary>
+		/// Parse Account.txt and writes all data to User object
+		/// </summary>
+		/// <returns>Object User with fields from Account.txt</returns>
 		public static User ParseAccFile()
 		{
 			User user = new User();
 			string accInfo = File.ReadAllText(Constants.AccountPath).Trim();
 
-			string[] words = accInfo.Split(new string[] { " ", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+			string[] words = accInfo.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
 
 			for(int i = 0; i < words.Length; ++i)
 			{
-				switch (words[i])
+				if (words[i].StartsWith("Language:"))
 				{
-					case "Language:":
-						++i;
-						user.Language = words[i];
-						break;
-					case "Name:":
-						++i;
-						user.Name = words[i];
-						break;
-					case "IsStudent:":
-						++i;
-						user.IsStudent = words[i].Contains("True");
-						break;
-					case "GroupNum:":
-						++i;
-						user.GroupNum = words[i];
-						break;
+					user.Language = words[i].Substring(10); // Skip definition (Language:)
+				}
+				else if (words[i].StartsWith("Name:"))
+				{
+					user.Name = words[i].Substring(6);
+				}
+				else if (words[i].StartsWith("IsStudent:"))
+				{
+					user.IsStudent = words[i].Substring(11).Contains("True");
+				}
+				else if (words[i].StartsWith("GroupNum:"))
+				{
+					user.GroupNum = words[i].Substring(10);
 				}
 			}
 			return user;
 		}
 
-		public static void ChangeAccParam(string value, AccParams ap)
+		/// <summary>
+		/// Change one field of User in Account.txt 
+		/// or create new field if not exist
+		/// </summary>
+		/// <param name="value">New value of field</param>
+		/// <param name="ap">TType of field 
+		/// (Name, Language, GroupNum or IsStudent)</param>
+		/// <param name="isParamInFile">Is there a corresponding parameter
+		/// in Account.txt</param>
+		public static void ChangeAccParam(string value, AccParams ap, bool isParamInFile)
 		{
-			string accInfo = File.ReadAllText(Constants.AccountPath).Trim();
-
-			string pattern = "";
-			switch (ap)
+			if (isParamInFile)
 			{
-				case AccParams.Language:
-					pattern = @"Language: .*\n?";
-					value = "Language: " + value + "\n";
-					break;
-				case AccParams.Name:
-					pattern = @"Name: .*\n?";
-					value = "Name: " + value + "\n";
-					break;
-				case AccParams.IsStudent:
-					pattern = @"IsStudent: .*\n?";
-					value = "IsStudent: " + value + "\n";
-					break;
-				case AccParams.GroupNum:
-					pattern = @"GroupNum: .*\n?";
-					value = "GroupNum: " + value + "\n";
-					break;
+				string accInfo = File.ReadAllText(Constants.AccountPath).Trim();
+
+				string pattern = "";
+				switch (ap)
+				{
+					case AccParams.Language:
+						pattern = @"Language:.*.\n?";
+						value = "Language: " + value + '\n';
+						break;
+					case AccParams.Name:
+						pattern = @"Name:.*\n?";
+						value = "Name: " + value + '\n';
+						break;
+					case AccParams.IsStudent:
+						pattern = @"IsStudent:.*\n?";
+						value = "IsStudent: " + value + '\n';
+						break;
+					case AccParams.GroupNum:
+						pattern = @"GroupNum:.*\n?";
+						value = "GroupNum: " + value + '\n';
+						break;
+				}
+
+				accInfo = Regex.Replace(accInfo, pattern, value);
+
+				FileStream fs = File.Create(Constants.AccountPath);
+				StreamWriter sw = new StreamWriter(fs);
+
+				sw.WriteLine(accInfo);
+
+				sw.Close();
+				fs.Close();
 			}
+			else
+			{
+				string accInfo = File.ReadAllText(Constants.AccountPath).Trim();
+				switch (ap)
+				{
+					case AccParams.Language:
+						accInfo += "\nLanguage: " + value;
+						break;
+					case AccParams.Name:
+						accInfo += "\nName: " + value;
+						break;
+					case AccParams.IsStudent:
+						accInfo += "\nIsStudent: " + value;
+						break;
+					case AccParams.GroupNum:
+						accInfo += "\nGroupNum: " + value;
+						break;
+				}
 
-			accInfo = Regex.Replace(accInfo, pattern, value);
-			FileStream fs = File.Create(Constants.AccountPath);
-			StreamWriter sw = new StreamWriter(fs);
+				FileStream fs = File.Create(Constants.AccountPath);
+				StreamWriter sw = new StreamWriter(fs);
 
-			sw.WriteLine(accInfo);
+				sw.WriteLine(accInfo);
 
-			sw.Close();	
-			fs.Close();
+				sw.Close();
+				fs.Close();
+			}
 		}
 	}
 }
