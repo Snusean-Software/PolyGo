@@ -8,7 +8,7 @@ namespace PolyGo.Models.Map
   public class Node
   {
     /// <summary>
-    /// Every node must have unique Id for correct work
+    /// Every node in same graph must have unique Id for correct work
     /// </summary>
     public int Id { get; set; }
 
@@ -16,7 +16,7 @@ namespace PolyGo.Models.Map
     /// Every adjacent node seems as tuple of
     /// adjacent node id and weight of edge to this node
     /// </summary>
-    public List<(int, float)> adjacentNodes { get; set; }
+    public List<(int, float)> AdjacentNodes { get; set; }
 
     /// <summary>
     /// Contains all specific info about node
@@ -35,7 +35,7 @@ namespace PolyGo.Models.Map
     public Node(int id, List<(int, float)> adcNodes, NodeInfo info)
     {
       Id = id;
-      adjacentNodes = new List<(int, float)>(adcNodes);
+      AdjacentNodes = new List<(int, float)>(adcNodes);
       Info = new NodeInfo(info);
     }
   }
@@ -45,11 +45,41 @@ namespace PolyGo.Models.Map
   /// </summary>
   public class NodeInfo
   {
+    /// <summary>
+    /// Contains number of classroom
+    /// </summary>
+    public string Classroom { get; set; }
+
+    /// <summary>
+    /// Is node represents stairs on map
+    /// </summary>
+    public bool IsStairs { get; set; }
+
+    /// <summary>
+    /// Is node represents classroom on map
+    /// </summary>
+    public bool IsClassroom { get; set; }
+
+    /// <summary>
+    /// Is node represents hall on map
+    /// </summary>
+    public bool IsHall { get; set; }
+
+    /// <summary>
+    /// Contains x, y coordinates on map
+    /// </summary>
+    public (int, int) Coordinates { get; set; }
+
     public NodeInfo()
     {
     }
     public NodeInfo(NodeInfo other)
     {
+      Classroom = string.Copy(other.Classroom);
+      IsStairs = other.IsStairs;
+      IsClassroom = other.IsClassroom;
+      IsHall = other.IsHall;
+      Coordinates = other.Coordinates;
     }
   }
 }

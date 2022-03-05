@@ -20,7 +20,7 @@ namespace PolyGo.Models.Map
       foreach (var node in nodes)
       {
         nodeIds.Add(node.Id);
-        foreach (var adjacentNode in node.adjacentNodes)
+        foreach (var adjacentNode in node.AdjacentNodes)
         {
           Edges.Add(new Edge(node.Id, adjacentNode.Item1, adjacentNode.Item2));
         }
