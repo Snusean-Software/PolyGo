@@ -4,9 +4,11 @@
              x:Class="PolyGo.Views.Map.Map11corpusPage">
     <ContentPage.Content>
         <StackLayout>
+            
             <Label Text="Welcome to map of 11 corpus!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+                   VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="CenterAndExpand"/>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

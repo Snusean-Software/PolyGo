@@ -5,23 +5,27 @@
 			 x:Class="PolyGo.Views.InitialSetup.IsStudentPage">
 	<ContentPage.Content>
 		<StackLayout>
+            
 			<Label Text="{x:Static resources:AppResources.YouAre}" 
 						 FontSize="25" 
 						 VerticalOptions="CenterAndExpand"/>
+            
 			<RadioButton x:Name="rbStudent"
                 Content="{x:Static resources:AppResources.Student}" 
                 HorizontalOptions="Center"
-                FontSize="22"
-               />
+                FontSize="22"/>
+            
 			<RadioButton x:Name="rbTeacher"
                 Content="{x:Static resources:AppResources.Teacher}" 
                 HorizontalOptions="Center"
-                FontSize="22"
-                />
+                FontSize="22"/>
+            
 			<Button Text="{x:Static resources:AppResources.Next}" 
 							Clicked="OnNextButtonClicked"/>
+            
 			<Button Text="{x:Static resources:AppResources.DoLater}" 
 							Clicked="OnDoLaterButtonClicked"/>
+            
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>
