@@ -4,22 +4,24 @@
 			 x:Class="PolyGo.Views.Schedule.MainSchedulePage">
 	<ContentPage.Content>
 		<StackLayout>
+            
 			<Label x:Name="LabelNetworkError" 
-						 IsVisible="False"
-						 Text="Error: you don't have internet"
-						 TextColor="OrangeRed"/>
+				   IsVisible="False"
+				   Text="Error: you don't have internet"
+				   TextColor="OrangeRed"/>
 
 			<Label x:Name="xxx" 
-						 Text="{Binding Count}"
-						 TextColor="CornflowerBlue"/>
+				   Text="{Binding Count}"
+				   TextColor="CornflowerBlue"/>
 
 			<CollectionView x:Name="collectionViewDays"
-                    SelectionMode="Single">
+                            SelectionMode="Single">
 
 				<CollectionView.ItemsLayout>
 					<LinearItemsLayout Orientation="Vertical"
-                               ItemSpacing="10" />
+									   ItemSpacing="10"/>
 				</CollectionView.ItemsLayout>
+                
 				<CollectionView.ItemTemplate>
 					<DataTemplate>
 						<StackLayout>
@@ -27,6 +29,7 @@
 						</StackLayout>
 					</DataTemplate>
 				</CollectionView.ItemTemplate>
+                
 			</CollectionView>
 		</StackLayout>
 	</ContentPage.Content>

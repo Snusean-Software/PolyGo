@@ -24,7 +24,7 @@
 				<maps:Pin Label="Main building"
                           Address="Click here to open map of this corpus"
                           Type="Place"
-													Clicked="OnCorpusPinClicked">
+						  Clicked="OnCorpusPinClicked">
 					<maps:Pin.Position>
 						<maps:Position>
 							<x:Arguments>
@@ -37,7 +37,7 @@
 				<maps:Pin Label="11 corpus"
                           Address="Click here to open map of this corpus"
                           Type="Place"
-													MarkerClicked="OnCorpusPinClicked">
+						  MarkerClicked="OnCorpusPinClicked">
 					<maps:Pin.Position>
 						<maps:Position>
 							<x:Arguments>
@@ -53,16 +53,21 @@
 		Maximum="18"
 		Minimum="1"
 		Value="12"
-		ValueChanged="OnSliderValueChanged" />
+		ValueChanged="OnSliderValueChanged"/>
+        
 	<StackLayout Orientation="Horizontal"
-			 HorizontalOptions="Center"
-			 Spacing="30">
+				 HorizontalOptions="Center"
+				 Spacing="30">
+        
 		<Button Text="Street"
-			Clicked="OnButtonClicked" />
+			Clicked="OnButtonClicked"/>
+        
 		<Button Text="Satellite"
-			Clicked="OnButtonClicked" />
+			Clicked="OnButtonClicked"/>
+        
 		<Button Text="Hybrid"
-			Clicked="OnButtonClicked" />
+			Clicked="OnButtonClicked"/>
+        
 	</StackLayout>
 	</StackLayout>
 </ContentPage>
