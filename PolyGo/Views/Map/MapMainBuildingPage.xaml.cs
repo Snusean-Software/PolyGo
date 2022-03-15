@@ -15,28 +15,33 @@ namespace PolyGo.Views.Map
 		public MapMainBuildingPage()
 		{
 			InitializeComponent();
+			floor_Image.Source = ImageSource.FromResource("PolyGo.Resources.map.mb.floor_1.png", GetType().Assembly);
+			up_Button.Source = ImageSource.FromResource("PolyGo.Resources.map.up_button.png", GetType().Assembly); ;
+			down_Button.Source = ImageSource.FromResource("PolyGo.Resources.map.down_button.png", GetType().Assembly); ;
+			decoration.Source = ImageSource.FromResource("PolyGo.Resources.map.start_to_finish_image.png", GetType().Assembly); ;
 		}
 
-        public enum Floor: ushort
+    public enum Floor: ushort
 		{
 			First = 1,
 			Second = 2, 
 			Third = 3,
-        }
+    }
+
 		Floor floor = Floor.First;
 
 		private void onUpButtonClicked(object sender, EventArgs e)
 		{
 			switch(floor)
-            {
+      {
 				case Floor.First:
-					floor_Image.Source = "mb_Floor_2_Image.png";
+					floor_Image.Source = ImageSource.FromResource("PolyGo.Resources.map.mb.floor_2.png", GetType().Assembly);
 					floor = Floor.Second;
 					floor_Number.Text = Convert.ToInt32(Floor.Second).ToString();
 					break;
 
 				case Floor.Second:
-					floor_Image.Source = "mb_Floor_3_Image.png";
+					floor_Image.Source = ImageSource.FromResource("PolyGo.Resources.map.mb.floor_3.png", GetType().Assembly);
 					floor = Floor.Third;
 					floor_Number.Text = Convert.ToInt32(Floor.Third).ToString();
 					break;
@@ -53,13 +58,13 @@ namespace PolyGo.Views.Map
 					break;
 
 				case Floor.Second:
-					floor_Image.Source = "mb_Floor_1_Image.png";
+					floor_Image.Source = ImageSource.FromResource("PolyGo.Resources.map.mb.floor_1.png", GetType().Assembly);
 					floor = Floor.First;
 					floor_Number.Text = Convert.ToInt32(Floor.First).ToString();
 					break;
 
 				case Floor.Third:
-					floor_Image.Source = "mb_Floor_2_Image.png";
+					floor_Image.Source = ImageSource.FromResource("PolyGo.Resources.map.mb.floor_2.png", GetType().Assembly);
 					floor = Floor.Second;
 					floor_Number.Text = Convert.ToInt32(Floor.Second).ToString();
 					break;

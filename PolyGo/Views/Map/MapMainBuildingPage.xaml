@@ -15,8 +15,7 @@
             <pinch:PinchZoom AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1" 
                              AbsoluteLayout.LayoutFlags="All">
                 <pinch:PinchZoom.Content>
-                    <Image x:Name="floor_Image" 
-                           Source="mb_Floor_1_Image.png"/>
+                    <Image x:Name="floor_Image"/>
                 </pinch:PinchZoom.Content>
             </pinch:PinchZoom>
 
@@ -25,13 +24,13 @@
                      AbsoluteLayout.LayoutFlags="All"/>
 
 
-            <ImageButton Source="up_Button.png"  
+            <ImageButton x:Name="up_Button" 
                          Clicked="onUpButtonClicked"
                          AbsoluteLayout.LayoutBounds="0.05, 0.90, 0.1, 0.1" 
                          AbsoluteLayout.LayoutFlags="All"
                          BackgroundColor="Color.Transparent"/>
             
-            <ImageButton Source="down_Button.png" 
+            <ImageButton x:Name="down_Button"
                          Clicked="onDownButtonClicked"
                          AbsoluteLayout.LayoutBounds="0.05, 1, 0.1, 0.1" 
                          AbsoluteLayout.LayoutFlags="All"
@@ -55,7 +54,7 @@
                      BorderColor="Gray"
                      CornerRadius="15"/>
 
-            <Image Source="start_To_Finish_Image.png"
+            <Image x:Name="decoration"
                    AbsoluteLayout.LayoutBounds="0.007, 0.015, 0.1, 0.12" 
                    AbsoluteLayout.LayoutFlags="All"/>
 
