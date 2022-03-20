@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Shell xmlns="http://xamarin.com/schemas/2014/forms"
-		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-		 xmlns:maps="clr-namespace:PolyGo.Views.Map"
-		 xmlns:schedule="clr-namespace:PolyGo.Views.Schedule"
-		 xmlns:profile="clr-namespace:PolyGo.Views.Profile"
-		 xmlns:resources="clr-namespace:PolyGo.Resx"
-		 x:Class="PolyGo.Shells.AppShell">
-	<TabBar>
+	   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	   xmlns:maps="clr-namespace:PolyGo.Views.Map"
+	   xmlns:schedule="clr-namespace:PolyGo.Views.Schedule"
+	   xmlns:profile="clr-namespace:PolyGo.Views.Profile"
+	   xmlns:resources="clr-namespace:PolyGo.Resx"
+	   x:Class="PolyGo.Shells.AppShell">
+    
+    <TabBar>
         
 		<ShellContent Title="{x:Static resources:AppResources.Schedule}"
 			Icon="icon_feed.png"

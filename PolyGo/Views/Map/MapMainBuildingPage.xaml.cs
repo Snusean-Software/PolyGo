@@ -30,13 +30,13 @@ namespace PolyGo.Views.Map
 			switch(floor)
             {
 				case Floor.First:
-					floor_Image.Source = "mb_Floor_2_Image.png";
+					floor_Image.Source = "mb_Floor_2_Image.svg";
 					floor = Floor.Second;
 					floor_Number.Text = Convert.ToInt32(Floor.Second).ToString();
 					break;
 
 				case Floor.Second:
-					floor_Image.Source = "mb_Floor_3_Image.png";
+					floor_Image.Source = "mb_Floor_3_Image.svg";
 					floor = Floor.Third;
 					floor_Number.Text = Convert.ToInt32(Floor.Third).ToString();
 					break;
@@ -53,13 +53,13 @@ namespace PolyGo.Views.Map
 					break;
 
 				case Floor.Second:
-					floor_Image.Source = "mb_Floor_1_Image.png";
+					floor_Image.Source = "mb_Floor_1_Image.svg";
 					floor = Floor.First;
 					floor_Number.Text = Convert.ToInt32(Floor.First).ToString();
 					break;
 
 				case Floor.Third:
-					floor_Image.Source = "mb_Floor_2_Image.png";
+					floor_Image.Source = "mb_Floor_2_Image.svg";
 					floor = Floor.Second;
 					floor_Number.Text = Convert.ToInt32(Floor.Second).ToString();
 					break;

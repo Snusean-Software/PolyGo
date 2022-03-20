@@ -4,6 +4,7 @@ using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
+using FFImageLoading.Forms.Platform;
 
 namespace PolyGo.Droid
 {
@@ -24,6 +25,7 @@ namespace PolyGo.Droid
 
 			Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 			global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+			CachedImageRenderer.Init(true);
 			Xamarin.FormsMaps.Init(this, savedInstanceState);
 			LoadApplication(new App());
 		}

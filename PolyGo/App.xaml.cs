@@ -44,6 +44,7 @@ namespace PolyGo
 				FileStream fs = File.Create(Constants.AccountPath);
 				fs.Close();
 				MainPage = new InitialSetupShell();
+				MainPage.SetValue(NavigationPage.BarTextColorProperty, Color.Black);
 			}
 			else MainPage = new AppShell();
 		}

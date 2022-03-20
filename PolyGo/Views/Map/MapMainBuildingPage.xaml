@@ -2,7 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PolyGo.Views.Map.MapMainBuildingPage"
-             xmlns:pinch="clr-namespace:Xamarin.Forms.PinchZoomImage;assembly=Xamarin.Forms.PinchZoomImage">
+             xmlns:pinch="clr-namespace:Xamarin.Forms.PinchZoomImage;assembly=Xamarin.Forms.PinchZoomImage"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:ffTransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             Shell.NavBarIsVisible="False">
 
     <ContentPage.Content>
        
@@ -15,8 +19,9 @@
             <pinch:PinchZoom AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1" 
                              AbsoluteLayout.LayoutFlags="All">
                 <pinch:PinchZoom.Content>
-                    <Image x:Name="floor_Image" 
-                           Source="mb_Floor_1_Image.png"/>
+                    <!--<Image x:Name="floor_Image" 
+                           Source="mbb_Floor_1_Image.eps"/>-->
+                    <ffSvg:SvgCachedImage x:Name="floor_Image" Source="mb_Floor_1_Image.svg"/>
                 </pinch:PinchZoom.Content>
             </pinch:PinchZoom>
 
