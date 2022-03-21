@@ -1,36 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 x:Class="PolyGo.Views.Schedule.MainSchedulePage">
-	<ContentPage.Content>
-		<StackLayout>
-            
-			<Label x:Name="LabelNetworkError" 
-				   IsVisible="False"
-				   Text="Error: you don't have internet"
-				   TextColor="OrangeRed"/>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="PolyGo.Views.Schedule.MainSchedulePage"
+            BarBackgroundColor="#E1F17B"
+            BarTextColor="Black"
+            Shell.NavBarIsVisible="False">
 
-			<Label x:Name="xxx" 
-				   Text="{Binding Count}"
-				   TextColor="CornflowerBlue"/>
+    <ContentPage Title="ПН">
+        <ScrollView>
+            <StackLayout>
 
-			<CollectionView x:Name="collectionViewDays"
-                            SelectionMode="Single">
+            </StackLayout>
+        </ScrollView>
+    </ContentPage>
 
-				<CollectionView.ItemsLayout>
-					<LinearItemsLayout Orientation="Vertical"
-									   ItemSpacing="10"/>
-				</CollectionView.ItemsLayout>
-                
-				<CollectionView.ItemTemplate>
-					<DataTemplate>
-						<StackLayout>
-							<Label Text="{Binding week_date_start}"/>
-						</StackLayout>
-					</DataTemplate>
-				</CollectionView.ItemTemplate>
-                
-			</CollectionView>
-		</StackLayout>
-	</ContentPage.Content>
-</ContentPage>
+    <ContentPage Title="ВТ"/>
+    <ContentPage Title="СР"/>
+    <ContentPage Title="ЧТ"/>
+    <ContentPage Title="ПТ"/>
+    <ContentPage Title="СБ"/>
+    <ContentPage Title="ВС"/>
+</TabbedPage>

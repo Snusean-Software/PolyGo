@@ -61,7 +61,7 @@ namespace PolyGo.Models.Map
 
     public Stream getMapStream(int floor)
     {
-      return Bitmaps[floor].Encode(SKEncodedImageFormat.Png, 50).AsStream();
+      return Bitmaps[floor].Encode(SKEncodedImageFormat.Png, 0).AsStream();
     }
   }
 }
