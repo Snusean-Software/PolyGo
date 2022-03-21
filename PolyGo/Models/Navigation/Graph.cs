@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PolyGo.Models.Map
+namespace PolyGo.Models.Navigation
 {
   public class Graph
   {
@@ -32,7 +32,7 @@ namespace PolyGo.Models.Map
     /// </summary>
     /// <param name="startId">Id of start node in path</param>
     /// <param name="endId">Id of end node in path</param>
-    /// <returns>Path as list of nodes. If path doesn't exist returns empty list</returns>
+    /// <returns>Path as list of nodes ids. If path doesn't exist returns empty list</returns>
     public List<int> findPath(int startId, int endId)
     {
       // pathWeight[v] - weight of shortest path from start to any vertex v
