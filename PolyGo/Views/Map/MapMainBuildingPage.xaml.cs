@@ -9,8 +9,8 @@ namespace PolyGo.Views.Map
 	public partial class MapMainBuildingPage : ContentPage
 	{
 		Models.Map.Map map = new Models.Map.Map(new List<string> { "PolyGo.Resources.map.mb.floor_1.png",
-																															 "PolyGo.Resources.map.mb.floor_2.png",
-																															 "PolyGo.Resources.map.mb.floor_3.png"});
+																   "PolyGo.Resources.map.mb.floor_2.png",
+																   "PolyGo.Resources.map.mb.floor_3.png"});
 		public MapMainBuildingPage()
 		{
 			InitializeComponent();

@@ -22,6 +22,9 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\map\down_button.png" />
+	  <None Remove="Resources\map\mb\floor_1.png" />
+	  <None Remove="Resources\map\mb\floor_2.png" />
+	  <None Remove="Resources\map\mb\floor_3.png" />
 	  <None Remove="Resources\map\mb_floor_1_image.png" />
 	  <None Remove="Resources\map\mb_floor_2_image.png" />
 	  <None Remove="Resources\map\mb_floor_3_image.png" />
