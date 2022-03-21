@@ -8,13 +8,14 @@ namespace PolyGo.Views.Map
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MapMainBuildingPage : ContentPage
 	{
-		Models.Map.Map map = new Models.Map.Map(new List<string> { "PolyGo.Resources.map.mb.floor_1.png",
+		Models.Navigation.Map map = new Models.Navigation.Map(new List<string> { 
+																	 "PolyGo.Resources.map.mb.floor_1.png",
 																   "PolyGo.Resources.map.mb.floor_2.png",
 																   "PolyGo.Resources.map.mb.floor_3.png"});
 		public MapMainBuildingPage()
 		{
 			InitializeComponent();
-			floor_Image.Source = ImageSource.FromStream(() => map.getMapStream(0));
+			floor_Image.Source = ImageSource.FromStream(() => map.getMapStream(1));
 			up_Button.Source = ImageSource.FromResource("PolyGo.Resources.map.up_button.png", GetType().Assembly);
 			down_Button.Source = ImageSource.FromResource("PolyGo.Resources.map.down_button.png", GetType().Assembly);
 			decoration.Source = ImageSource.FromResource("PolyGo.Resources.map.start_to_finish_image.png", GetType().Assembly);
@@ -34,13 +35,13 @@ namespace PolyGo.Views.Map
 			switch(floor)
       {
 				case Floor.First:
-					floor_Image.Source = ImageSource.FromStream(() => map.getMapStream(1));
+					floor_Image.Source = ImageSource.FromStream(() => map.getMapStream(2));
 					floor = Floor.Second;
 					floor_Number.Text = Convert.ToInt32(Floor.Second).ToString();
 					break;
 
 				case Floor.Second:
-					floor_Image.Source = ImageSource.FromStream(() => map.getMapStream(2));
+					floor_Image.Source = ImageSource.FromStream(() => map.getMapStream(3));
 					floor = Floor.Third;
 					floor_Number.Text = Convert.ToInt32(Floor.Third).ToString();
 					break;
@@ -57,13 +58,13 @@ namespace PolyGo.Views.Map
 					break;
 
 				case Floor.Second:
-					floor_Image.Source = ImageSource.FromStream(() => map.getMapStream(0));
+					floor_Image.Source = ImageSource.FromStream(() => map.getMapStream(1));
 					floor = Floor.First;
 					floor_Number.Text = Convert.ToInt32(Floor.First).ToString();
 					break;
 
 				case Floor.Third:
-					floor_Image.Source = ImageSource.FromStream(() => map.getMapStream(1));
+					floor_Image.Source = ImageSource.FromStream(() => map.getMapStream(2));
 					floor = Floor.Second;
 					floor_Number.Text = Convert.ToInt32(Floor.Second).ToString();
 					break;

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PolyGo.Models.Map
+namespace PolyGo.Models.Navigation
 {
   /// <summary>
   /// This class represents node of graph and also contains specific info about node 
@@ -66,20 +66,33 @@ namespace PolyGo.Models.Map
     public bool IsHall { get; set; }
 
     /// <summary>
-    /// Contains x, y coordinates on map
+    /// X coordinate on map
     /// </summary>
-    public (int, int) Coordinates { get; set; }
+    public int X { get; set; }
+
+    /// <summary>
+    /// Y coordinate on map
+    /// </summary>
+    public int Y { get; set; }
+
+    /// <summary>
+    /// Node's floor on map
+    /// </summary>
+    public int Floor { get; set; }
 
     public NodeInfo()
     {
     }
+
     public NodeInfo(NodeInfo other)
     {
       Classroom = string.Copy(other.Classroom);
       IsStairs = other.IsStairs;
       IsClassroom = other.IsClassroom;
       IsHall = other.IsHall;
-      Coordinates = other.Coordinates;
+      X = other.X;
+      Y = other.Y;
+      Floor = other.Floor;
     }
   }
 }

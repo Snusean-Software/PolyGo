@@ -1,5 +1,5 @@
 ﻿
-namespace PolyGo.Models.Map
+namespace PolyGo.Models.Navigation
 {
   /// <summary>
   /// This class represents orientiert edge of graph with weight
