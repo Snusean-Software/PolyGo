@@ -65,7 +65,13 @@
                    FontSize="22"
                    AbsoluteLayout.LayoutBounds="0.085, 0.923, 30, 30" 
                    AbsoluteLayout.LayoutFlags="PositionProportional"/>
-            
+
+            <ImageButton x:Name="main_map_button"
+                         Clicked="onMainMapClicked"
+                         AbsoluteLayout.LayoutBounds="0.95, 1, 0.1, 0.1" 
+                         AbsoluteLayout.LayoutFlags="All"
+                         BackgroundColor="Color.Transparent"/>
+
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

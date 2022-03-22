@@ -11,6 +11,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Resources\Новая папка1\**" />
+	  <EmbeddedResource Remove="Resources\Новая папка1\**" />
+	  <None Remove="Resources\Новая папка1\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	<Compile Remove="Views\MapPage.xaml.cs" />
 	<Compile Remove="Views\SchedulePage.xaml.cs" />
 	</ItemGroup>
@@ -21,7 +27,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\icoShell\map_ico.png" />
+	  <None Remove="Resources\icoShell\profile_ico.png" />
+	  <None Remove="Resources\icoShell\shedule_ico.png" />
 	  <None Remove="Resources\map\down_button.png" />
+	  <None Remove="Resources\map\main_map_button.png" />
 	  <None Remove="Resources\map\mb\floor_1.png" />
 	  <None Remove="Resources\map\mb\floor_2.png" />
 	  <None Remove="Resources\map\mb\floor_3.png" />
@@ -30,15 +40,23 @@
 	  <None Remove="Resources\map\mb_floor_3_image.png" />
 	  <None Remove="Resources\map\start_to_finish_image.png" />
 	  <None Remove="Resources\map\up_button.png" />
+	  <None Remove="Resources\shedule\free_day_picture.png" />
+	  <None Remove="Resources\shedule\van_picture.png" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <EmbeddedResource Include="Resources\icoShell\map_ico.png" />
+	  <EmbeddedResource Include="Resources\icoShell\profile_ico.png" />
+	  <EmbeddedResource Include="Resources\icoShell\shedule_ico.png" />
 	  <EmbeddedResource Include="Resources\map\down_button.png" />
+	  <EmbeddedResource Include="Resources\map\main_map_button.png" />
 	  <EmbeddedResource Include="Resources\map\mb\floor_1.png" />
 	  <EmbeddedResource Include="Resources\map\mb\floor_2.png" />
 	  <EmbeddedResource Include="Resources\map\mb\floor_3.png" />
 	  <EmbeddedResource Include="Resources\map\start_to_finish_image.png" />
 	  <EmbeddedResource Include="Resources\map\up_button.png" />
+	  <EmbeddedResource Include="Resources\shedule\free_day_picture.png" />
+	  <EmbeddedResource Include="Resources\shedule\van_picture.png" />
 	</ItemGroup>
 
 	<ItemGroup>

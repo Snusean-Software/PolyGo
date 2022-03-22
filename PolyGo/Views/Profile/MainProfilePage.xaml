@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 x:Class="PolyGo.Views.Profile.MainProfilePage">
+			 x:Class="PolyGo.Views.Profile.MainProfilePage"
+             Shell.NavBarIsVisible="False">
+    
 	<ContentPage.Content>
 		<StackLayout>
 			<Grid>
@@ -19,7 +21,8 @@
 				<Label Grid.Column ="0" 
                        Grid.Row ="0" 
                        Text="Your name: " 
-                       FontSize="18"/>
+                       FontSize="18"
+                       Padding="10"/>
                 
 				<Editor x:Name ="EditorName" 
                         Grid.Column ="1" 
@@ -32,7 +35,8 @@
 				<Label Grid.Column ="0" 
                        Grid.Row ="1" 
                        Text="You are student: " 
-                       FontSize="18"/>
+                       FontSize="18"
+                       Padding="10"/>
                 
 				<Editor x:Name ="EditorIsStudent" 
                         Grid.Column ="1" Grid.Row ="1" 
@@ -44,7 +48,8 @@
                        Grid.Column ="0" 
                        Grid.Row ="2"
                        Text="Your group number: " 
-                       FontSize="18"/>
+                       FontSize="18"
+                       Padding="10"/>
                 
 				<Editor x:Name ="EditorGroupNum" 
                         IsVisible ="{Binding IsStudent}" 

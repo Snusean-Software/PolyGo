@@ -19,6 +19,7 @@ namespace PolyGo.Views.Map
 			up_Button.Source = ImageSource.FromResource("PolyGo.Resources.map.up_button.png", GetType().Assembly);
 			down_Button.Source = ImageSource.FromResource("PolyGo.Resources.map.down_button.png", GetType().Assembly);
 			decoration.Source = ImageSource.FromResource("PolyGo.Resources.map.start_to_finish_image.png", GetType().Assembly);
+			main_map_button.Source = ImageSource.FromResource("PolyGo.Resources.map.main_map_button.png", GetType().Assembly);
 		}
 
     public enum Floor: ushort
@@ -69,6 +70,11 @@ namespace PolyGo.Views.Map
 					floor_Number.Text = Convert.ToInt32(Floor.Second).ToString();
 					break;
 			}
+		}
+
+		private async void onMainMapClicked(object sender, EventArgs e)
+        {
+			await Navigation.PopAsync();
 		}
 	}
 }

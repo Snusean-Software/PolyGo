@@ -6,9 +6,22 @@
 		 xmlns:profile="clr-namespace:PolyGo.Views.Profile"
 		 xmlns:resources="clr-namespace:PolyGo.Resx"
 		 x:Class="PolyGo.Shells.AppShell">
+
+    <Shell.Resources>
+        <Style TargetType="TabBar"
+               x:Name="Basic_style">
+            <Setter Property="Shell.TabBarBackgroundColor"
+                    Value="#E1F17B"/>
+            <Setter Property="Shell.TabBarTitleColor"
+                    Value="Black"/>
+            <Setter Property="Shell.TabBarUnselectedColor"
+                    Value="DarkGray"/>
+        </Style>
+    </Shell.Resources>
+    
 	<TabBar>
         
-		<ShellContent Title="{x:Static resources:AppResources.Schedule}"
+		<!--<ShellContent Title="{x:Static resources:AppResources.Schedule}"
 			Icon="icon_feed.png"
 			ContentTemplate="{DataTemplate schedule:MainSchedulePage}"/>
 
@@ -18,7 +31,22 @@
 
 		<ShellContent Title="{x:Static resources:AppResources.Profile}"
 			Icon="icon_feed.png"
-			ContentTemplate="{DataTemplate profile:MainProfilePage}"/>
+			ContentTemplate="{DataTemplate profile:MainProfilePage}"/>-->
         
-	</TabBar>
+        <Tab Title="{x:Static resources:AppResources.Schedule}"
+             x:Name="shedule_ico">
+            <ShellContent ContentTemplate="{DataTemplate schedule:MainSchedulePage}"/>
+        </Tab>
+
+        <Tab Title="{x:Static resources:AppResources.Map}"
+             x:Name="map_ico">
+            <ShellContent ContentTemplate="{DataTemplate maps:MapCampusPage}"/>
+        </Tab>
+
+        <Tab Title="{x:Static resources:AppResources.Profile}"
+             x:Name="profile_ico">
+            <ShellContent ContentTemplate="{DataTemplate profile:MainProfilePage}"/>
+        </Tab>
+
+    </TabBar>
 </Shell>
