@@ -235,12 +235,6 @@
                                AbsoluteLayout.LayoutBounds=" 0, 0.97, 300, 20" 
                                AbsoluteLayout.LayoutFlags="PositionProportional"/>
 
-                        <ImageButton x:Name="van"
-                               Clicked="onVanButtonClicked"
-                               AbsoluteLayout.LayoutBounds="0.87, 0.5, 50, 50" 
-                               AbsoluteLayout.LayoutFlags="PositionProportional"
-                               BackgroundColor="Color.Transparent"/>
-
                     </AbsoluteLayout>
                 </Frame>
 

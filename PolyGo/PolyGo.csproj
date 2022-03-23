@@ -41,7 +41,6 @@
 	  <None Remove="Resources\map\start_to_finish_image.png" />
 	  <None Remove="Resources\map\up_button.png" />
 	  <None Remove="Resources\shedule\free_day_picture.png" />
-	  <None Remove="Resources\shedule\van_picture.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -56,7 +55,6 @@
 	  <EmbeddedResource Include="Resources\map\start_to_finish_image.png" />
 	  <EmbeddedResource Include="Resources\map\up_button.png" />
 	  <EmbeddedResource Include="Resources\shedule\free_day_picture.png" />
-	  <EmbeddedResource Include="Resources\shedule\van_picture.png" />
 	</ItemGroup>
 
 	<ItemGroup>
