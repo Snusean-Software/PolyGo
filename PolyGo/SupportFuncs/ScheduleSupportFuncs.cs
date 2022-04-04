@@ -2,6 +2,14 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using HtmlAgilityPack;
+using System.Text.RegularExpressions;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Newtonsoft.Json.Linq;
+using System.Net;
+using System.IO;
 
 using PolyGo.Models.Schedule;
 
@@ -82,6 +90,94 @@ namespace PolyGo.SupportFuncs
 			temp.is_odd ^= false;
 
 			return GetWeekURL(temp.date_start);
+		}
+		public static int ParceFacultyGroups(string number)
+		{
+			string url = "https://ruz.spbstu.ru";
+			url += "/faculty/" + number + "/groups";
+			string pageCode = getResponse(url, "window.__INITIAL_STATE__", "\\script");
+			var htmlDoc = new HtmlDocument();
+			htmlDoc.LoadHtml(pageCode);
+
+			foreach (var scriptCode in htmlDoc.DocumentNode.SelectNodes(".//script"))
+			{
+				if (scriptCode.InnerText.Trim().StartsWith("window.__INITIAL_STATE__"))
+				{
+					//Console.WriteLine(bebra.InnerText);	
+					//scriptCode.InnerText.Trim().Remove(0, 27);
+
+					string id_s = "\"id\":";
+					string name_s = "\"name\":";
+					string group_number_s = "\"" + @"\w??\d+?/\d+?" + "\",";
+
+					string pattern = id_s + @"\d+?," + name_s + group_number_s;
+					var groupMatches = Regex.Matches(scriptCode.InnerText, pattern);
+
+					foreach (var groupMatch in groupMatches)
+					{
+						var id_pattern = id_s + @"\d+?,";
+						var name_pattern = name_s + group_number_s;
+
+						string groupURL = url + '/' + Regex.Match(groupMatch.ToString(), id_pattern).ToString().Remove(0, 5).Replace(",", "");
+						string groupNum = Regex.Match(groupMatch.ToString(), name_pattern).ToString().Remove(0, 7).Replace(",", "");
+
+						FacultyGroup facultyGroup = new FacultyGroup();
+						facultyGroup.Name = groupNum;
+						facultyGroup.URL = groupURL;
+
+						App.Database.SaveFacultyGroup(facultyGroup);
+					}
+					break;
+				}
+			}
+			return 0;
+		}
+		public static void ParceFacultyNumbers()
+		{
+			var url = "https://ruz.spbstu.ru";
+			string pageCode = getResponse(url, "body", "footer");
+			var htmlDoc = new HtmlDocument();
+			htmlDoc.LoadHtml(pageCode);
+
+			foreach (var htmlFaculty in htmlDoc.DocumentNode.SelectNodes(".//li[@class='faculty-list__item']"))
+			{
+				string name = htmlFaculty.SelectSingleNode(".//a[@class='faculty-list__link']").GetAttributeValue("href", null);
+				string number = Regex.Match(name, @"\d+").ToString();
+				ParceFacultyGroups(number);
+			}
+		}
+		private static string getResponse(string url, string beginning, string end)
+		{
+			StringBuilder sb = new StringBuilder();
+			byte[] buf = new byte[8192];
+			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+			Stream resStream = response.GetResponseStream();
+			int count;
+			bool isStarted = false;
+			do
+			{
+				count = resStream.Read(buf, 0, buf.Length);
+				if (count != 0)
+				{
+					var sCurrent = Encoding.Default.GetString(buf, 0, count);
+					if (!isStarted)
+					{
+						if (sCurrent.Contains(beginning)) isStarted = true;
+					}
+					if (isStarted)
+					{
+						if (sCurrent.Contains(end))
+						{
+							sb.Append(Encoding.Default.GetString(buf, 0, count));
+							break;
+						}
+						else sb.Append(Encoding.Default.GetString(buf, 0, count));
+					}
+				}
+			}
+			while (count > 0);
+			return sb.ToString();
 		}
 	}
 }
