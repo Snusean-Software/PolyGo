@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Net;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using HtmlAgilityPack;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
+using Newtonsoft.Json;
+using HtmlAgilityPack;
 using Newtonsoft.Json.Linq;
-using System.Net;
-using System.IO;
 
 using PolyGo.Models.Schedule;
 
@@ -91,7 +92,11 @@ namespace PolyGo.SupportFuncs
 
 			return GetWeekURL(temp.date_start);
 		}
-		public static int ParceFacultyGroups(string number)
+		/// <summary>
+		/// Parce page of faculty. Add all groups from this faculty to database
+		/// </summary>
+		/// <param name="number">Faculty id for URL</param>
+		public static void ParceFacultyGroups(string number)
 		{
 			string url = "https://ruz.spbstu.ru";
 			url += "/faculty/" + number + "/groups";
@@ -103,9 +108,6 @@ namespace PolyGo.SupportFuncs
 			{
 				if (scriptCode.InnerText.Trim().StartsWith("window.__INITIAL_STATE__"))
 				{
-					//Console.WriteLine(bebra.InnerText);	
-					//scriptCode.InnerText.Trim().Remove(0, 27);
-
 					string id_s = "\"id\":";
 					string name_s = "\"name\":";
 					string group_number_s = "\"" + @"\w??\d+?/\d+?" + "\",";
@@ -130,8 +132,10 @@ namespace PolyGo.SupportFuncs
 					break;
 				}
 			}
-			return 0;
 		}
+		/// <summary>
+		/// Parce page of faculties to get id's. Call ParceFacultyGroups for each.
+		/// </summary>
 		public static void ParceFacultyNumbers()
 		{
 			var url = "https://ruz.spbstu.ru";
@@ -146,6 +150,13 @@ namespace PolyGo.SupportFuncs
 				ParceFacultyGroups(number);
 			}
 		}
+		/// <summary>
+		/// Parce page by given url.
+		/// </summary>
+		/// <param name="url">URL of page to parce</param>
+		/// <param name="beginning">Word from which function start parcing</param>
+		/// <param name="end">Word on which function end parcing</param>
+		/// <returns>Parced page</returns>
 		private static string getResponse(string url, string beginning, string end)
 		{
 			StringBuilder sb = new StringBuilder();
