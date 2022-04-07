@@ -1,7 +1,16 @@
 ﻿using System;
+using System.Net;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
 using Newtonsoft.Json;
+using HtmlAgilityPack;
+using Newtonsoft.Json.Linq;
 
 using PolyGo.Models.Schedule;
 
@@ -82,6 +91,104 @@ namespace PolyGo.SupportFuncs
 			temp.is_odd ^= false;
 
 			return GetWeekURL(temp.date_start);
+		}
+		/// <summary>
+		/// Parce page of faculty. Add all groups from this faculty to database
+		/// </summary>
+		/// <param name="number">Faculty id for URL</param>
+		public static void ParceFacultyGroups(string number)
+		{
+			string url = "https://ruz.spbstu.ru";
+			url += "/faculty/" + number + "/groups";
+			string pageCode = getResponse(url, "window.__INITIAL_STATE__", "\\script");
+			var htmlDoc = new HtmlDocument();
+			htmlDoc.LoadHtml(pageCode);
+
+			foreach (var scriptCode in htmlDoc.DocumentNode.SelectNodes(".//script"))
+			{
+				if (scriptCode.InnerText.Trim().StartsWith("window.__INITIAL_STATE__"))
+				{
+					string id_s = "\"id\":";
+					string name_s = "\"name\":";
+					string group_number_s = "\"" + @"\w??\d+?/\d+?" + "\",";
+
+					string pattern = id_s + @"\d+?," + name_s + group_number_s;
+					var groupMatches = Regex.Matches(scriptCode.InnerText, pattern);
+
+					foreach (var groupMatch in groupMatches)
+					{
+						var id_pattern = id_s + @"\d+?,";
+						var name_pattern = name_s + group_number_s;
+
+						string groupURL = url + '/' + Regex.Match(groupMatch.ToString(), id_pattern).ToString().Remove(0, 5).Replace(",", "");
+						string groupNum = Regex.Match(groupMatch.ToString(), name_pattern).ToString().Remove(0, 7).Replace(",", "");
+
+						FacultyGroup facultyGroup = new FacultyGroup();
+						facultyGroup.Name = groupNum;
+						facultyGroup.URL = groupURL;
+
+						App.Database.SaveFacultyGroup(facultyGroup);
+					}
+					break;
+				}
+			}
+		}
+		/// <summary>
+		/// Parce page of faculties to get id's. Call ParceFacultyGroups for each.
+		/// </summary>
+		public static void ParceFacultyNumbers()
+		{
+			var url = "https://ruz.spbstu.ru";
+			string pageCode = getResponse(url, "body", "footer");
+			var htmlDoc = new HtmlDocument();
+			htmlDoc.LoadHtml(pageCode);
+
+			foreach (var htmlFaculty in htmlDoc.DocumentNode.SelectNodes(".//li[@class='faculty-list__item']"))
+			{
+				string name = htmlFaculty.SelectSingleNode(".//a[@class='faculty-list__link']").GetAttributeValue("href", null);
+				string number = Regex.Match(name, @"\d+").ToString();
+				ParceFacultyGroups(number);
+			}
+		}
+		/// <summary>
+		/// Parce page by given url.
+		/// </summary>
+		/// <param name="url">URL of page to parce</param>
+		/// <param name="beginning">Word from which function start parcing</param>
+		/// <param name="end">Word on which function end parcing</param>
+		/// <returns>Parced page</returns>
+		private static string getResponse(string url, string beginning, string end)
+		{
+			StringBuilder sb = new StringBuilder();
+			byte[] buf = new byte[8192];
+			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+			Stream resStream = response.GetResponseStream();
+			int count;
+			bool isStarted = false;
+			do
+			{
+				count = resStream.Read(buf, 0, buf.Length);
+				if (count != 0)
+				{
+					var sCurrent = Encoding.Default.GetString(buf, 0, count);
+					if (!isStarted)
+					{
+						if (sCurrent.Contains(beginning)) isStarted = true;
+					}
+					if (isStarted)
+					{
+						if (sCurrent.Contains(end))
+						{
+							sb.Append(Encoding.Default.GetString(buf, 0, count));
+							break;
+						}
+						else sb.Append(Encoding.Default.GetString(buf, 0, count));
+					}
+				}
+			}
+			while (count > 0);
+			return sb.ToString();
 		}
 	}
 }
