@@ -324,6 +324,26 @@ namespace PolyGo.Data
 
       return rt;
     }
+
+    public List<FacultyGroup> GetFacultyGroups()
+		{
+      List<FacultyGroup> facultyGroups = new List<FacultyGroup>();
+
+      foreach(var fg in database.Table<FacultyGroup>())
+			{
+        facultyGroups.Add(fg);
+			}
+
+      return facultyGroups;
+		}
+
+    public void ClearFacultyGroups()
+    {
+      foreach (var fg in database.Table<FacultyGroup>())
+      {
+        database.Delete(fg);
+      }
+    }
   }
 }
 

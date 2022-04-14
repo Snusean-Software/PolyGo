@@ -8,45 +8,47 @@ using PolyGo.Models.Schedule;
 namespace PolyGo.Views.Schedule
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class MainSchedulePage 
+	public partial class MainSchedulePage : TabbedPage
 	{
 		public MainSchedulePage()
 		{
 			InitializeComponent();
 		}
-		//protected override async void OnAppearing()
-		//{
-		//	base.OnAppearing();
-		//	Week current = new Week();
+		protected override async void OnAppearing()
+		{
+			base.OnAppearing();
+			Week current = new Week();
 
-		//	if (App.Database.Empty)
-		//	{
-		//		var networkAccess = Connectivity.NetworkAccess;
-		//		switch (networkAccess)
-		//		{
-		//			case NetworkAccess.Internet:
-		//			{
-		//				current = await ScheduleSupportFuncs.ParseWeek(Constants.RefToSchedule);
+			if (App.Database.Empty)
+			{
+				var networkAccess = Connectivity.NetworkAccess;
+				switch (networkAccess)
+				{
+					case NetworkAccess.Internet:
+						{
+							current = await ScheduleSupportFuncs.ParseWeek(Constants.RefToSchedule);
 
-		//				await ScheduleSupportFuncs.ParseWeek(ScheduleSupportFuncs.ChangeWeekUrl(current, -1));
+							await ScheduleSupportFuncs.ParseWeek(ScheduleSupportFuncs.ChangeWeekUrl(current, -1));
 
-		//				await ScheduleSupportFuncs.ParseWeek(ScheduleSupportFuncs.ChangeWeekUrl(current, 2));
+							await ScheduleSupportFuncs.ParseWeek(ScheduleSupportFuncs.ChangeWeekUrl(current, 2));
 
-		//				await ScheduleSupportFuncs.ParseWeek(ScheduleSupportFuncs.ChangeWeekUrl(current, 1));
+							await ScheduleSupportFuncs.ParseWeek(ScheduleSupportFuncs.ChangeWeekUrl(current, 1));
 
-		//				break;
-		//			}
-		//			default:
-		//			{
-		//				LabelNetworkError.IsVisible = true;
-		//				break;
-		//			}
-		//		}
-		//	}
+							break;
+						}
+					default:
+						{
+							break;
+						}
+				}
+			}
+			//App.Database.ClearFacultyGroups();
+			//ScheduleSupportFuncs.ParceFacultyNumbers();
 
-		//	var data = App.Database.GetDataForSchedule();
+			//var data = App.Database.GetDataForSchedule();
+			//var groups = App.Database.GetFacultyGroups();
 
-		//	collectionViewDays.ItemsSource = data;
-		//}
+			//collectionViewDays.ItemsSource = data;
+		}
 	}
 }
