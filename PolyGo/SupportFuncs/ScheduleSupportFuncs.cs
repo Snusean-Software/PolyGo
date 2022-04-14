@@ -162,6 +162,7 @@ namespace PolyGo.SupportFuncs
 			StringBuilder sb = new StringBuilder();
 			byte[] buf = new byte[8192];
 			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+			request.ServerCertificateValidationCallback = delegate { return true; };
 			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 			Stream resStream = response.GetResponseStream();
 			int count;

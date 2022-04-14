@@ -6,8 +6,9 @@
 		 xmlns:profile="clr-namespace:PolyGo.Views.Profile"
 		 xmlns:resources="clr-namespace:PolyGo.Resx"
 		 x:Class="PolyGo.Shells.AppShell">
+	
 	<TabBar>
-        
+     
 		<ShellContent Title="{x:Static resources:AppResources.Schedule}"
 			Icon="icon_feed.png"
 			ContentTemplate="{DataTemplate schedule:MainSchedulePage}"/>
