@@ -20,6 +20,7 @@ namespace PolyGo.Data
       database.CreateTable<Group>();
       database.CreateTable<Teacher>();
       database.CreateTable<Auditory>();  
+      database.CreateTable<FacultyGroup>();
     }
 
     /// <summary>
@@ -122,6 +123,17 @@ namespace PolyGo.Data
           }
         }
         return result;
+      }
+    }
+    public int SaveFacultyGroup(FacultyGroup facultyGroup)
+    {
+      if (facultyGroup.ID != 0)
+      {
+        return database.Update(facultyGroup);
+      }
+      else
+      {
+        return database.Insert(facultyGroup);
       }
     }
     private List<Day> getAllDaysByID(int IJid)
@@ -311,6 +323,26 @@ namespace PolyGo.Data
       }
 
       return rt;
+    }
+
+    public List<FacultyGroup> GetFacultyGroups()
+		{
+      List<FacultyGroup> facultyGroups = new List<FacultyGroup>();
+
+      foreach(var fg in database.Table<FacultyGroup>())
+			{
+        facultyGroups.Add(fg);
+			}
+
+      return facultyGroups;
+		}
+
+    public void ClearFacultyGroups()
+    {
+      foreach (var fg in database.Table<FacultyGroup>())
+      {
+        database.Delete(fg);
+      }
     }
   }
 }
