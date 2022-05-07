@@ -33,7 +33,7 @@ namespace PolyGo.SupportFuncs
 
 			var root = JsonConvert.DeserializeObject<Root>(responseBody);
 
-		  App.Database.SaveRoot(root);
+		  App.SchdlDatabase.SaveRoot(root);
 
 			return root.week;
 		}
@@ -127,7 +127,7 @@ namespace PolyGo.SupportFuncs
 						facultyGroup.Name = groupNum;
 						facultyGroup.URL = groupURL;
 
-						App.Database.SaveFacultyGroup(facultyGroup);
+						App.SchdlDatabase.SaveFacultyGroup(facultyGroup);
 					}
 					break;
 				}

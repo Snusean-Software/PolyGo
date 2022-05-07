@@ -60,7 +60,7 @@ namespace PolyGo.Models.Navigation
     /// <returns>False if path doesn't exist</returns>
     public bool drawPath(Node start, Node end)
     {
-      var path = MapGraph.findPath(start.Id, end.Id);
+      var path = MapGraph.findPath(start.ID, end.ID);
       if (path == null)
       {
         return false;
@@ -70,7 +70,7 @@ namespace PolyGo.Models.Navigation
       while (NodesDrawen + 1 != path.Count)
       {
         using (SKCanvas bitmapCanvas =
-          new SKCanvas(Bitmaps[Nodes[path[NodesDrawen]].Info.Floor]))
+          new SKCanvas(Bitmaps[Nodes[path[NodesDrawen]].Floor]))
         {
           var painter = new SKPaint
           {
@@ -80,23 +80,23 @@ namespace PolyGo.Models.Navigation
           };
 
           while (NodesDrawen + 1 != path.Count &&
-            Nodes[path[NodesDrawen]].Info.Floor == Nodes[path[NodesDrawen + 1]].Info.Floor)
+            Nodes[path[NodesDrawen]].Floor == Nodes[path[NodesDrawen + 1]].Floor)
           {
             Node a = Nodes[path[NodesDrawen]];
             Node b = Nodes[path[NodesDrawen + 1]];
-            if (Math.Abs(a.Info.X - b.Info.X) > Math.Abs(a.Info.Y - b.Info.Y))
+            if (Math.Abs(a.X - b.X) > Math.Abs(a.Y - b.Y))
             {
-              bitmapCanvas.DrawRect((a.Info.X + b.Info.X) / 2, a.Info.Y,
-                Math.Abs(a.Info.X - b.Info.X), 10, painter);
+              bitmapCanvas.DrawRect((a.X + b.X) / 2, a.Y,
+                Math.Abs(a.X - b.X), 10, painter);
             }
             else
             {
-              bitmapCanvas.DrawRect(a.Info.X, (a.Info.Y + b.Info.Y) / 2,
-                10, Math.Abs(a.Info.Y - b.Info.Y), painter);
+              bitmapCanvas.DrawRect(a.X, (a.Y + b.Y) / 2,
+                10, Math.Abs(a.Y - b.Y), painter);
             }
             NodesDrawen++;
           }
-          if (Nodes[path[NodesDrawen]].Info.Floor == Nodes[path[NodesDrawen + 1]].Info.Floor)
+          if (Nodes[path[NodesDrawen]].Floor == Nodes[path[NodesDrawen + 1]].Floor)
           {
             NodesDrawen++;
           }

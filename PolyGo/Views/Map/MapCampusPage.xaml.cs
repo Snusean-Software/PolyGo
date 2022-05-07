@@ -13,10 +13,10 @@ namespace PolyGo.Views.Map
     public MapCampusPage()
     {
       InitializeComponent();
-      CargarMapa();
+      LoadMap();
     }
 
-    public void CargarMapa()
+    public void LoadMap()
     {
       var source = new HtmlWebViewSource();
       source.BaseUrl = DependencyService.Get<IBaseUrl>().Get();
@@ -41,7 +41,7 @@ namespace PolyGo.Views.Map
       }
       else
       {
-        DisplayAlert("Aviso!", "error al cargar el mapa...", "entendido");
+        DisplayAlert("Error!", "error on loading map occurred...", "Error!");
       }
     }
 
