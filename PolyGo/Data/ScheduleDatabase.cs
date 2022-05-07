@@ -12,7 +12,7 @@ namespace PolyGo.Data
     readonly SQLiteConnection database;
     public ScheduleDatabase()
     {
-      database = new SQLiteConnection(Constants.DatabasePath);
+      database = new SQLiteConnection(Constants.ScheduleDatabasePath);
 
       database.CreateTable<Root>();
       database.CreateTable<Day>();

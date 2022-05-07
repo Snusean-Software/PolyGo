@@ -19,7 +19,7 @@ namespace PolyGo.Views.Schedule
 			base.OnAppearing();
 			Week current = new Week();
 
-			if (App.Database.Empty)
+			if (App.SchdlDatabase.Empty)
 			{
 				var networkAccess = Connectivity.NetworkAccess;
 				switch (networkAccess)

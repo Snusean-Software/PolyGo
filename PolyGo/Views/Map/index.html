@@ -39,18 +39,18 @@
 
     <script type="text/javascript">
 
-        var mbAttr = ' ',
-            mbUrl = 'Tiles/{z}/{x}/{y}.png';
+        var mbAttr = ' ';
+        var mbUrl = 'Tiles/{z}/{x}/{y}.png';
 
         var map = L.map('map').setView([60.0074614, 30.3729735], 15);
 
-        var southWest = L.latLng(59.9935, 30.3113),
-        northEast = L.latLng(60.0210, 30.4431);
+        var southWest = L.latLng(59.9935, 30.3113);
+        var northEast = L.latLng(60.0210, 30.4431);
         var bounds = L.latLngBounds(southWest, northEast);
 
         map.setMaxBounds(bounds);
         map.on('drag', function() {
-        map.panInsideBounds(bounds, { animate: false });
+            map.panInsideBounds(bounds, { animate: false });
         });
 
         L.tileLayer(mbUrl, { id: 'OSM', minZoom: 15, maxZoom: 17}).addTo(map);
@@ -59,8 +59,8 @@
         map.addLayer(markerGroup);
 
         //Create new marker
-        function newMarker(lat, lon, texto) {
-            var marker = L.marker([lat.toString(), lon.toString()]).bindPopup(texto);
+        function newMarker(lat, lon, text) {
+            var marker = L.marker([lat.toString(), lon.toString()]).bindPopup(text);
             markerGroup.addLayer(marker);
         }
 
