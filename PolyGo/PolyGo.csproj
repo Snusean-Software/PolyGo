@@ -30,6 +30,7 @@
 	  <None Remove="Resources\map\mb_floor_3_image.png" />
 	  <None Remove="Resources\map\start_to_finish_image.png" />
 	  <None Remove="Resources\map\up_button.png" />
+	  <None Remove="Views\Map\index.html" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -39,6 +40,7 @@
 	  <EmbeddedResource Include="Resources\map\mb\floor_3.png" />
 	  <EmbeddedResource Include="Resources\map\start_to_finish_image.png" />
 	  <EmbeddedResource Include="Resources\map\up_button.png" />
+	  <EmbeddedResource Include="Views\Map\index.html" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -107,5 +109,9 @@
 	<Compile Update="Views\Map\MapCampusPage.xaml.cs">
 		<DependentUpon>MapCampusPage.xaml</DependentUpon>
 	</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Models\Navigation\CustomRender\" />
 	</ItemGroup>
 </Project>
