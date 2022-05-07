@@ -1,73 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 		 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-		 xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
-		 x:Class="PolyGo.Views.Map.MapCampusPage">
-	
-	<StackLayout Margin="10">
-		<maps:Map x:Name="map">
-			<x:Arguments>
-				<maps:MapSpan>
-					<x:Arguments>
-						<maps:Position>
-							<x:Arguments>
-								<x:Double>60.00742748115687</x:Double>
-								<x:Double>30.373037561794394</x:Double>
-							</x:Arguments>
-						</maps:Position>
-						<x:Double>0.015</x:Double>
-						<x:Double>0.015</x:Double>
-					</x:Arguments>
-				</maps:MapSpan>
-			</x:Arguments>
-			<maps:Map.Pins>
-				<maps:Pin Label="Main building"
-                          Address="Click here to open map of this corpus"
-                          Type="Place"
-						  Clicked="OnCorpusPinClicked">
-					<maps:Pin.Position>
-						<maps:Position>
-							<x:Arguments>
-								<x:Double>60.00742748115687</x:Double>
-								<x:Double>30.373037561794394</x:Double>
-							</x:Arguments>
-						</maps:Position>
-					</maps:Pin.Position>
-				</maps:Pin>
-				<maps:Pin Label="11 corpus"
-                          Address="Click here to open map of this corpus"
-                          Type="Place"
-						  MarkerClicked="OnCorpusPinClicked">
-					<maps:Pin.Position>
-						<maps:Position>
-							<x:Arguments>
-								<x:Double>60.009107756716745</x:Double>
-								<x:Double>30.37755676162321</x:Double>
-							</x:Arguments>
-						</maps:Position>
-					</maps:Pin.Position>
-				</maps:Pin>
-			</maps:Map.Pins>
-		</maps:Map>
-		<Slider Margin="20,0,20,0"
-		Maximum="18"
-		Minimum="1"
-		Value="12"
-		ValueChanged="OnSliderValueChanged"/>
-        
-	<StackLayout Orientation="Horizontal"
-				 HorizontalOptions="Center"
-				 Spacing="30">
-        
-		<Button Text="Street"
-			Clicked="OnButtonClicked"/>
-        
-		<Button Text="Satellite"
-			Clicked="OnButtonClicked"/>
-        
-		<Button Text="Hybrid"
-			Clicked="OnButtonClicked"/>
-        
-	</StackLayout>
-	</StackLayout>
+		 xmlns:map="clr-namespace:PolyGo.Models.Navigation.CustomRender"
+		 x:Class="PolyGo.Views.Map.MapCampusPage"
+     Shell.NavBarIsVisible="False">
+  <ContentPage.Content>
+    <StackLayout>
+      <map:IWebViewCustom x:Name="webView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="100"/>
+    </StackLayout>
+  </ContentPage.Content>
 </ContentPage>
