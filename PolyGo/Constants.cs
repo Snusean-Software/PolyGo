@@ -10,12 +10,14 @@ namespace PolyGo
     public const string GroupsDatabaseFilename = "GroupsDatabase.db3";
     public const string AccountFilename = "Account.txt";
 
+    private static string basePath =
+      Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+
     public static string RefToSchedule = "https://ruz.spbstu.ru/api/v1/ruz/scheduler/33742";
     public static string ScheduleDatabasePath
     {
       get
       {
-        var basePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         return Path.Combine(basePath, ScheduleDatabaseFilename);
       }
     }
@@ -23,7 +25,6 @@ namespace PolyGo
     {
       get
       {
-        var basePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         return Path.Combine(basePath, MapDatabaseFilename);
       }
     }
@@ -31,7 +32,6 @@ namespace PolyGo
     {
       get
       {
-        var basePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         return Path.Combine(basePath, AccountFilename);
       }
     }
