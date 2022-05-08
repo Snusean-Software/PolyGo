@@ -12,5 +12,10 @@ namespace PolyGo.Models.Navigation
       Five = 5,
       Sixth = 6,
     }
+
+    public enum MapID : int
+    {
+      MainBuilding = 1,
+    }
   }
 }

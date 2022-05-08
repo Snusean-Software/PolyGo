@@ -22,6 +22,8 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\map\down_button.png" />
+	  <None Remove="Resources\map\graph_edges.txt" />
+	  <None Remove="Resources\map\Graph_Nodes.txt" />
 	  <None Remove="Resources\map\mb\floor_1.png" />
 	  <None Remove="Resources\map\mb\floor_2.png" />
 	  <None Remove="Resources\map\mb\floor_3.png" />
@@ -35,9 +37,11 @@
 
 	<ItemGroup>
 	  <EmbeddedResource Include="Resources\map\down_button.png" />
+	  <EmbeddedResource Include="Resources\map\graph_nodes.txt" />
 	  <EmbeddedResource Include="Resources\map\mb\floor_1.png" />
 	  <EmbeddedResource Include="Resources\map\mb\floor_2.png" />
 	  <EmbeddedResource Include="Resources\map\mb\floor_3.png" />
+	  <EmbeddedResource Include="Resources\map\graph_edges.txt" />
 	  <EmbeddedResource Include="Resources\map\start_to_finish_image.png" />
 	  <EmbeddedResource Include="Resources\map\up_button.png" />
 	  <EmbeddedResource Include="Views\Map\index.html" />

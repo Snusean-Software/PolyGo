@@ -8,7 +8,7 @@ namespace PolyGo.Views.Map
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MapMainBuildingPage : ContentPage
 	{
-		Models.Navigation.Map map = new Models.Navigation.Map(new List<string> { 
+		Models.Navigation.Map map = new Models.Navigation.Map(1, new List<string> { 
 																	 "PolyGo.Resources.map.mb.floor_1.png",
 																   "PolyGo.Resources.map.mb.floor_2.png",
 																   "PolyGo.Resources.map.mb.floor_3.png"});

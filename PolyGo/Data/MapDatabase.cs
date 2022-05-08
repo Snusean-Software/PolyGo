@@ -18,6 +18,17 @@ namespace PolyGo.Data
     }
 
     /// <summary>
+    /// If table Nodes is empty
+    /// </summary>
+    public bool Empty
+    {
+      get
+      {
+        return database.Table<Node>().Count() == 0;
+      }
+    }
+
+    /// <summary>
     /// Saves or updtes node in database
     /// </summary>
     /// <param name="node">Node to be saved</param>
