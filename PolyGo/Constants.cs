@@ -6,7 +6,7 @@ namespace PolyGo
   public static class Constants
   {
     public const string ScheduleDatabaseFilename = "ScheduleDatabase.db3";
-    public const string GroupsDatabaseFilename = "GroupsDatabase.db3";
+    //public const string GroupsDatabaseFilename = "GroupsDatabase.db3";
     public const string AccountFilename = "Account.txt";
 
     public static string RefToSchedule = "https://ruz.spbstu.ru/api/v1/ruz/scheduler/33742";

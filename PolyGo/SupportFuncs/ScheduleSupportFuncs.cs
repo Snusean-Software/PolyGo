@@ -44,7 +44,7 @@ namespace PolyGo.SupportFuncs
 		/// </summary>
 		/// <param name="day">String with date of start day of week</param>
 		/// <returns>Tuple with year-day-month date of start day</returns>
-		private static (int year, int day, int month) getWeekDate(string day)
+		public static (int year, int day, int month) getWeekDate(string day)
 		{
 			var nums = day.Split(new char[] { '-', '.' });
 			(int year, int day, int month) res;
