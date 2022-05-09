@@ -7,7 +7,6 @@ namespace PolyGo
   {
     public const string ScheduleDatabaseFilename = "ScheduleDatabase.db3";
     public const string MapDatabaseFilename = "MapDatabase.db3";
-    public const string GroupsDatabaseFilename = "GroupsDatabase.db3";
     public const string AccountFilename = "Account.txt";
 
     private static string basePath =

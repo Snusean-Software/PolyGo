@@ -32,6 +32,9 @@
 	  <None Remove="Resources\map\mb_floor_3_image.png" />
 	  <None Remove="Resources\map\start_to_finish_image.png" />
 	  <None Remove="Resources\map\up_button.png" />
+	  <None Remove="Resources\schedule\no_lessons_image.png" />
+	  <None Remove="Resources\schedule\sdo_link_button.png" />
+	  <None Remove="Resources\schedule\shedule_polygon_image.png" />
 	  <None Remove="Views\Map\index.html" />
 	</ItemGroup>
 
@@ -44,6 +47,9 @@
 	  <EmbeddedResource Include="Resources\map\graph_edges.txt" />
 	  <EmbeddedResource Include="Resources\map\start_to_finish_image.png" />
 	  <EmbeddedResource Include="Resources\map\up_button.png" />
+	  <EmbeddedResource Include="Resources\schedule\no_lessons_image.png" />
+	  <EmbeddedResource Include="Resources\schedule\sdo_link_button.png" />
+	  <EmbeddedResource Include="Resources\schedule\shedule_polygon_image.png" />
 	  <EmbeddedResource Include="Views\Map\index.html" />
 	</ItemGroup>
 
@@ -52,9 +58,9 @@
 	<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	<PackageReference Include="SkiaSharp" Version="2.80.3" />
 	<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
-	<PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
-	<PackageReference Include="Xamarin.Essentials" Version="1.7.1" />
-	<PackageReference Include="Xamarin.Forms.Maps" Version="5.0.0.2337" />
+	<PackageReference Include="Xamarin.Forms" Version="5.0.0.2401" />
+	<PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
+	<PackageReference Include="Xamarin.Forms.Maps" Version="5.0.0.2401" />
 	<PackageReference Include="Xamarin.Forms.PinchZoomImage" Version="1.2.0" />
 	</ItemGroup>
 

@@ -1,23 +1,376 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
-            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            x:Class="PolyGo.Views.Schedule.MainSchedulePage"
-            BarBackgroundColor="#E1F17B"
-            BarTextColor="Black"
-            Shell.NavBarIsVisible="False">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:schedule="clr-namespace:PolyGo.Views.Schedule"
+						 x:Class="PolyGo.Views.Schedule.MainSchedulePage"
+            Shell.NavBarIsVisible="False"
+            >
 
-    <ContentPage Title="ПН">
-        <ScrollView>
-            <StackLayout>
+	<ContentPage.Resources>
 
-            </StackLayout>
-        </ScrollView>
-    </ContentPage>
+		<Style x:Key="dataFrameStyle" TargetType="Frame">
+			<Setter Property="BackgroundColor" Value="#E1F17B"/>
+			<Setter Property="Margin" Value="0"/>
+			<Setter Property="Padding" Value="0"/>
+			<Setter Property="HeightRequest" Value="40"/>
+		</Style>
 
-    <ContentPage Title="ВТ"/>
-    <ContentPage Title="СР"/>
-    <ContentPage Title="ЧТ"/>
-    <ContentPage Title="ПТ"/>
-    <ContentPage Title="СБ"/>
-    <ContentPage Title="ВС"/>
-</TabbedPage>
+		<Style x:Key="lessonFrameStyle" TargetType="Frame">
+			<Setter Property="BackgroundColor" Value="#FFFDF3"/>
+			<Setter Property="Margin" Value="5"/>
+			<Setter Property="Padding" Value="0"/>
+			<Setter Property="HeightRequest" Value="150"/>
+			<Setter Property="CornerRadius" Value="10"/>
+			<Setter Property="HasShadow" Value="True"/>
+			<Setter Property="IsVisible" Value="False"/>
+		</Style>
+
+		<Style x:Key="typeOfLessonLabelStyle" TargetType="Label">
+			<Setter Property="AbsoluteLayout.LayoutBounds" Value="0.1, 0.05, 0.3, 0.14"/>
+			<Setter Property="AbsoluteLayout.LayoutFlags" Value="All"/>
+			<Setter Property="Text" Value="Практика"/>
+			<Setter Property="TextColor" Value="#3C3C3C"/>
+		</Style>
+
+		<Style x:Key="numberOfLessonLabelStyle" TargetType="Label">
+			<Setter Property="AbsoluteLayout.LayoutBounds" Value="0.02, 0.05, 0.05, 0.14"/>
+			<Setter Property="AbsoluteLayout.LayoutFlags" Value="All"/>
+			<Setter Property="TextColor" Value="#3C3C3C"/>
+			<Setter Property="Text" Value="1"/>
+		</Style>
+
+		<Style x:Key="timeOfLessonLabelStyle" TargetType="Label">
+			<Setter Property="AbsoluteLayout.LayoutBounds" Value="0.95, 0.05, 0.25, 0.14"/>
+			<Setter Property="AbsoluteLayout.LayoutFlags" Value="All"/>
+			<Setter Property="TextColor" Value="#3C3C3C"/>
+			<Setter Property="Text" Value="10:00-11:40"/>
+		</Style>
+
+		<Style x:Key="nameOfLessonLabelStyle" TargetType="Label">
+			<Setter Property="AbsoluteLayout.LayoutBounds" Value="0.35, 0.27, 0.8, 0.14"/>
+			<Setter Property="AbsoluteLayout.LayoutFlags" Value="All"/>
+			<Setter Property="TextColor" Value="#3C3C3C"/>
+			<Setter Property="FontAttributes" Value="Bold"/>
+			<Setter Property="Text" Value="Практикум по вычислительной математике"/>
+		</Style>
+
+		<Style x:Key="teacherOfLessonLabelStyle" TargetType="Label">
+			<Setter Property="AbsoluteLayout.LayoutBounds" Value="0.35, 0.49, 0.8, 0.14"/>
+			<Setter Property="AbsoluteLayout.LayoutFlags" Value="All"/>
+			<Setter Property="TextColor" Value="#3C3C3C"/>
+			<Setter Property="Text" Value="Воскобойников Сергей Петрович"/>
+		</Style>
+
+		<Style x:Key="groupsOfLessonLabelStyle" TargetType="Label">
+			<Setter Property="AbsoluteLayout.LayoutBounds" Value="0.35, 0.71, 0.8, 0.14"/>
+			<Setter Property="AbsoluteLayout.LayoutFlags" Value="All"/>
+			<Setter Property="TextColor" Value="#3C3C3C"/>
+			<Setter Property="Text" Value="Список групп ▼"/>
+		</Style>
+
+		<Style x:Key="locationOfLessonLabelStyle" TargetType="Label">
+			<Setter Property="AbsoluteLayout.LayoutBounds" Value="0.175, 0.96, 0.6, 0.14"/>
+			<Setter Property="AbsoluteLayout.LayoutFlags" Value="All"/>
+			<Setter Property="TextColor" Value="#3C3C3C"/>
+			<Setter Property="Text" Value="DL, ауд. Дистанционно"/>
+		</Style>
+
+		<Style x:Key="sdoLinkOfLessonImageButtonStyle" TargetType="schedule:ButtonLink">
+			<Setter Property="BackgroundColor" Value="Transparent"/>
+			<Setter Property="AbsoluteLayout.LayoutBounds" Value="0.95, 0.96, 0.1, 0.2"/>
+			<Setter Property="AbsoluteLayout.LayoutFlags" Value="All"/>
+		</Style>
+
+		<Style x:Key="noLessonsImageStyle" TargetType="Image">
+			<Setter Property="IsVisible" Value="False"/>
+			<Setter Property="AbsoluteLayout.LayoutBounds" Value="0.5, 0.5, 1, 1"/>
+			<Setter Property="AbsoluteLayout.LayoutFlags" Value="All"/>
+		</Style>
+
+	</ContentPage.Resources>
+
+
+	<StackLayout BackgroundColor="Transparent"
+							 Padding="0"
+							 Margin="0"
+							 Spacing="0">
+
+		<Frame BackgroundColor="#E1F17B"
+					 Margin="0"
+					 Padding="0"
+					 HeightRequest="120">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+
+				<Frame Grid.Column="0" BackgroundColor="Transparent"
+							 Margin="0"
+							 Padding="0">
+					<AbsoluteLayout>
+
+						<Label Text="ПН"
+									 FontSize="10"
+									 FontAttributes="Bold"
+									 HorizontalTextAlignment="Center"
+									 TextColor="Black"
+									 AbsoluteLayout.LayoutBounds ="0.5, 0, 0.4, 0.4"
+									 AbsoluteLayout.LayoutFlags="All"/>
+
+						<Image x:Name="shedule_polygon_image_1"
+									 AbsoluteLayout.LayoutBounds ="0.5, 0.9, 1, 0.5"
+									 AbsoluteLayout.LayoutFlags="All"
+									 IsVisible="False"/>
+
+						<Label x:Name="mon_date"
+									 Text="00"
+									 HorizontalOptions="Center"
+									 FontSize="15"
+									 AbsoluteLayout.LayoutBounds ="0.5, 0.9, 1, 0.5"
+									 AbsoluteLayout.LayoutFlags="All"/>
+					</AbsoluteLayout>
+				</Frame>
+
+				<Frame Grid.Column="1" BackgroundColor="Transparent"
+							 Margin="0"
+							 Padding="0">
+					<AbsoluteLayout>
+
+						<Label Text="ВТ"
+									 FontSize="10"
+									 FontAttributes="Bold"
+									 HorizontalTextAlignment="Center"
+									 TextColor="Black"
+									 AbsoluteLayout.LayoutBounds ="0.5, 0, 0.4, 0.4"
+									 AbsoluteLayout.LayoutFlags="All"/>
+
+						<Image x:Name="shedule_polygon_image_2"
+									 AbsoluteLayout.LayoutBounds ="0.5, 0.9, 1, 0.5"
+									 AbsoluteLayout.LayoutFlags="All"
+									 IsVisible="False"/>
+
+						<Label x:Name="tue_date"
+									 Text="00"
+									 HorizontalOptions="Center"
+									 FontSize="15"
+									 AbsoluteLayout.LayoutBounds ="0.5, 0.9, 1, 0.5"
+									 AbsoluteLayout.LayoutFlags="All"/>
+					</AbsoluteLayout>
+				</Frame>
+
+				<Frame Grid.Column="2" BackgroundColor="Transparent"
+							 Margin="0"
+							 Padding="0">
+					<AbsoluteLayout>
+
+						<Label Text="СР"
+									 FontSize="10"
+									 FontAttributes="Bold"
+									 HorizontalTextAlignment="Center"
+									 TextColor="Black"
+									 AbsoluteLayout.LayoutBounds ="0.5, 0, 0.4, 0.4"
+									 AbsoluteLayout.LayoutFlags="All"/>
+
+						<Image x:Name="shedule_polygon_image_3"
+									 AbsoluteLayout.LayoutBounds ="0.5, 0.9, 1, 0.5"
+									 AbsoluteLayout.LayoutFlags="All"
+									 IsVisible="False"/>
+
+						<Label x:Name="wed_date"
+									 Text="00"
+									 HorizontalOptions="Center"
+									 FontSize="15"
+									 AbsoluteLayout.LayoutBounds ="0.5, 0.9, 1, 0.5"
+									 AbsoluteLayout.LayoutFlags="All"/>
+					</AbsoluteLayout>
+				</Frame>
+
+				<Frame Grid.Column="3" BackgroundColor="Transparent"
+							 Margin="0"
+							 Padding="0">
+					<AbsoluteLayout>
+
+						<Label Text="ЧТ"
+									 FontSize="10"
+									 FontAttributes="Bold"
+									 HorizontalTextAlignment="Center"
+									 TextColor="Black"
+									 AbsoluteLayout.LayoutBounds ="0.5, 0, 0.4, 0.4"
+									 AbsoluteLayout.LayoutFlags="All"/>
+
+						<Image x:Name="shedule_polygon_image_4"
+									 AbsoluteLayout.LayoutBounds ="0.5, 0.9, 1, 0.5"
+									 AbsoluteLayout.LayoutFlags="All"
+									 IsVisible="False"/>
+
+						<Label x:Name="thu_date"
+									 Text="00"
+									 HorizontalOptions="Center"
+									 FontSize="15"
+									 AbsoluteLayout.LayoutBounds ="0.5, 0.9, 1, 0.5"
+									 AbsoluteLayout.LayoutFlags="All"/>
+					</AbsoluteLayout>
+				</Frame>
+
+				<Frame Grid.Column="4" BackgroundColor="Transparent"
+							 Margin="0"
+							 Padding="0">
+					<AbsoluteLayout>
+
+						<Label Text="ПТ"
+									 FontSize="10"
+									 FontAttributes="Bold"
+									 HorizontalTextAlignment="Center"
+									 TextColor="Black"
+									 AbsoluteLayout.LayoutBounds ="0.5, 0, 0.4, 0.4"
+									 AbsoluteLayout.LayoutFlags="All"/>
+
+						<Image x:Name="shedule_polygon_image_5"
+									 AbsoluteLayout.LayoutBounds ="0.5, 0.9, 1, 0.5"
+									 AbsoluteLayout.LayoutFlags="All"
+									 IsVisible="False"/>
+
+						<Label x:Name="fri_date"
+									 Text="00"
+									 HorizontalOptions="Center"
+									 FontSize="15"
+									 AbsoluteLayout.LayoutBounds ="0.5, 0.9, 1, 0.5"
+									 AbsoluteLayout.LayoutFlags="All"/>
+					</AbsoluteLayout>
+				</Frame>
+
+				<Frame Grid.Column="5" BackgroundColor="Transparent"
+							 Margin="0"
+							 Padding="0">
+					<AbsoluteLayout>
+
+						<Label Text="СБ"
+									 FontSize="10"
+									 FontAttributes="Bold"
+									 HorizontalTextAlignment="Center"
+									 TextColor="Black"
+									 AbsoluteLayout.LayoutBounds ="0.5, 0, 0.4, 0.4"
+									 AbsoluteLayout.LayoutFlags="All"/>
+
+						<Image x:Name="shedule_polygon_image_6"
+									 AbsoluteLayout.LayoutBounds ="0.5, 0.9, 1, 0.5"
+									 AbsoluteLayout.LayoutFlags="All"
+									 IsVisible="False"/>
+
+						<Label x:Name="sat_date"
+									 Text="00"
+									 HorizontalOptions="Center"
+									 FontSize="15"
+									 AbsoluteLayout.LayoutBounds ="0.5, 0.9, 1, 0.5"
+									 AbsoluteLayout.LayoutFlags="All"/>
+					</AbsoluteLayout>
+				</Frame>
+
+				<Frame Grid.Column="6" 
+							 Margin="0"
+							 Padding="0"
+							 BackgroundColor="Transparent">
+					<AbsoluteLayout>
+
+						<Label Text="ВС"
+									 FontSize="10"
+									 FontAttributes="Bold"
+									 HorizontalTextAlignment="Center"
+									 TextColor="Black"
+									 AbsoluteLayout.LayoutBounds ="0.5, 0, 0.4, 0.4"
+									 AbsoluteLayout.LayoutFlags="All"/>
+
+						<Image x:Name="shedule_polygon_image_7"
+									 AbsoluteLayout.LayoutBounds ="0.5, 0.9, 1, 0.5"
+									 AbsoluteLayout.LayoutFlags="All"
+									 IsVisible="False"/>
+
+						<Label x:Name="sun_date"
+									 Text="00"
+									 HorizontalOptions="Center"
+									 FontSize="15"
+									 AbsoluteLayout.LayoutBounds ="0.5, 0.9, 1, 0.5"
+									 AbsoluteLayout.LayoutFlags="All"/>
+					</AbsoluteLayout>
+				</Frame>
+
+			</Grid>
+
+		</Frame>
+
+		<Frame BackgroundColor="#E1F17B"
+					 HeightRequest="100"
+					 WidthRequest="2000"
+				   IsClippedToBounds="True"
+				   HorizontalOptions="Center"
+					 VerticalOptions="Center"
+					 Padding="0"
+					 Margin="0">
+			<AbsoluteLayout>
+				<DatePicker x:Name="date_Picker" 
+                    DateSelected="onDateSelected"
+										BackgroundColor="Transparent"
+										HorizontalOptions="Center"
+										FontSize="13"
+										AbsoluteLayout.LayoutBounds ="1, 1, 1, 1"
+										AbsoluteLayout.LayoutFlags="All"
+										TextColor="Black"
+										Format="dd/MM/yyyy"
+										>
+				</DatePicker>
+
+			</AbsoluteLayout>
+
+		</Frame>
+
+		<Image x:Name="nolessons_Image" Style="{StaticResource noLessonsImageStyle}"
+							 Margin="20"
+							 VerticalOptions="Center"
+							 HeightRequest="600"/>
+
+		<CollectionView x:Name="myColl" HeightRequest="1300">
+			<CollectionView.ItemTemplate>
+				<DataTemplate>
+					<ScrollView>
+						<StackLayout>
+
+							<Frame x:Name="lesson_Frame" Style="{StaticResource lessonFrameStyle}" IsVisible="true">
+								<AbsoluteLayout>
+									<Label x:Name="type_of_lesson" Style="{StaticResource typeOfLessonLabelStyle}"
+												 Text="{Binding typeObj_name}"/>
+									<!--<Label x:Name="number_of_lesson" Style="{StaticResource numberOfLessonLabelStyle}"
+												 Text="{Binding IjDaysID}"/>-->
+									<Label x:Name="time_of_lesson" Style="{StaticResource timeOfLessonLabelStyle}"
+												 Text="{Binding time_start}"/>
+									<Label x:Name="name_of_lesson" Style="{StaticResource nameOfLessonLabelStyle}"
+												 Text="{Binding subject}"/>
+									<!--<Label x:Name="teacher_of_lesson" Style="{StaticResource teacherOfLessonLabelStyle}"
+												 Text="{Binding teacherOfLesson}"/>-->
+									<!--<Label x:Name="groups_of_lesson" Style="{StaticResource groupsOfLessonLabelStyle}"
+												 Text="{Binding groups}">
+										<Label.GestureRecognizers>
+											<TapGestureRecognizer Tapped="onGroupsOfLessonTapped"
+                                      NumberOfTapsRequired="1"/>
+										</Label.GestureRecognizers>
+									</Label>-->
+									<!--<Label x:Name="location_of_lesson" Style="{StaticResource locationOfLessonLabelStyle}"
+												 Text="{Binding locationOfLesson}"/>-->
+									<schedule:ButtonLink Link="{Binding lms_url}" x:Name="sdo_link_of_lesson" 
+																			 Style="{StaticResource sdoLinkOfLessonImageButtonStyle}"/>
+								</AbsoluteLayout>
+							</Frame>
+
+						</StackLayout>
+					</ScrollView>
+				</DataTemplate>
+			</CollectionView.ItemTemplate>
+		</CollectionView>
+
+
+	</StackLayout>
+</ContentPage>

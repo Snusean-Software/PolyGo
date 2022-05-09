@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using SQLite;
 
 using PolyGo.Models.Schedule;
+using PolyGo.SupportFuncs;
 
 namespace PolyGo.Data
 {
@@ -19,7 +20,7 @@ namespace PolyGo.Data
       database.CreateTable<Lesson>();
       database.CreateTable<Group>();
       database.CreateTable<Teacher>();
-      database.CreateTable<Auditory>();  
+      database.CreateTable<Auditory>();
       database.CreateTable<FacultyGroup>();
     }
 
@@ -203,7 +204,7 @@ namespace PolyGo.Data
         foreach (var day in getAllDaysByID(rt.ID))
         {
           foreach (var lesson in getAllLessonsByID(day.ID))
-          { 
+          {
 
             foreach (var gr in getAllGroupsByID(lesson.ID))
             {
@@ -243,7 +244,7 @@ namespace PolyGo.Data
     /// </summary>
     /// <returns>List of roots from database without groups lists in Lessons</returns>
     public List<Root> GetDataForSchedule()
-		{
+    {
       List<Root> roots = new List<Root>();
 
       foreach (var rt in database.Table<Root>())
@@ -286,7 +287,7 @@ namespace PolyGo.Data
     /// <param name="sDay">Start day of week</param>
     /// <returns>Root with definite start day of week</returns>
     public Root GetRootByStartDay(string sDay)
-		{
+    {
       Root rt = findRootByStartDay(sDay);
 
       foreach (var day in getAllDaysByID(rt.ID))
@@ -326,22 +327,142 @@ namespace PolyGo.Data
     }
 
     public List<FacultyGroup> GetFacultyGroups()
-		{
+    {
       List<FacultyGroup> facultyGroups = new List<FacultyGroup>();
 
-      foreach(var fg in database.Table<FacultyGroup>())
-			{
+      foreach (var fg in database.Table<FacultyGroup>())
+      {
         facultyGroups.Add(fg);
-			}
+      }
 
       return facultyGroups;
-		}
+    }
 
     public void ClearFacultyGroups()
     {
       foreach (var fg in database.Table<FacultyGroup>())
       {
         database.Delete(fg);
+      }
+    }
+
+    /// <summary>
+    /// Delete weeks that were 3 weeks ago and earlier 
+    /// </summary>
+    /// <param name="start_date">Start day of current week</param>
+    public void ClearOldWeeks(string start_date)
+    {
+      foreach (var rt in database.Table<Root>())
+      {
+        var start = ScheduleSupportFuncs.getWeekDate(start_date);
+        var current = ScheduleSupportFuncs.getWeekDate(rt.week_date_start);
+        DateTime dt_start = new DateTime(start.year, start.month, start.day);
+        DateTime dt_max_old = dt_start.AddDays(-14);
+        DateTime dt_current = new DateTime(current.year, current.month, current.day);
+        if (dt_max_old.CompareTo(dt_current) > 0)
+        {
+          database.Delete(rt);
+          foreach (var day in database.Table<Day>())
+          {
+            if (day.IjRootID == rt.ID)
+            {
+              database.Delete(day);
+              foreach (var lsn in database.Table<Lesson>())
+              {
+                if (lsn.IjDaysID == day.ID)
+                {
+                  database.Delete(lsn);
+                  foreach (var gr in database.Table<Group>())
+                  {
+                    if (gr.IjLessonID == lsn.ID) database.Delete(gr);
+                  }
+                  foreach (var teacher in database.Table<Teacher>())
+                  {
+                    if (teacher.IjLessonID == lsn.ID) database.Delete(teacher);
+                  }
+                  foreach (var aud in database.Table<Auditory>())
+                  {
+                    if (aud.IjLessonID == lsn.ID) database.Delete(aud);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    /// <summary>
+    /// Checks if week is in database
+    /// </summary>
+    /// <param name="start_date"></param>
+    /// <returns></returns>
+    public bool checkWeekInDB(string start_date)
+    {
+      foreach (var rt in database.Table<Root>())
+      {
+        if (start_date == rt.week_date_start)
+        {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    /// <summary>
+    /// Updates info about chosen week
+    /// </summary>
+    /// <param name="root"></param>
+    public void updateWeek(Root root)
+    {
+      foreach (var rt in database.Table<Root>())
+      {
+        if (root.week_date_start == rt.week_date_start)
+        {
+          database.Delete(rt);
+          database.Insert(rt);
+          foreach (var day in database.Table<Day>())
+          {
+            if (day.IjRootID == rt.ID)
+            {
+              database.Delete(day);
+              database.Insert(day);
+              foreach (var lsn in database.Table<Lesson>())
+              {
+                if (lsn.IjDaysID == day.ID)
+                {
+                  database.Delete(lsn);
+                  database.Insert(lsn);
+                  foreach (var gr in database.Table<Group>())
+                  {
+                    if (gr.IjLessonID == lsn.ID)
+                    {
+                      database.Delete(gr);
+                      database.Insert(gr);
+                    }
+                  }
+                  foreach (var teacher in database.Table<Teacher>())
+                  {
+                    if (teacher.IjLessonID == lsn.ID)
+                    {
+                      database.Delete(teacher);
+                      database.Insert(teacher);
+                    }
+                  }
+                  foreach (var aud in database.Table<Auditory>())
+                  {
+                    if (aud.IjLessonID == lsn.ID)
+                    {
+                      database.Delete(aud);
+                      database.Insert(aud);
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

@@ -134,10 +134,10 @@
     <PackageReference Include="sqlite-net-pcl">
       <Version>1.8.116</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.1" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2401" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
     <PackageReference Include="Xamarin.Forms.Maps">
-      <Version>5.0.0.2337</Version>
+      <Version>5.0.0.2401</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms.PinchZoomImage">
       <Version>1.2.0</Version>
