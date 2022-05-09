@@ -193,8 +193,7 @@ namespace PolyGo.Views.Schedule
 				{
 					foreach (var day in rt.days)
 					{
-						var dayDate = date_Picker.Date.ToShortDateString().Replace('.', '-'); //dd-mm-yyyy, need yyyy-mm-dd
-						dayDate = dayDate.Substring(6) + dayDate.Substring(2, 3) + '-' + dayDate.Substring(0, 2);
+						var dayDate = dateTimeToString(date_Picker.Date).Replace('.', '-'); //yyyy-mm-dd
 						if (day.date == dayDate)
 						{
 							myColl.ItemsSource = day.lessons;
@@ -220,8 +219,7 @@ namespace PolyGo.Views.Schedule
 				ScheduleData.Add(newWeek);
 				foreach (var day in newWeek.days)
 				{
-					var dayDate = date_Picker.Date.ToShortDateString().Replace('.', '-'); //dd-mm-yyyy, need yyyy-mm-dd
-					dayDate = dayDate.Substring(6) + dayDate.Substring(2, 3) + '-' + dayDate.Substring(0, 2);
+					var dayDate = dateTimeToString(date_Picker.Date).Replace('.', '-'); //yyyy-mm-dd
 					if (day.date == dayDate)
 					{
 						myColl.ItemsSource = day.lessons;
@@ -256,8 +254,7 @@ namespace PolyGo.Views.Schedule
 				}
 			}
 
-			var wrongFormatDate = date_Picker.Date.ToShortDateString(); //dd.mm.yyyy, need yyyy.mm.dd
-			var currentWeekDate = wrongFormatDate.Substring(6) + wrongFormatDate.Substring(2, 3) + '-' + wrongFormatDate.Substring(0, 2);
+			var currentWeekDate = dateTimeToString(date_Picker.Date); ///yyyy.mm.dd
 			App.SchdlDatabase.ClearOldWeeks(currentWeekDate);
 
 			ScheduleData = App.SchdlDatabase.GetDataForSchedule();
