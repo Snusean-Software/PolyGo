@@ -7,23 +7,24 @@ namespace PolyGo.Models.Navigation
     private List<Edge> Edges;
     private List<int> nodeIds;
     private int nodeCount;
+    
+    public int MapID { get; set; }
 
     /// <summary>
     /// Create graph out of nodes
     /// </summary>
     /// <param name="nodes">Nodes of graph</param>
-    public Graph(List<Node> nodes)
+    public Graph(int mapID)
     {
       Edges = new List<Edge>();
       nodeIds = new List<int>();
+      MapID = mapID;
+      var nodes = App.MpDatabase.getNodes(MapID);
       nodeCount = nodes.Count;
       foreach (var node in nodes)
       {
-        nodeIds.Add(node.Id);
-        foreach (var adjacentNode in node.AdjacentNodes)
-        {
-          Edges.Add(new Edge(node.Id, adjacentNode.Item1, adjacentNode.Item2));
-        }
+        nodeIds.Add(node.ID);
+        Edges.AddRange(App.MpDatabase.getEdges(MapID, node.ID));
       }
     }
 

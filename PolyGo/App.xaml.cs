@@ -14,20 +14,34 @@ namespace PolyGo
 	{
 		internal static User user;
 
-	  static ScheduleDatabase database;
+	  static ScheduleDatabase scheduleDatabase;
+		static MapDatabase mapDatabase;
 
 		// Create the database connection as a singleton.
-	  internal static ScheduleDatabase Database
+	  internal static ScheduleDatabase SchdlDatabase
 		{
 			get
 			{
-				if (database == null)
+				if (scheduleDatabase == null)
 				{
-					database = new ScheduleDatabase();
+					scheduleDatabase = new ScheduleDatabase();
 				}
-				return database;
+				return scheduleDatabase;
 			}
 		}
+
+		internal static MapDatabase MpDatabase
+		{
+			get 
+			{
+				if (mapDatabase == null)
+				{
+					mapDatabase = new MapDatabase();
+				}
+				return mapDatabase;
+			}
+		}
+
 		public App()
 		{
 			InitializeComponent();

@@ -13,6 +13,7 @@ using HtmlAgilityPack;
 using Newtonsoft.Json.Linq;
 
 using PolyGo.Models.Schedule;
+using PolyGo.Data;
 
 namespace PolyGo.SupportFuncs
 {
@@ -24,7 +25,7 @@ namespace PolyGo.SupportFuncs
 		/// </summary>
 		/// <param name="url">Url of Internet page to parse</param>
 		/// <returns>Week from parsed page</returns>
-		public static async Task<Week> ParseWeek(string url)
+		public static async Task<Root> ParseWeek(string url, bool needToStore = true)
 		{
 			HttpClient httpClient = new HttpClient();
 			HttpResponseMessage response =
@@ -33,9 +34,12 @@ namespace PolyGo.SupportFuncs
 
 			var root = JsonConvert.DeserializeObject<Root>(responseBody);
 
-		  App.Database.SaveRoot(root);
+			if (needToStore && !App.SchdlDatabase.checkWeekInDB(root.week_date_start))
+			{
+				App.SchdlDatabase.SaveRoot(root);
+			}
 
-			return root.week;
+			return root;
 		}
 
 
@@ -60,10 +64,10 @@ namespace PolyGo.SupportFuncs
 		/// </summary>
 		/// <param name="firstDay">Start day of week</param>
 		/// <returns>Url to schedule of week with given start day</returns>
-		private static string GetWeekURL(string firstDay)
+		public static string GetWeekURL(string firstDay)
 		{
 			var date = getWeekDate(firstDay);
-			return Constants.RefToSchedule + "?date=" + date.year.ToString() + '-' 
+			return Constants.RefToSchedule + "?date=" + date.year.ToString() + '-'
 					+ date.month.ToString() + '-' + date.day.ToString();
 		}
 
@@ -82,7 +86,7 @@ namespace PolyGo.SupportFuncs
 			var newStart = dt.AddDays(7.0 * numOfWeeks);
 			var newEnd = dt.AddDays(7.0 * numOfWeeks + 6.0); // End day of new week
 
-			temp.date_start = newStart.Year.ToString() + '.' 
+			temp.date_start = newStart.Year.ToString() + '.'
 					+ newStart.Month.ToString() + '.' + newStart.Day.ToString();
 
 			temp.date_end = newEnd.Year.ToString() + '.'
@@ -127,7 +131,7 @@ namespace PolyGo.SupportFuncs
 						facultyGroup.Name = groupNum;
 						facultyGroup.URL = groupURL;
 
-						App.Database.SaveFacultyGroup(facultyGroup);
+						App.SchdlDatabase.SaveFacultyGroup(facultyGroup);
 					}
 					break;
 				}

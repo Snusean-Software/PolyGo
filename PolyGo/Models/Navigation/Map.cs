@@ -10,6 +10,11 @@ namespace PolyGo.Models.Navigation
   public class Map
   {
     /// <summary>
+    /// Id of map
+    /// </summary>
+    public int MapID { get; set; }
+
+    /// <summary>
     /// Count of floors in building
     /// </summary>
     private int FloorCount { get; set; }
@@ -40,37 +45,95 @@ namespace PolyGo.Models.Navigation
     /// Create map out of images. imagesIds[0] - image of first floor
     /// </summary>
     /// <param name="imagesIds"></param>
-    public Map(List<string> imagesIds)
+    public Map(int mapID, List<string> imagesIds)
     {
       ImagesIds = new List<string>(imagesIds);
       FloorCount = ImagesIds.Count;
+      MapID = mapID;
       Bitmaps = new List<SKBitmap>();
       Assembly assembly = this.GetType().GetTypeInfo().Assembly;
       foreach (var id in ImagesIds)
       {
         Bitmaps.Add(SKBitmap.Decode(assembly.GetManifestResourceStream(id)));
-      }  
+      }
+
+      if (App.MpDatabase.Empty)
+      {
+        StreamReader reader = new StreamReader(
+          assembly.GetManifestResourceStream("PolyGo.Resources.map.graph_nodes.txt"));
+        while (!reader.EndOfStream)
+        {
+          string line = reader.ReadLine();
+          var parts = line.Split(' ');
+          if (parts.Length == 6)
+          {
+            var node = new Node();
+            node.ID = int.Parse(parts[0]);
+            node.MapID = int.Parse(parts[1]);
+            node.Classroom = parts[2];
+            node.X = int.Parse(parts[3]);
+            node.Y = int.Parse(parts[4]);
+            node.Floor = int.Parse(parts[5]);
+            App.MpDatabase.saveNode(node);
+          }
+          else
+          {
+            Console.WriteLine("Error in graph_nodes.txt file syntax!!!");
+          }
+        }
+        reader = new StreamReader(
+          assembly.GetManifestResourceStream("PolyGo.Resources.map.graph_edges.txt"));
+        while (!reader.EndOfStream)
+        {
+          string line = reader.ReadLine();
+          var parts = line.Split(' ');
+          if (parts.Length == 4)
+          {
+            var edge = new Edge();
+            edge.StartNodeId = int.Parse(parts[0]);
+            edge.EndNodeId = int.Parse(parts[1]);
+            edge.Weight = int.Parse(parts[2]);
+            edge.MapID = int.Parse(parts[3]);
+            App.MpDatabase.saveEdge(edge);
+          }
+          else
+          {
+            Console.WriteLine("Error in graph_edges.txt file syntax!!!");
+          }
+        }
+      }
+      MapGraph = new Graph(MapID);
+      Nodes = new Dictionary<int, Node>();
+      foreach (var node in App.MpDatabase.getNodes(MapID))
+      {
+        Nodes[node.ID] = node;
+      }
     }
 
     /// <summary>
     /// Draw path on map beetween two nodes
     /// </summary>
-    /// <param name="start">Start of path</param>
-    /// <param name="end">End of path</param>
+    /// <param name="start">Start node id of path</param>
+    /// <param name="end">End node id of path</param>
     /// <returns>False if path doesn't exist</returns>
-    public bool drawPath(Node start, Node end)
+    public bool drawPath(int start, int end)
     {
-      var path = MapGraph.findPath(start.Id, end.Id);
+      var path = MapGraph.findPath(start, end);
       if (path == null)
       {
         return false;
+      }
+
+      foreach (var item in path)
+      {
+        Console.WriteLine(item);
       }
   
       int NodesDrawen = 0;
       while (NodesDrawen + 1 != path.Count)
       {
         using (SKCanvas bitmapCanvas =
-          new SKCanvas(Bitmaps[Nodes[path[NodesDrawen]].Info.Floor]))
+          new SKCanvas(Bitmaps[Nodes[path[NodesDrawen]].Floor - 1]))
         {
           var painter = new SKPaint
           {
@@ -78,25 +141,25 @@ namespace PolyGo.Models.Navigation
             Color = SKColors.Red,
             Style = SKPaintStyle.Fill
           };
-
           while (NodesDrawen + 1 != path.Count &&
-            Nodes[path[NodesDrawen]].Info.Floor == Nodes[path[NodesDrawen + 1]].Info.Floor)
+            Nodes[path[NodesDrawen]].Floor == Nodes[path[NodesDrawen + 1]].Floor)
           {
             Node a = Nodes[path[NodesDrawen]];
             Node b = Nodes[path[NodesDrawen + 1]];
-            if (Math.Abs(a.Info.X - b.Info.X) > Math.Abs(a.Info.Y - b.Info.Y))
+            if (Math.Abs(a.X - b.X) > Math.Abs(a.Y - b.Y))
             {
-              bitmapCanvas.DrawRect((a.Info.X + b.Info.X) / 2, a.Info.Y,
-                Math.Abs(a.Info.X - b.Info.X), 10, painter);
+              bitmapCanvas.DrawRect(Math.Min(a.X, b.X), Math.Min(a.Y, b.Y),
+                Math.Abs(a.X - b.X), 5, painter);
             }
             else
             {
-              bitmapCanvas.DrawRect(a.Info.X, (a.Info.Y + b.Info.Y) / 2,
-                10, Math.Abs(a.Info.Y - b.Info.Y), painter);
+              bitmapCanvas.DrawRect(Math.Min(a.X, b.X), Math.Min(a.Y, b.Y),
+                5, Math.Abs(a.Y - b.Y), painter);
             }
+            Console.WriteLine("IM HERE " + NodesDrawen);
             NodesDrawen++;
           }
-          if (Nodes[path[NodesDrawen]].Info.Floor == Nodes[path[NodesDrawen + 1]].Info.Floor)
+          if (NodesDrawen + 1 != path.Count)
           {
             NodesDrawen++;
           }
