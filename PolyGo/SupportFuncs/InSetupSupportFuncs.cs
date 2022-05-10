@@ -4,7 +4,6 @@ using Xamarin.Forms;
 using PolyGo.Shells;
 using PolyGo.Models;
 
-
 namespace PolyGo.SupportFuncs
 {
 	internal static class InSetupSupportFuncs

@@ -1,11 +1,11 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using System.Collections.Generic;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
-using System;
 
 using PolyGo.SupportFuncs;
 using PolyGo.Models.Schedule;
-using System.Collections.Generic;
 
 namespace PolyGo.Views.Schedule
 {
@@ -14,6 +14,15 @@ namespace PolyGo.Views.Schedule
 	public partial class MainSchedulePage : ContentPage
 	{
 		private IList<Root> ScheduleData = new List<Root>();
+
+		//Property for network access check
+		NetworkAccess NA
+		{
+			get
+			{
+				return Connectivity.NetworkAccess;
+			}
+		}
 		public MainSchedulePage()
 		{
 			InitializeComponent();
@@ -129,7 +138,7 @@ namespace PolyGo.Views.Schedule
 			clearShedulePolygons();
 			configurePolygons();
 
-			var str_weekStart = defineWeekForDay(date_Picker.Date);
+			var str_weekStart = ScheduleSupportFuncs.defineWeekForDay(date_Picker.Date);
 			loadSchedule(str_weekStart);
 		}
 		private void clearShedulePolygons()
@@ -146,44 +155,6 @@ namespace PolyGo.Views.Schedule
 		{
 
 		}
-
-		/// <summary>
-		/// Returns start of week which day belongs to
-		/// </summary>
-		/// <param name="day"></param>
-		/// <returns>Start day of week</returns>
-		/// 
-		private string dateTimeToString(DateTime day)
-		{
-			var result = day.Year.ToString() + '.'; //+ day.Month.ToString() + '.' + day.Day.ToString();
-			if (day.Month / 10 >= 1) result += day.Month.ToString() + '.';
-			else result += '0' + day.Month.ToString() + '.';
-
-			if (day.Day / 10 >= 1) result += day.Day.ToString();
-			else result += '0' + day.Day.ToString();
-
-			return result;
-		}
-		private string defineWeekForDay(DateTime day)
-		{
-			switch (day.DayOfWeek)
-			{
-				case DayOfWeek.Monday:
-					return dateTimeToString(day);
-				case DayOfWeek.Tuesday:
-					return dateTimeToString(day.AddDays(-1));
-				case DayOfWeek.Wednesday:
-					return dateTimeToString(day.AddDays(-2));
-				case DayOfWeek.Thursday:
-					return dateTimeToString(day.AddDays(-3));
-				case DayOfWeek.Friday:
-					return dateTimeToString(day.AddDays(-4));
-				case DayOfWeek.Saturday:
-					return dateTimeToString(day.AddDays(-5));
-				default:
-					return dateTimeToString(day.AddDays(-6));
-			}
-		}
 		private async void loadSchedule(string str_weekStart)
 		{
 			bool flag_ScheduleNotLoad = true;
@@ -193,7 +164,7 @@ namespace PolyGo.Views.Schedule
 				{
 					foreach (var day in rt.days)
 					{
-						var dayDate = dateTimeToString(date_Picker.Date).Replace('.', '-'); //yyyy-mm-dd
+						var dayDate = ScheduleSupportFuncs.dateTimeToString(date_Picker.Date).Replace('.', '-'); //yyyy-mm-dd
 						if (day.date == dayDate)
 						{
 							myColl.ItemsSource = day.lessons;
@@ -206,7 +177,7 @@ namespace PolyGo.Views.Schedule
 				}
 			}
 
-			if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+			if (NA != NetworkAccess.Internet)
 			{
 				//Tell about error
 				return;
@@ -219,7 +190,7 @@ namespace PolyGo.Views.Schedule
 				ScheduleData.Add(newWeek);
 				foreach (var day in newWeek.days)
 				{
-					var dayDate = dateTimeToString(date_Picker.Date).Replace('.', '-'); //yyyy-mm-dd
+					var dayDate = ScheduleSupportFuncs.dateTimeToString(date_Picker.Date).Replace('.', '-'); //yyyy-mm-dd
 					if (day.date == dayDate)
 					{
 						myColl.ItemsSource = day.lessons;
@@ -233,33 +204,32 @@ namespace PolyGo.Views.Schedule
 			base.OnAppearing();
 			configurePolygons();
 
-			var networkAccess = Connectivity.NetworkAccess;
-			if (App.SchdlDatabase.Empty)
+			switch (NA)
 			{
-				switch (networkAccess)
-				{
-					case NetworkAccess.Internet:
-						{
-							//Save current and two next weeks
-							var currentWeek = await ScheduleSupportFuncs.ParseWeek(Constants.RefToSchedule);
-							await ScheduleSupportFuncs.ParseWeek(ScheduleSupportFuncs.ChangeWeekUrl(currentWeek.week, 1));
-							await ScheduleSupportFuncs.ParseWeek(ScheduleSupportFuncs.ChangeWeekUrl(currentWeek.week, 1));
-							break;
-						}
-					default:
+				case NetworkAccess.Internet:
+					{
+						//Save or update current and two next weeks
+						var currentWeek = await ScheduleSupportFuncs.ParseWeek(Constants.RefToSchedule);
+						await ScheduleSupportFuncs.ParseWeek(ScheduleSupportFuncs.ChangeWeekUrl(currentWeek.week, 1));
+						await ScheduleSupportFuncs.ParseWeek(ScheduleSupportFuncs.ChangeWeekUrl(currentWeek.week, 1));
+						break;
+					}
+				default:
+					{
+						if (App.SchdlDatabase.Empty)
 						{
 							//Tell about error
-							break;
 						}
-				}
+						break;
+					}
 			}
 
-			var currentWeekDate = dateTimeToString(date_Picker.Date); ///yyyy.mm.dd
+			var currentWeekDate = ScheduleSupportFuncs.dateTimeToString(date_Picker.Date); ///yyyy-mm-dd
 			App.SchdlDatabase.ClearOldWeeks(currentWeekDate);
 
-			ScheduleData = App.SchdlDatabase.GetDataForSchedule();
+			ScheduleData = App.SchdlDatabase.GetAllData();
 
-			var str_weekStart = defineWeekForDay(date_Picker.Date);
+			var str_weekStart = ScheduleSupportFuncs.defineWeekForDay(date_Picker.Date);
 			loadSchedule(str_weekStart);
 		}
 	}

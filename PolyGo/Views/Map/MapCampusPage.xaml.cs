@@ -1,9 +1,8 @@
 ﻿using System;
-using Xamarin.Forms.Xaml;
-using Xamarin.Forms;
-using Xamarin.Forms.Maps;
 using System.Reflection;
 using System.IO;
+using Xamarin.Forms;
+
 using PolyGo.Models.Navigation.CustomRender;
 
 namespace PolyGo.Views.Map

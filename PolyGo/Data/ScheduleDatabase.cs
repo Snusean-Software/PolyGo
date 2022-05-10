@@ -41,7 +41,7 @@ namespace PolyGo.Data
     /// </summary>
     /// <param name="rt">Object Root which will be written to the database</param>
     /// <returns>The number of rows inserted or updated in Root table</returns>
-    public int SaveRoot(Root rt)
+    private int SaveRoot(Root rt)
     {
       if (rt.ID != 0)
       {
@@ -182,14 +182,6 @@ namespace PolyGo.Data
       }
       return groups;
     }
-    private Root findRootByStartDay(string sDay)
-    {
-      foreach (var rt in database.Table<Root>())
-      {
-        if (rt.week_date_start == sDay) return rt;
-      }
-      return null;
-    }
 
     /// <summary>
     /// Returns all data from all tables
@@ -280,52 +272,6 @@ namespace PolyGo.Data
 
       return roots;
     }
-
-    /// <summary>
-    /// Returns one Root from database with definite start day of week
-    /// </summary>
-    /// <param name="sDay">Start day of week</param>
-    /// <returns>Root with definite start day of week</returns>
-    public Root GetRootByStartDay(string sDay)
-    {
-      Root rt = findRootByStartDay(sDay);
-
-      foreach (var day in getAllDaysByID(rt.ID))
-      {
-        foreach (var lesson in getAllLessonsByID(day.ID))
-        {
-
-          foreach (var gr in getAllGroupsByID(lesson.ID))
-          {
-            lesson.groups.Add(gr);
-          }
-
-          try
-          {
-            foreach (var au in getAllAuditoriesByID(lesson.ID))
-            {
-              lesson.auditories.Add(au);
-            }
-          }
-          catch (Exception) { }
-
-          try
-          {
-            foreach (var teacher in getAllTeachersByID(lesson.ID))
-            {
-              lesson.teachers.Add(teacher);
-            }
-          }
-          catch (Exception) { }
-
-          day.lessons.Add(lesson);
-        }
-        rt.days.Add(day);
-      }
-
-      return rt;
-    }
-
     public List<FacultyGroup> GetFacultyGroups()
     {
       List<FacultyGroup> facultyGroups = new List<FacultyGroup>();
@@ -337,12 +283,41 @@ namespace PolyGo.Data
 
       return facultyGroups;
     }
-
     public void ClearFacultyGroups()
     {
       foreach (var fg in database.Table<FacultyGroup>())
       {
         database.Delete(fg);
+      }
+    }
+    private void deleteRoot(Root rt)
+		{
+      database.Delete(rt);
+      foreach (var day in database.Table<Day>())
+      {
+        if (day.IjRootID == rt.ID)
+        {
+          database.Delete(day);
+          foreach (var lsn in database.Table<Lesson>())
+          {
+            if (lsn.IjDaysID == day.ID)
+            {
+              database.Delete(lsn);
+              foreach (var gr in database.Table<Group>())
+              {
+                if (gr.IjLessonID == lsn.ID) database.Delete(gr);
+              }
+              foreach (var teacher in database.Table<Teacher>())
+              {
+                if (teacher.IjLessonID == lsn.ID) database.Delete(teacher);
+              }
+              foreach (var aud in database.Table<Auditory>())
+              {
+                if (aud.IjLessonID == lsn.ID) database.Delete(aud);
+              }
+            }
+          }
+        }
       }
     }
 
@@ -361,57 +336,13 @@ namespace PolyGo.Data
         DateTime dt_current = new DateTime(current.year, current.month, current.day);
         if (dt_max_old.CompareTo(dt_current) > 0)
         {
-          database.Delete(rt);
-          foreach (var day in database.Table<Day>())
-          {
-            if (day.IjRootID == rt.ID)
-            {
-              database.Delete(day);
-              foreach (var lsn in database.Table<Lesson>())
-              {
-                if (lsn.IjDaysID == day.ID)
-                {
-                  database.Delete(lsn);
-                  foreach (var gr in database.Table<Group>())
-                  {
-                    if (gr.IjLessonID == lsn.ID) database.Delete(gr);
-                  }
-                  foreach (var teacher in database.Table<Teacher>())
-                  {
-                    if (teacher.IjLessonID == lsn.ID) database.Delete(teacher);
-                  }
-                  foreach (var aud in database.Table<Auditory>())
-                  {
-                    if (aud.IjLessonID == lsn.ID) database.Delete(aud);
-                  }
-                }
-              }
-            }
-          }
+          deleteRoot(rt);
         }
       }
     }
 
     /// <summary>
-    /// Checks if week is in database
-    /// </summary>
-    /// <param name="start_date"></param>
-    /// <returns></returns>
-    public bool checkWeekInDB(string start_date)
-    {
-      foreach (var rt in database.Table<Root>())
-      {
-        if (start_date == rt.week_date_start)
-        {
-          return true;
-        }
-      }
-
-      return false;
-    }
-
-    /// <summary>
-    /// Updates info about chosen week
+    /// Updates info about chosen week or inserts a new week
     /// </summary>
     /// <param name="root"></param>
     public void updateWeek(Root root)
@@ -420,50 +351,13 @@ namespace PolyGo.Data
       {
         if (root.week_date_start == rt.week_date_start)
         {
-          database.Delete(rt);
-          database.Insert(rt);
-          foreach (var day in database.Table<Day>())
-          {
-            if (day.IjRootID == rt.ID)
-            {
-              database.Delete(day);
-              database.Insert(day);
-              foreach (var lsn in database.Table<Lesson>())
-              {
-                if (lsn.IjDaysID == day.ID)
-                {
-                  database.Delete(lsn);
-                  database.Insert(lsn);
-                  foreach (var gr in database.Table<Group>())
-                  {
-                    if (gr.IjLessonID == lsn.ID)
-                    {
-                      database.Delete(gr);
-                      database.Insert(gr);
-                    }
-                  }
-                  foreach (var teacher in database.Table<Teacher>())
-                  {
-                    if (teacher.IjLessonID == lsn.ID)
-                    {
-                      database.Delete(teacher);
-                      database.Insert(teacher);
-                    }
-                  }
-                  foreach (var aud in database.Table<Auditory>())
-                  {
-                    if (aud.IjLessonID == lsn.ID)
-                    {
-                      database.Delete(aud);
-                      database.Insert(aud);
-                    }
-                  }
-                }
-              }
-            }
-          }
+          //Need quality update
+          deleteRoot(rt);
+          break;
         }
       }
+
+      SaveRoot(root);
     }
   }
 }

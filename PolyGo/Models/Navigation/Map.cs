@@ -1,9 +1,10 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
-using SkiaSharp;
 using System.Reflection;
 using Xamarin.Forms;
-using System.IO;
+
+using SkiaSharp;
 
 namespace PolyGo.Models.Navigation
 {
