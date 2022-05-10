@@ -13,19 +13,7 @@ namespace PolyGo.Models.Navigation
     /// <summary>
     /// Id of map
     /// </summary>
-    public int MapID { get; set; }
-
-    /// <summary>
-    /// Count of floors in building
-    /// </summary>
-    private int FloorCount { get; set; }
-
-    /// <summary>
-    /// Identifiers of map images
-    /// imageIds[0] - id of first floor map image
-    /// id format - assemblyName.folder1.folder2.fileName
-    /// </summary>
-    private List<string> ImagesIds { get; set; }
+    public MapConstants.MapID MapID { get; set; }
 
     /// <summary>
     /// Bitmap for every image
@@ -46,69 +34,44 @@ namespace PolyGo.Models.Navigation
     /// Create map out of images. imagesIds[0] - image of first floor
     /// </summary>
     /// <param name="imagesIds"></param>
-    public Map(int mapID, List<string> imagesIds)
+    public Map(MapConstants.MapID mapID)
     {
-      ImagesIds = new List<string>(imagesIds);
-      FloorCount = ImagesIds.Count;
       MapID = mapID;
       Bitmaps = new List<SKBitmap>();
       Assembly assembly = this.GetType().GetTypeInfo().Assembly;
-      foreach (var id in ImagesIds)
+      foreach (var id in MapConstants.ImgSource(MapID))
       {
         Bitmaps.Add(SKBitmap.Decode(assembly.GetManifestResourceStream(id)));
       }
-
       if (App.MpDatabase.Empty)
       {
-        StreamReader reader = new StreamReader(
-          assembly.GetManifestResourceStream("PolyGo.Resources.map.graph_nodes.txt"));
-        while (!reader.EndOfStream)
-        {
-          string line = reader.ReadLine();
-          var parts = line.Split(' ');
-          if (parts.Length == 6)
-          {
-            var node = new Node();
-            node.ID = int.Parse(parts[0]);
-            node.MapID = int.Parse(parts[1]);
-            node.Classroom = parts[2];
-            node.X = int.Parse(parts[3]);
-            node.Y = int.Parse(parts[4]);
-            node.Floor = int.Parse(parts[5]);
-            App.MpDatabase.saveNode(node);
-          }
-          else
-          {
-            Console.WriteLine("Error in graph_nodes.txt file syntax!!!");
-          }
-        }
-        reader = new StreamReader(
-          assembly.GetManifestResourceStream("PolyGo.Resources.map.graph_edges.txt"));
-        while (!reader.EndOfStream)
-        {
-          string line = reader.ReadLine();
-          var parts = line.Split(' ');
-          if (parts.Length == 4)
-          {
-            var edge = new Edge();
-            edge.StartNodeId = int.Parse(parts[0]);
-            edge.EndNodeId = int.Parse(parts[1]);
-            edge.Weight = int.Parse(parts[2]);
-            edge.MapID = int.Parse(parts[3]);
-            App.MpDatabase.saveEdge(edge);
-          }
-          else
-          {
-            Console.WriteLine("Error in graph_edges.txt file syntax!!!");
-          }
-        }
+        App.MpDatabase.initDatabase();
       }
       MapGraph = new Graph(MapID);
       Nodes = new Dictionary<int, Node>();
-      foreach (var node in App.MpDatabase.getNodes(MapID))
+      foreach (var node in App.MpDatabase.getNodes((int)MapID))
       {
         Nodes[node.ID] = node;
       }
+      drawPath("151", "251");
+    }
+
+    /// <summary>
+    /// Draw path on map beetween two nodes
+    /// </summary>
+    /// <param name="start">Start classroom of path</param>
+    /// <param name="end">End calssroom of path</param>
+    /// <returns>False if path doesn't exist</returns>
+    public bool drawPath(string start, string end)
+    {
+      var a = App.MpDatabase.getNode(start, (int)MapID);
+      var b = App.MpDatabase.getNode(end, (int)MapID);
+      if (a != null && b != null)
+      {
+        return drawPath(a.ID, b.ID);
+      }
+      Console.WriteLine("ERROR! No nodes with that classroom!");
+      return false;
     }
 
     /// <summary>
@@ -123,11 +86,6 @@ namespace PolyGo.Models.Navigation
       if (path == null)
       {
         return false;
-      }
-
-      foreach (var item in path)
-      {
-        Console.WriteLine(item);
       }
   
       int NodesDrawen = 0;
@@ -157,7 +115,6 @@ namespace PolyGo.Models.Navigation
               bitmapCanvas.DrawRect(Math.Min(a.X, b.X), Math.Min(a.Y, b.Y),
                 5, Math.Abs(a.Y - b.Y), painter);
             }
-            Console.WriteLine("IM HERE " + NodesDrawen);
             NodesDrawen++;
           }
           if (NodesDrawen + 1 != path.Count)
@@ -177,31 +134,25 @@ namespace PolyGo.Models.Navigation
     {
       Bitmaps = new List<SKBitmap>();
       Assembly assembly = this.GetType().GetTypeInfo().Assembly;
-      foreach (var id in ImagesIds)
+      foreach (var id in MapConstants.ImgSource(MapID))
       {
         Bitmaps.Add(SKBitmap.Decode(assembly.GetManifestResourceStream(id)));
       }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     /// <param name="floor">Floor if map has many floors, default floor = 1</param>
     /// <returns>ImageSource of floor's map</returns>
-    public ImageSource getMapImageSource(int floor = 1)
+    public ImageSource getMapImageSource(MapConstants.Floor floor)
     {
       return ImageSource.FromStream(
-        () => Bitmaps[floor - 1].Encode(SKEncodedImageFormat.Png, 0).AsStream());
+        () => Bitmaps[(int)floor].Encode(SKEncodedImageFormat.Png, 0).AsStream());
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     /// <param name="floor">Floor if map has many floors, default floor = 1</param>
     /// <returns>Stream of image of floor's map</returns>
-    public Stream getMapStream(int floor = 1)
+    public Stream getMapStream(MapConstants.Floor floor)
     {
-      return Bitmaps[floor - 1].Encode(SKEncodedImageFormat.Png, 0).AsStream();
+      return Bitmaps[(int)floor].Encode(SKEncodedImageFormat.Png, 0).AsStream();
     }
   }
 }

@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using System;
+using System.Reflection;
 
 using SQLite;
 
@@ -26,6 +29,60 @@ namespace PolyGo.Data
       {
         return database.Table<Node>().Count() == 0;
       }
+    }
+
+    /// <summary>
+    /// Initialize database from text files
+    /// </summary>
+    /// <returns></returns>
+    public bool initDatabase()
+    {
+      Assembly assembly = this.GetType().GetTypeInfo().Assembly;
+      StreamReader reader = new StreamReader(
+         assembly.GetManifestResourceStream("PolyGo.Resources.map.graph_nodes.txt"));
+      while (!reader.EndOfStream)
+      {
+        string line = reader.ReadLine();
+        var parts = line.Split(' ');
+        if (parts.Length == 6)
+        {
+          var node = new Node();
+          node.ID = int.Parse(parts[0]);
+          node.MapID = int.Parse(parts[1]);
+          node.Classroom = parts[2];
+          node.X = int.Parse(parts[3]);
+          node.Y = int.Parse(parts[4]);
+          node.Floor = int.Parse(parts[5]);
+          App.MpDatabase.saveNode(node);
+        }
+        else
+        {
+          Console.WriteLine("Error in graph_nodes.txt file syntax!!!");
+          return false;
+        }
+      }
+      reader = new StreamReader(
+        assembly.GetManifestResourceStream("PolyGo.Resources.map.graph_edges.txt"));
+      while (!reader.EndOfStream)
+      {
+        string line = reader.ReadLine();
+        var parts = line.Split(' ');
+        if (parts.Length == 4)
+        {
+          var edge = new Edge();
+          edge.StartNodeId = int.Parse(parts[0]);
+          edge.EndNodeId = int.Parse(parts[1]);
+          edge.Weight = int.Parse(parts[2]);
+          edge.MapID = int.Parse(parts[3]);
+          App.MpDatabase.saveEdge(edge);
+        }
+        else
+        {
+          Console.WriteLine("Error in graph_edges.txt file syntax!!!");
+          return false;
+        }
+      }
+      return true;
     }
 
     /// <summary>
@@ -78,17 +135,19 @@ namespace PolyGo.Data
       return result;
     }
 
-    /// <param name="nodeID">Node to be searched</param>
+    /// <summary>
+    /// Find node by classroom name.
+    /// </summary>
+    /// <param name="classroom">Classroom to be searched</param>
     /// <param name="mapID">Node will be searched in this map</param>
     /// <returns>All info about node</returns>
-    public Node getNodeInfo(int nodeID, int mapID)
+    public Node getNode(string classroom, int mapID)
     {
-      foreach (var nodeInfo in database.Table<Node>())
+      foreach (var node in database.Table<Node>())
       {
-        if (nodeInfo.ID == nodeID && nodeInfo.MapID == mapID)
+        if (node.Classroom == classroom && node.MapID == mapID)
         {
-          var result = new Node(nodeInfo);
-          return result;
+          return node;
         }
       }
       return null;

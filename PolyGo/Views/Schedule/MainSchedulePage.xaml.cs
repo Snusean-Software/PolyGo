@@ -390,7 +390,11 @@ namespace PolyGo.Views.Schedule
 				}
 			}
 
+<<<<<<< HEAD
 			var currentWeekDate = dateTimeToString(date_Picker.Date); ///yyyy.mm.dd
+=======
+			var currentWeekDate = dateTimeToString(date_Picker.Date);
+>>>>>>> 7aadeda77be863905a5e66c418c0c9fcc82e0bbc
 			App.SchdlDatabase.ClearOldWeeks(currentWeekDate);
 
 			ScheduleData = App.SchdlDatabase.GetDataForSchedule();

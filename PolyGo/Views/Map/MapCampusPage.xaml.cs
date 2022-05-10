@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 using PolyGo.Models.Navigation.CustomRender;
 
-namespace PolyGo.Views.Map
+namespace PolyGo.Views.Maps
 {
   public partial class MapCampusPage : ContentPage
   {
