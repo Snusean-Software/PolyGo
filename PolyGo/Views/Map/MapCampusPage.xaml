@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 		 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 		 xmlns:map="clr-namespace:PolyGo.Models.Navigation.CustomRender"
-		 x:Class="PolyGo.Views.Map.MapCampusPage"
+		 x:Class="PolyGo.Views.Maps.MapCampusPage"
      Shell.NavBarIsVisible="False">
   <ContentPage.Content>
     <StackLayout>
