@@ -1,52 +1,43 @@
 ﻿using System;
-using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace PolyGo.Views.Map
+using PolyGo.Models.Navigation;
+
+namespace PolyGo.Views.Maps
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MapMainBuildingPage : ContentPage
 	{
-		Models.Navigation.Map map = new Models.Navigation.Map(1, new List<string> { 
-																	 "PolyGo.Resources.map.mb.floor_1.png",
-																   "PolyGo.Resources.map.mb.floor_2.png",
-																   "PolyGo.Resources.map.mb.floor_3.png"});
+		Map map = new Map(MapConstants.MapID.mMainBuilding);
 		public MapMainBuildingPage()
 		{
 			InitializeComponent();
-			floor_Image.Source = ImageSource.FromStream(() => map.getMapStream(1));
+			floor_Image.Source = ImageSource.FromStream(() => map.getMapStream(MapConstants.Floor.First));
 			up_Button.Source = ImageSource.FromResource("PolyGo.Resources.map.up_button.png", GetType().Assembly);
 			down_Button.Source = ImageSource.FromResource("PolyGo.Resources.map.down_button.png", GetType().Assembly);
 			decoration.Source = ImageSource.FromResource("PolyGo.Resources.map.start_to_finish_image.png", GetType().Assembly);
 		}
 
-    public enum Floor: ushort
-		{
-			First = 1,
-			Second = 2,
-			Third = 3,
-    }
-
-		Floor floor = Floor.First;
+		MapConstants.Floor floor = MapConstants.Floor.First;
 
 		private void onUpButtonClicked(object sender, EventArgs e)
 		{
 			switch(floor)
       {
-				case Floor.First:
-					floor_Image.Source = ImageSource.FromStream(() => map.getMapStream(2));
-					floor = Floor.Second;
-					floor_Number.Text = Convert.ToInt32(Floor.Second).ToString();
+				case MapConstants.Floor.First:
+					floor = MapConstants.Floor.Second;
+					floor_Image.Source = ImageSource.FromStream(() => map.getMapStream(floor));
+					floor_Number.Text = (Convert.ToInt32(floor) + 1).ToString();
 					break;
 
-				case Floor.Second:
-					floor_Image.Source = ImageSource.FromStream(() => map.getMapStream(3));
-					floor = Floor.Third;
-					floor_Number.Text = Convert.ToInt32(Floor.Third).ToString();
+				case MapConstants.Floor.Second:
+					floor = MapConstants.Floor.Third;
+					floor_Image.Source = ImageSource.FromStream(() => map.getMapStream(floor));
+					floor_Number.Text = (Convert.ToInt32(floor) + 1).ToString();
 					break;
 
-				case Floor.Third:
+				case MapConstants.Floor.Third:
 					break;
 			}
 		}
@@ -54,19 +45,19 @@ namespace PolyGo.Views.Map
 		{
 			switch (floor)
 			{
-				case Floor.First:
+				case MapConstants.Floor.First:
 					break;
 
-				case Floor.Second:
-					floor_Image.Source = ImageSource.FromStream(() => map.getMapStream(1));
-					floor = Floor.First;
-					floor_Number.Text = Convert.ToInt32(Floor.First).ToString();
+				case MapConstants.Floor.Second:
+					floor = MapConstants.Floor.First;
+					floor_Image.Source = ImageSource.FromStream(() => map.getMapStream(floor));
+					floor_Number.Text = (Convert.ToInt32(floor) + 1).ToString();
 					break;
 
-				case Floor.Third:
-					floor_Image.Source = ImageSource.FromStream(() => map.getMapStream(2));
-					floor = Floor.Second;
-					floor_Number.Text = Convert.ToInt32(Floor.Second).ToString();
+				case MapConstants.Floor.Third:
+					floor = MapConstants.Floor.Second;
+					floor_Image.Source = ImageSource.FromStream(() => map.getMapStream(floor));
+					floor_Number.Text = (Convert.ToInt32(floor) + 1).ToString();
 					break;
 			}
 		}

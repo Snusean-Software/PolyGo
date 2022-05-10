@@ -67,7 +67,9 @@ namespace PolyGo.SupportFuncs
 		public static string GetWeekURL(string firstDay)
 		{
 			var date = getWeekDate(firstDay);
-			return Constants.RefToSchedule + "?date=" + date.year.ToString() + '-'
+			var a = Constants.RefToSchedule + "/?date=" + date.year.ToString() + '-'
+					+ date.month.ToString() + '-' + date.day.ToString();
+			return Constants.RefToSchedule + "/?date=" + date.year.ToString() + '-'
 					+ date.month.ToString() + '-' + date.day.ToString();
 		}
 

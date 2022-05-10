@@ -6,7 +6,7 @@ using System.Reflection;
 using System.IO;
 using PolyGo.Models.Navigation.CustomRender;
 
-namespace PolyGo.Views.Map
+namespace PolyGo.Views.Maps
 {
   public partial class MapCampusPage : ContentPage
   {
