@@ -1,11 +1,11 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using System.Collections.Generic;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
-using System;
 
 using PolyGo.SupportFuncs;
 using PolyGo.Models.Schedule;
-using System.Collections.Generic;
 
 namespace PolyGo.Views.Schedule
 {
@@ -15,6 +15,15 @@ namespace PolyGo.Views.Schedule
 	{
 		private IList<Root> ScheduleData = new List<Root>();
 		private int nowDayOfWheek = 0;
+
+		//Property for network access check
+		private NetworkAccess NA
+		{
+			get
+			{
+				return Connectivity.NetworkAccess;
+			}
+		}
 		public MainSchedulePage()
 		{
 			InitializeComponent();
@@ -28,11 +37,10 @@ namespace PolyGo.Views.Schedule
 			shedule_polygon_image_sun.Source = ImageSource.FromResource("PolyGo.Resources.schedule.shedule_polygon_image.png", GetType().Assembly);
 			calculateNowDayOfWheek();
 		}
-
 		private void calculateNowDayOfWheek()
-        {
-			switch(date_Picker.Date.DayOfWeek)
-            {
+		{
+			switch (date_Picker.Date.DayOfWeek)
+			{
 				case DayOfWeek.Monday:
 					nowDayOfWheek = 0;
 					break;
@@ -61,12 +69,12 @@ namespace PolyGo.Views.Schedule
 					nowDayOfWheek = 6;
 					break;
 			}
-        }
+		}
 		private void changePolygonPosition(int newDayOfWheek)
-        {
+		{
 			int daysDifference = newDayOfWheek - nowDayOfWheek;
-			if(daysDifference != 0)
-            {
+			if (daysDifference != 0)
+			{
 				clearShedulePolygons();
 				switch (newDayOfWheek)
 				{
@@ -107,8 +115,6 @@ namespace PolyGo.Views.Schedule
 				}
 			}
 		}
-
-
 		private void onMonDateTapped(object sender, EventArgs e)
 		{
 			changePolygonPosition(0);
@@ -117,7 +123,7 @@ namespace PolyGo.Views.Schedule
 			calculateNowDayOfWheek();
 		}
 		private void onTueDateTapped(object sender, EventArgs e)
-        {
+		{
 			changePolygonPosition(1);
 			var str_weekStart = defineWeekForDay(date_Picker.Date);
 			loadSchedule(str_weekStart);
@@ -158,8 +164,6 @@ namespace PolyGo.Views.Schedule
 			loadSchedule(str_weekStart);
 			calculateNowDayOfWheek();
 		}
-
-
 		private void configurePolygons()
 		{
 			switch (date_Picker.Date.DayOfWeek)
@@ -280,7 +284,6 @@ namespace PolyGo.Views.Schedule
 		{
 
 		}
-
 		/// <summary>
 		/// Returns start of week which day belongs to
 		/// </summary>
@@ -340,7 +343,7 @@ namespace PolyGo.Views.Schedule
 				}
 			}
 
-			if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+			if (NA != NetworkAccess.Internet)
 			{
 				//Tell about error
 				return;
@@ -370,13 +373,12 @@ namespace PolyGo.Views.Schedule
 			var networkAccess = Connectivity.NetworkAccess;
 			if (App.SchdlDatabase.Empty)
 			{
-				switch (networkAccess)
+				switch (NA)
 				{
 					case NetworkAccess.Internet:
 						{
-							//Save current and two next weeks
+							//Save current and next week
 							var currentWeek = await ScheduleSupportFuncs.ParseWeek(Constants.RefToSchedule);
-							await ScheduleSupportFuncs.ParseWeek(ScheduleSupportFuncs.ChangeWeekUrl(currentWeek.week, 1));
 							await ScheduleSupportFuncs.ParseWeek(ScheduleSupportFuncs.ChangeWeekUrl(currentWeek.week, 1));
 							break;
 						}
@@ -410,6 +412,7 @@ namespace PolyGo.Views.Schedule
 		public ButtonLink()
 		{
 			Source = ImageSource.FromResource("PolyGo.Resources.schedule.sdo_link_button.png", GetType().Assembly);
+
 			Clicked += async (sender, e) =>
 			{
 				try

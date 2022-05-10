@@ -4,16 +4,12 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 using Newtonsoft.Json;
 using HtmlAgilityPack;
-using Newtonsoft.Json.Linq;
 
 using PolyGo.Models.Schedule;
-using PolyGo.Data;
 
 namespace PolyGo.SupportFuncs
 {
@@ -25,7 +21,7 @@ namespace PolyGo.SupportFuncs
 		/// </summary>
 		/// <param name="url">Url of Internet page to parse</param>
 		/// <returns>Week from parsed page</returns>
-		public static async Task<Root> ParseWeek(string url, bool needToStore = true)
+		public static async Task<Root> ParseWeek(string url)
 		{
 			HttpClient httpClient = new HttpClient();
 			HttpResponseMessage response =
@@ -34,10 +30,7 @@ namespace PolyGo.SupportFuncs
 
 			var root = JsonConvert.DeserializeObject<Root>(responseBody);
 
-			if (needToStore && !App.SchdlDatabase.checkWeekInDB(root.week_date_start))
-			{
-				App.SchdlDatabase.SaveRoot(root);
-			}
+			App.SchdlDatabase.updateWeek(root);
 
 			return root;
 		}
@@ -194,6 +187,38 @@ namespace PolyGo.SupportFuncs
 			}
 			while (count > 0);
 			return sb.ToString();
+		}
+
+		public static string dateTimeToString(DateTime day)
+		{
+			var result = day.Year.ToString() + '.';
+			if (day.Month / 10 >= 1) result += day.Month.ToString() + '.';
+			else result += '0' + day.Month.ToString() + '.';
+
+			if (day.Day / 10 >= 1) result += day.Day.ToString();
+			else result += '0' + day.Day.ToString();
+
+			return result;
+		}
+		public static string defineWeekForDay(DateTime day)
+		{
+			switch (day.DayOfWeek)
+			{
+				case DayOfWeek.Monday:
+					return dateTimeToString(day);
+				case DayOfWeek.Tuesday:
+					return dateTimeToString(day.AddDays(-1));
+				case DayOfWeek.Wednesday:
+					return dateTimeToString(day.AddDays(-2));
+				case DayOfWeek.Thursday:
+					return dateTimeToString(day.AddDays(-3));
+				case DayOfWeek.Friday:
+					return dateTimeToString(day.AddDays(-4));
+				case DayOfWeek.Saturday:
+					return dateTimeToString(day.AddDays(-5));
+				default:
+					return dateTimeToString(day.AddDays(-6));
+			}
 		}
 	}
 }

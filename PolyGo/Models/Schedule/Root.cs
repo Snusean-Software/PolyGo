@@ -165,7 +165,6 @@ namespace PolyGo.Models.Schedule
         group.faculty_id = value;
       }
     }
-
     public string group_faculty_name
     {
       get
@@ -178,7 +177,6 @@ namespace PolyGo.Models.Schedule
         group.faculty_name = value;
       }
     }
-
     public string group_faculty_abbr
     {
       get
@@ -191,7 +189,6 @@ namespace PolyGo.Models.Schedule
         group.faculty_abbr = value;
       }
     }
-
     public Root()
 		{
       days = new List<Day>();

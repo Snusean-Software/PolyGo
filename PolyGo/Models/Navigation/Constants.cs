@@ -1,5 +1,4 @@
-﻿
-namespace PolyGo.Models.Navigation
+﻿namespace PolyGo.Models.Navigation
 {
   public static class Constants
   {

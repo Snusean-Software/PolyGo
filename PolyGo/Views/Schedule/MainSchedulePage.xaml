@@ -112,10 +112,10 @@
 				<Frame Grid.Column="0" BackgroundColor="Transparent"
 							 Margin="0"
 							 Padding="0">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="onMonDateTapped"
+					<Frame.GestureRecognizers>
+						<TapGestureRecognizer Tapped="onMonDateTapped"
 											  NumberOfTapsRequired="1"/>
-                    </Frame.GestureRecognizers>
+					</Frame.GestureRecognizers>
 					<AbsoluteLayout>
 
 						<Label Text="ПН"
@@ -143,10 +143,10 @@
 				<Frame Grid.Column="1" BackgroundColor="Transparent"
 							 Margin="0"
 							 Padding="0">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="onTueDateTapped"
+					<Frame.GestureRecognizers>
+						<TapGestureRecognizer Tapped="onTueDateTapped"
 											  NumberOfTapsRequired="1"/>
-                    </Frame.GestureRecognizers>
+					</Frame.GestureRecognizers>
 					<AbsoluteLayout>
 
 						<Label Text="ВТ"
@@ -174,10 +174,10 @@
 				<Frame Grid.Column="2" BackgroundColor="Transparent"
 							 Margin="0"
 							 Padding="0">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="onWedDateTapped"
+					<Frame.GestureRecognizers>
+						<TapGestureRecognizer Tapped="onWedDateTapped"
 											  NumberOfTapsRequired="1"/>
-                    </Frame.GestureRecognizers>
+					</Frame.GestureRecognizers>
 					<AbsoluteLayout>
 
 						<Label Text="СР"
@@ -205,10 +205,10 @@
 				<Frame Grid.Column="3" BackgroundColor="Transparent"
 							 Margin="0"
 							 Padding="0">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="onThuDateTapped"
+					<Frame.GestureRecognizers>
+						<TapGestureRecognizer Tapped="onThuDateTapped"
 											  NumberOfTapsRequired="1"/>
-                    </Frame.GestureRecognizers>
+					</Frame.GestureRecognizers>
 					<AbsoluteLayout>
 
 						<Label Text="ЧТ"
@@ -236,10 +236,10 @@
 				<Frame Grid.Column="4" BackgroundColor="Transparent"
 							 Margin="0"
 							 Padding="0">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="onFriDateTapped"
+					<Frame.GestureRecognizers>
+						<TapGestureRecognizer Tapped="onFriDateTapped"
 											  NumberOfTapsRequired="1"/>
-                    </Frame.GestureRecognizers>
+					</Frame.GestureRecognizers>
 					<AbsoluteLayout>
 
 						<Label Text="ПТ"
@@ -267,10 +267,10 @@
 				<Frame Grid.Column="5" BackgroundColor="Transparent"
 							 Margin="0"
 							 Padding="0">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="onSatDateTapped"
+					<Frame.GestureRecognizers>
+						<TapGestureRecognizer Tapped="onSatDateTapped"
 											  NumberOfTapsRequired="1"/>
-                    </Frame.GestureRecognizers>
+					</Frame.GestureRecognizers>
 					<AbsoluteLayout>
 
 						<Label Text="СБ"
@@ -299,10 +299,10 @@
 							 Margin="0"
 							 Padding="0"
 							 BackgroundColor="Transparent">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="onSunDateTapped"
+					<Frame.GestureRecognizers>
+						<TapGestureRecognizer Tapped="onSunDateTapped"
 											  NumberOfTapsRequired="1"/>
-                    </Frame.GestureRecognizers>
+					</Frame.GestureRecognizers>
 					<AbsoluteLayout>
 
 						<Label Text="ВС"
