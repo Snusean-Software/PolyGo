@@ -9,7 +9,6 @@ using PolyGo.Models.Schedule;
 
 namespace PolyGo.Views.Schedule
 {
-
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MainSchedulePage : ContentPage
 	{
@@ -36,6 +35,26 @@ namespace PolyGo.Views.Schedule
 			shedule_polygon_image_sat.Source = ImageSource.FromResource("PolyGo.Resources.schedule.shedule_polygon_image.png", GetType().Assembly);
 			shedule_polygon_image_sun.Source = ImageSource.FromResource("PolyGo.Resources.schedule.shedule_polygon_image.png", GetType().Assembly);
 			calculateNowDayOfWheek();
+
+			parseSchedule();
+		}
+		private async void parseSchedule()
+		{
+			switch (NA)
+			{
+				case NetworkAccess.Internet:
+					{
+						//Save current and next week
+						var currentWeek = await ScheduleSupportFuncs.ParseWeek(Constants.RefToSchedule);
+						await ScheduleSupportFuncs.ParseWeek(ScheduleSupportFuncs.ChangeWeekUrl(currentWeek.week, 1));
+						break;
+					}
+				default:
+					{
+						//Tell about error or not
+						break;
+					}
+			}
 		}
 		private void calculateNowDayOfWheek()
 		{
@@ -365,30 +384,10 @@ namespace PolyGo.Views.Schedule
 				}
 			}
 		}
-		protected override async void OnAppearing()
+		protected override void OnAppearing()
 		{
 			base.OnAppearing();
 			configurePolygons();
-
-			var networkAccess = Connectivity.NetworkAccess;
-			if (App.SchdlDatabase.Empty)
-			{
-				switch (NA)
-				{
-					case NetworkAccess.Internet:
-						{
-							//Save current and next week
-							var currentWeek = await ScheduleSupportFuncs.ParseWeek(Constants.RefToSchedule);
-							await ScheduleSupportFuncs.ParseWeek(ScheduleSupportFuncs.ChangeWeekUrl(currentWeek.week, 1));
-							break;
-						}
-					default:
-						{
-							//Tell about error
-							break;
-						}
-				}
-			}
 
 			var currentWeekDate = dateTimeToString(date_Picker.Date); ///yyyy.mm.dd
 			App.SchdlDatabase.ClearOldWeeks(currentWeekDate);
