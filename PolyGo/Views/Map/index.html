@@ -57,41 +57,34 @@
         document.getElementsByClassName( 'leaflet-control-attribution' )[0].style.display = 'none';
         var markerGroup = new L.LayerGroup();
         map.addLayer(markerGroup);
+        markerGroup.addTo(map);
 
-        //Create new marker
-        function newMarker(lat, lon, text) {
-            var marker = L.marker([lat.toString(), lon.toString()]).bindPopup(text);
-            markerGroup.addLayer(marker);
-        }
+        var mapIDtoBeOpen = 0;
 
-        //Create line
-        function newLine(latFrom, lonFrom, latTo, lonTo, color) {
-            var From = new L.latlng(latFrom, lonFrom);
-            var To = new L.latlng(latTo, lonTo);
-            var FromTo = [From, To];
-            var Line = new L.polyline(FromTo, { color: color, weight: 3, opacity: 0.5, smoothFactor: 1, noClip: false });
-            markerGroup.addLayer(Line);
-        }
+        // Main building
+        var mbLatLng = new L.LatLng(60.0073469194067, 30.3729136737511);
+        var popupMb = L.popup();
+        popupMb.setLatLng(mbLatLng)
+            .setContent('<a href="index.html">Главное здание</a>');
+        var markerMb = L.marker(mbLatLng);
+        markerMb.bindPopup(popupMb).openPopup();
+        markerGroup.addLayer(markerMb);
 
-        //Create circle
-        function newCircle(lat, lon, color, fillColor, fillOpacity, radius) {
-            var circle = L.circle([lat, lon], { color: color, fillColor: fillColor, fillOpacity: fillOpacity, radius: radius });
-            markerGroup.addLayer(circle);
-        }
+        map.on('popupopen', function (e) {
+            var marker = e.popup._source;
+            switch (marker.getLatLng())
+            {
+                case mbLatLng:
+                    mapIDtoBeOpen = 1;
+                    break;
+                default:
+                    mapIDtoBeOpen = 0;
+                    break;
+            }
+        });
 
-        //Show markers on map
-        function show() {
-            markerGroup.addTo(map);
-        }
-
-        //Center the map
-        function centerMap(lat, lon) {
-            map.panTo(new L.LatLng(lat, lon));
-        }
-
-        //Remove markers
-        function delMarker() {
-            markerGroup.clearLayers().addTo(map);
+        function getMapIDtoBeOpen() {
+            return mapIDtoBeOpen;
         }
 
     </script>

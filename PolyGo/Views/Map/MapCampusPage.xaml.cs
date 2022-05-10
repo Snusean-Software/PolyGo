@@ -15,6 +15,12 @@ namespace PolyGo.Views.Maps
       LoadMap();
     }
 
+    protected override void OnAppearing()
+    {
+      base.OnAppearing();
+      LoadMap();
+    }
+
     public void LoadMap()
     {
       var source = new HtmlWebViewSource();
@@ -44,111 +50,19 @@ namespace PolyGo.Views.Maps
       }
     }
 
-    public void SetItemMuestra()
+    async void webviewReloading(object sender, WebNavigatingEventArgs e)
     {
-      //-2.14003,-79.9312967 marker
-      newMarker("-2.14003", "-79.9312967", "Soy un marker");
-
-      //-2.1407283,-79.9286524 circulo
-      newCircle("-2.1407283", "-79.9286524", "red", "#07", 0.5, 50);
-
-      //-2.14003,-79.9312967 / -2.1407283,-79.9286524 Linea
-      newLine("-2.14003", "-79.9312967", "-2.1407283", "-79.9286524", "blue");
-
-      //mostrar objetos
-      Show();
-
-      //centrar el mapa
-      //CentrarMapa("10.6222200", "-66.5735300");
-    }
-
-    /*
-     Crear marcador
-     lat = latitud
-     lon = longitud
-     */
-    public void newMarker(string lat, string lon, string texto = "")
-    {
-      if (string.IsNullOrEmpty(lat) || string.IsNullOrEmpty(lon))
+      Console.WriteLine("Nice");
+      string result = await webView.EvaluateJavaScriptAsync($"getMapIDtoBeOpen()");
+      switch (result)
       {
-        Console.Write("Verifique los campos lat lon");
-        return;
+        case "1": // MainBuilding
+          webView.Reload();
+          await Shell.Current.GoToAsync($"{nameof(MapMainBuildingPage)}?");
+          break;
+        default:
+          break;
       }
-
-      webView.Eval(string.Format("newMarker({0}, {1}, {2})", "\"" + lat + "\"", "\"" + lon + "\"", "\"" + texto + "\""));
-    }
-
-    /*
-     Crear Linea
-     latFrom = latitud de comienzo
-     lonFrom = longitud de comienzo
-     latTo = latitud final
-     lonTo = longitud final
-     color = color de la linea
-     */
-    public void newLine(string latFrom, string lonFrom, string latTo, string LonTo, string Color = "blue")
-    {
-      if (string.IsNullOrEmpty(latFrom) || string.IsNullOrEmpty(lonFrom) || string.IsNullOrEmpty(latTo) || string.IsNullOrEmpty(LonTo))
-      {
-        Console.Write("Verifique los campos lat lon");
-        return;
-      }
-      webView.Eval(string.Format("newLine({0},{1},{2}),{3},{4}", "\"" + latFrom + "\"", "\"" + lonFrom + "\"", "\"" + latTo + "\"", "\"" + LonTo + "\"", "\"" + Color + "\""));
-    }
-
-    /*
-     Crear Circulo
-     lat = latutud
-     lon = longitud
-     color = color de linea
-     fillcolor = color de relleno
-     fillopacity = transparencia de relleno
-     raidus = radio
-     */
-    public void newCircle(string lat, string lon, string color = "blue", string fillcolor = "#07", double fillopacity = 0.5, int radius = 500)
-    {
-      if (string.IsNullOrEmpty(lat) || string.IsNullOrEmpty(lon))
-      {
-        Console.Write("Verifique los campos lat lon");
-        return;
-      }
-      webView.Eval(string.Format("newCircle({0},{1},{2},{3},{4},{5})", "\"" + lat + "\"", "\"" + lon + "\"", "\"" + color + "\"", "\"" + fillcolor + "\"", "\"" + fillopacity + "\"", "\"" + radius + "\""));
-    }
-
-    /*
-     Centrar mapa
-     lat = latitud
-     lon = longitud
-     */
-    public void CentrarMapa(string lat, string lon)
-    {
-      if (string.IsNullOrEmpty(lat) || string.IsNullOrEmpty(lon))
-      {
-        Console.Write("Verifique los campos lat lon");
-        return;
-      }
-      webView.Eval(string.Format("centerMap({0},{1})", "\"" + lat + "\"", "\"" + lon + "\""));
-    }
-
-    /*
-     Mostrar grupo
-     */
-    public void Show()
-    {
-      webView.Eval(@"show()");
-    }
-
-    /*
-     Eliminar objetos
-     */
-    public void Destruir()
-    {
-      webView.Eval(@"delMarket()");
-    }
-
-    private void Send_Clicked(object sender, EventArgs e)
-    {
-      SetItemMuestra();
     }
   }
 }
