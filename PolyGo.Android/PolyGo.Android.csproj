@@ -98,7 +98,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomRender\BaseUrl.cs" />
-    <Compile Include="CustomRender\WebViewCustom.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

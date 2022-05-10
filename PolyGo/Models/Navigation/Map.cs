@@ -53,7 +53,6 @@ namespace PolyGo.Models.Navigation
       {
         Nodes[node.ID] = node;
       }
-      drawPath("151", "251");
     }
 
     /// <summary>
