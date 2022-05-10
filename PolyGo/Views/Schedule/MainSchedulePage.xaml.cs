@@ -36,6 +36,8 @@ namespace PolyGo.Views.Schedule
 			shedule_polygon_image_sun.Source = ImageSource.FromResource("PolyGo.Resources.schedule.shedule_polygon_image.png", GetType().Assembly);
 			calculateNowDayOfWheek();
 
+			var currentWeekDate = dateTimeToString(date_Picker.Date); ///yyyy.mm.dd
+			App.SchdlDatabase.ClearOldWeeks(currentWeekDate);
 			parseSchedule();
 		}
 		private async void parseSchedule()
@@ -388,9 +390,6 @@ namespace PolyGo.Views.Schedule
 		{
 			base.OnAppearing();
 			configurePolygons();
-
-			var currentWeekDate = dateTimeToString(date_Picker.Date); ///yyyy.mm.dd
-			App.SchdlDatabase.ClearOldWeeks(currentWeekDate);
 
 			ScheduleData = App.SchdlDatabase.GetDataForSchedule();
 
