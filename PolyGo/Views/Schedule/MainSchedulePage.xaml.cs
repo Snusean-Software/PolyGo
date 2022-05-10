@@ -14,25 +14,158 @@ namespace PolyGo.Views.Schedule
 	public partial class MainSchedulePage : ContentPage
 	{
 		private IList<Root> ScheduleData = new List<Root>();
+		private int nowDayOfWheek = 0;
 		public MainSchedulePage()
 		{
 			InitializeComponent();
 			nolessons_Image.Source = ImageSource.FromResource("PolyGo.Resources.schedule.no_lessons_image.png", GetType().Assembly);
-			shedule_polygon_image_1.Source = ImageSource.FromResource("PolyGo.Resources.schedule.shedule_polygon_image.png", GetType().Assembly);
-			shedule_polygon_image_2.Source = ImageSource.FromResource("PolyGo.Resources.schedule.shedule_polygon_image.png", GetType().Assembly);
-			shedule_polygon_image_3.Source = ImageSource.FromResource("PolyGo.Resources.schedule.shedule_polygon_image.png", GetType().Assembly);
-			shedule_polygon_image_4.Source = ImageSource.FromResource("PolyGo.Resources.schedule.shedule_polygon_image.png", GetType().Assembly);
-			shedule_polygon_image_5.Source = ImageSource.FromResource("PolyGo.Resources.schedule.shedule_polygon_image.png", GetType().Assembly);
-			shedule_polygon_image_6.Source = ImageSource.FromResource("PolyGo.Resources.schedule.shedule_polygon_image.png", GetType().Assembly);
-			shedule_polygon_image_7.Source = ImageSource.FromResource("PolyGo.Resources.schedule.shedule_polygon_image.png", GetType().Assembly);
+			shedule_polygon_image_mon.Source = ImageSource.FromResource("PolyGo.Resources.schedule.shedule_polygon_image.png", GetType().Assembly);
+			shedule_polygon_image_tue.Source = ImageSource.FromResource("PolyGo.Resources.schedule.shedule_polygon_image.png", GetType().Assembly);
+			shedule_polygon_image_wed.Source = ImageSource.FromResource("PolyGo.Resources.schedule.shedule_polygon_image.png", GetType().Assembly);
+			shedule_polygon_image_thu.Source = ImageSource.FromResource("PolyGo.Resources.schedule.shedule_polygon_image.png", GetType().Assembly);
+			shedule_polygon_image_fri.Source = ImageSource.FromResource("PolyGo.Resources.schedule.shedule_polygon_image.png", GetType().Assembly);
+			shedule_polygon_image_sat.Source = ImageSource.FromResource("PolyGo.Resources.schedule.shedule_polygon_image.png", GetType().Assembly);
+			shedule_polygon_image_sun.Source = ImageSource.FromResource("PolyGo.Resources.schedule.shedule_polygon_image.png", GetType().Assembly);
+			calculateNowDayOfWheek();
 		}
+
+		private void calculateNowDayOfWheek()
+        {
+			switch(date_Picker.Date.DayOfWeek)
+            {
+				case DayOfWeek.Monday:
+					nowDayOfWheek = 0;
+					break;
+
+				case DayOfWeek.Tuesday:
+					nowDayOfWheek = 1;
+					break;
+
+				case DayOfWeek.Wednesday:
+					nowDayOfWheek = 2;
+					break;
+
+				case DayOfWeek.Thursday:
+					nowDayOfWheek = 3;
+					break;
+
+				case DayOfWeek.Friday:
+					nowDayOfWheek = 4;
+					break;
+
+				case DayOfWeek.Saturday:
+					nowDayOfWheek = 5;
+					break;
+
+				case DayOfWeek.Sunday:
+					nowDayOfWheek = 6;
+					break;
+			}
+        }
+		private void changePolygonPosition(int newDayOfWheek)
+        {
+			int daysDifference = newDayOfWheek - nowDayOfWheek;
+			if(daysDifference != 0)
+            {
+				clearShedulePolygons();
+				switch (newDayOfWheek)
+				{
+					case 0:
+						shedule_polygon_image_mon.IsVisible = true;
+						date_Picker.Date = date_Picker.Date.AddDays(daysDifference);
+						break;
+
+					case 1:
+						shedule_polygon_image_tue.IsVisible = true;
+						date_Picker.Date = date_Picker.Date.AddDays(daysDifference);
+						break;
+
+					case 2:
+						shedule_polygon_image_wed.IsVisible = true;
+						date_Picker.Date = date_Picker.Date.AddDays(daysDifference);
+						break;
+
+					case 3:
+						shedule_polygon_image_thu.IsVisible = true;
+						date_Picker.Date = date_Picker.Date.AddDays(daysDifference);
+						break;
+
+					case 4:
+						shedule_polygon_image_fri.IsVisible = true;
+						date_Picker.Date = date_Picker.Date.AddDays(daysDifference);
+						break;
+
+					case 5:
+						shedule_polygon_image_sat.IsVisible = true;
+						date_Picker.Date = date_Picker.Date.AddDays(daysDifference);
+						break;
+
+					case 6:
+						shedule_polygon_image_sun.IsVisible = true;
+						date_Picker.Date = date_Picker.Date.AddDays(daysDifference);
+						break;
+				}
+			}
+		}
+
+
+		private void onMonDateTapped(object sender, EventArgs e)
+		{
+			changePolygonPosition(0);
+			var str_weekStart = defineWeekForDay(date_Picker.Date);
+			loadSchedule(str_weekStart);
+			calculateNowDayOfWheek();
+		}
+		private void onTueDateTapped(object sender, EventArgs e)
+        {
+			changePolygonPosition(1);
+			var str_weekStart = defineWeekForDay(date_Picker.Date);
+			loadSchedule(str_weekStart);
+			calculateNowDayOfWheek();
+		}
+		private void onWedDateTapped(object sender, EventArgs e)
+		{
+			changePolygonPosition(2);
+			var str_weekStart = defineWeekForDay(date_Picker.Date);
+			loadSchedule(str_weekStart);
+			calculateNowDayOfWheek();
+		}
+		private void onThuDateTapped(object sender, EventArgs e)
+		{
+			changePolygonPosition(3);
+			var str_weekStart = defineWeekForDay(date_Picker.Date);
+			loadSchedule(str_weekStart);
+			calculateNowDayOfWheek();
+		}
+		private void onFriDateTapped(object sender, EventArgs e)
+		{
+			changePolygonPosition(4);
+			var str_weekStart = defineWeekForDay(date_Picker.Date);
+			loadSchedule(str_weekStart);
+			calculateNowDayOfWheek();
+		}
+		private void onSatDateTapped(object sender, EventArgs e)
+		{
+			changePolygonPosition(5);
+			var str_weekStart = defineWeekForDay(date_Picker.Date);
+			loadSchedule(str_weekStart);
+			calculateNowDayOfWheek();
+		}
+		private void onSunDateTapped(object sender, EventArgs e)
+		{
+			changePolygonPosition(6);
+			var str_weekStart = defineWeekForDay(date_Picker.Date);
+			loadSchedule(str_weekStart);
+			calculateNowDayOfWheek();
+		}
+
 
 		private void configurePolygons()
 		{
 			switch (date_Picker.Date.DayOfWeek)
 			{
 				case DayOfWeek.Monday:
-					shedule_polygon_image_1.IsVisible = true;
+					shedule_polygon_image_mon.IsVisible = true;
 					{
 						mon_date.Text = date_Picker.Date.Day.ToString();
 						tue_date.Text = date_Picker.Date.AddDays(1).Date.Day.ToString();
@@ -45,7 +178,7 @@ namespace PolyGo.Views.Schedule
 					break;
 
 				case DayOfWeek.Tuesday:
-					shedule_polygon_image_2.IsVisible = true;
+					shedule_polygon_image_tue.IsVisible = true;
 					{
 						mon_date.Text = date_Picker.Date.AddDays(-1).Date.Day.ToString();
 						tue_date.Text = date_Picker.Date.Day.ToString();
@@ -58,7 +191,7 @@ namespace PolyGo.Views.Schedule
 					break;
 
 				case DayOfWeek.Wednesday:
-					shedule_polygon_image_3.IsVisible = true;
+					shedule_polygon_image_wed.IsVisible = true;
 					{
 						mon_date.Text = date_Picker.Date.AddDays(-2).Date.Day.ToString();
 						tue_date.Text = date_Picker.Date.AddDays(-1).Date.Day.ToString();
@@ -71,7 +204,7 @@ namespace PolyGo.Views.Schedule
 					break;
 
 				case DayOfWeek.Thursday:
-					shedule_polygon_image_4.IsVisible = true;
+					shedule_polygon_image_thu.IsVisible = true;
 					{
 						mon_date.Text = date_Picker.Date.AddDays(-3).Date.Day.ToString();
 						tue_date.Text = date_Picker.Date.AddDays(-2).Date.Day.ToString();
@@ -84,7 +217,7 @@ namespace PolyGo.Views.Schedule
 					break;
 
 				case DayOfWeek.Friday:
-					shedule_polygon_image_5.IsVisible = true;
+					shedule_polygon_image_fri.IsVisible = true;
 					{
 						mon_date.Text = date_Picker.Date.AddDays(-4).Date.Day.ToString();
 						tue_date.Text = date_Picker.Date.AddDays(-3).Date.Day.ToString();
@@ -92,12 +225,12 @@ namespace PolyGo.Views.Schedule
 						thu_date.Text = date_Picker.Date.AddDays(-1).Date.Day.ToString();
 						fri_date.Text = date_Picker.Date.Day.ToString();
 						sat_date.Text = date_Picker.Date.AddDays(1).Date.Day.ToString();
-						sun_date.Text = date_Picker.Date.AddDays(1).Date.Day.ToString();
+						sun_date.Text = date_Picker.Date.AddDays(2).Date.Day.ToString();
 					}
 					break;
 
 				case DayOfWeek.Saturday:
-					shedule_polygon_image_6.IsVisible = true;
+					shedule_polygon_image_sat.IsVisible = true;
 					{
 						mon_date.Text = date_Picker.Date.AddDays(-5).Date.Day.ToString();
 						tue_date.Text = date_Picker.Date.AddDays(-4).Date.Day.ToString();
@@ -110,7 +243,7 @@ namespace PolyGo.Views.Schedule
 					break;
 
 				case DayOfWeek.Sunday:
-					shedule_polygon_image_7.IsVisible = true;
+					shedule_polygon_image_sun.IsVisible = true;
 					{
 						mon_date.Text = date_Picker.Date.AddDays(-6).Date.Day.ToString();
 						tue_date.Text = date_Picker.Date.AddDays(-5).Date.Day.ToString();
@@ -131,16 +264,17 @@ namespace PolyGo.Views.Schedule
 
 			var str_weekStart = defineWeekForDay(date_Picker.Date);
 			loadSchedule(str_weekStart);
+			calculateNowDayOfWheek();
 		}
 		private void clearShedulePolygons()
 		{
-			shedule_polygon_image_1.IsVisible = false;
-			shedule_polygon_image_2.IsVisible = false;
-			shedule_polygon_image_3.IsVisible = false;
-			shedule_polygon_image_4.IsVisible = false;
-			shedule_polygon_image_5.IsVisible = false;
-			shedule_polygon_image_6.IsVisible = false;
-			shedule_polygon_image_7.IsVisible = false;
+			shedule_polygon_image_mon.IsVisible = false;
+			shedule_polygon_image_tue.IsVisible = false;
+			shedule_polygon_image_wed.IsVisible = false;
+			shedule_polygon_image_thu.IsVisible = false;
+			shedule_polygon_image_fri.IsVisible = false;
+			shedule_polygon_image_sat.IsVisible = false;
+			shedule_polygon_image_sun.IsVisible = false;
 		}
 		private void onGroupsOfLessonTapped(object sender, EventArgs e)
 		{
