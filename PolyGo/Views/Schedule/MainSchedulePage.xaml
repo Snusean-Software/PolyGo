@@ -112,6 +112,10 @@
 				<Frame Grid.Column="0" BackgroundColor="Transparent"
 							 Margin="0"
 							 Padding="0">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="onMonDateTapped"
+											  NumberOfTapsRequired="1"/>
+                    </Frame.GestureRecognizers>
 					<AbsoluteLayout>
 
 						<Label Text="ПН"
@@ -122,8 +126,8 @@
 									 AbsoluteLayout.LayoutBounds ="0.5, 0, 0.4, 0.4"
 									 AbsoluteLayout.LayoutFlags="All"/>
 
-						<Image x:Name="shedule_polygon_image_1"
-									 AbsoluteLayout.LayoutBounds ="0.5, 0.9, 1, 0.5"
+						<Image x:Name="shedule_polygon_image_mon"
+									 AbsoluteLayout.LayoutBounds ="0.5, 0.82, 1, 0.5"
 									 AbsoluteLayout.LayoutFlags="All"
 									 IsVisible="False"/>
 
@@ -139,6 +143,10 @@
 				<Frame Grid.Column="1" BackgroundColor="Transparent"
 							 Margin="0"
 							 Padding="0">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="onTueDateTapped"
+											  NumberOfTapsRequired="1"/>
+                    </Frame.GestureRecognizers>
 					<AbsoluteLayout>
 
 						<Label Text="ВТ"
@@ -149,8 +157,8 @@
 									 AbsoluteLayout.LayoutBounds ="0.5, 0, 0.4, 0.4"
 									 AbsoluteLayout.LayoutFlags="All"/>
 
-						<Image x:Name="shedule_polygon_image_2"
-									 AbsoluteLayout.LayoutBounds ="0.5, 0.9, 1, 0.5"
+						<Image x:Name="shedule_polygon_image_tue"
+									 AbsoluteLayout.LayoutBounds ="0.5, 0.82, 1, 0.5"
 									 AbsoluteLayout.LayoutFlags="All"
 									 IsVisible="False"/>
 
@@ -166,6 +174,10 @@
 				<Frame Grid.Column="2" BackgroundColor="Transparent"
 							 Margin="0"
 							 Padding="0">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="onWedDateTapped"
+											  NumberOfTapsRequired="1"/>
+                    </Frame.GestureRecognizers>
 					<AbsoluteLayout>
 
 						<Label Text="СР"
@@ -176,8 +188,8 @@
 									 AbsoluteLayout.LayoutBounds ="0.5, 0, 0.4, 0.4"
 									 AbsoluteLayout.LayoutFlags="All"/>
 
-						<Image x:Name="shedule_polygon_image_3"
-									 AbsoluteLayout.LayoutBounds ="0.5, 0.9, 1, 0.5"
+						<Image x:Name="shedule_polygon_image_wed"
+									 AbsoluteLayout.LayoutBounds ="0.5, 0.82, 1, 0.5"
 									 AbsoluteLayout.LayoutFlags="All"
 									 IsVisible="False"/>
 
@@ -193,6 +205,10 @@
 				<Frame Grid.Column="3" BackgroundColor="Transparent"
 							 Margin="0"
 							 Padding="0">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="onThuDateTapped"
+											  NumberOfTapsRequired="1"/>
+                    </Frame.GestureRecognizers>
 					<AbsoluteLayout>
 
 						<Label Text="ЧТ"
@@ -203,8 +219,8 @@
 									 AbsoluteLayout.LayoutBounds ="0.5, 0, 0.4, 0.4"
 									 AbsoluteLayout.LayoutFlags="All"/>
 
-						<Image x:Name="shedule_polygon_image_4"
-									 AbsoluteLayout.LayoutBounds ="0.5, 0.9, 1, 0.5"
+						<Image x:Name="shedule_polygon_image_thu"
+									 AbsoluteLayout.LayoutBounds ="0.5, 0.82, 1, 0.5"
 									 AbsoluteLayout.LayoutFlags="All"
 									 IsVisible="False"/>
 
@@ -220,6 +236,10 @@
 				<Frame Grid.Column="4" BackgroundColor="Transparent"
 							 Margin="0"
 							 Padding="0">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="onFriDateTapped"
+											  NumberOfTapsRequired="1"/>
+                    </Frame.GestureRecognizers>
 					<AbsoluteLayout>
 
 						<Label Text="ПТ"
@@ -230,8 +250,8 @@
 									 AbsoluteLayout.LayoutBounds ="0.5, 0, 0.4, 0.4"
 									 AbsoluteLayout.LayoutFlags="All"/>
 
-						<Image x:Name="shedule_polygon_image_5"
-									 AbsoluteLayout.LayoutBounds ="0.5, 0.9, 1, 0.5"
+						<Image x:Name="shedule_polygon_image_fri"
+									 AbsoluteLayout.LayoutBounds ="0.5, 0.82, 1, 0.5"
 									 AbsoluteLayout.LayoutFlags="All"
 									 IsVisible="False"/>
 
@@ -247,6 +267,10 @@
 				<Frame Grid.Column="5" BackgroundColor="Transparent"
 							 Margin="0"
 							 Padding="0">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="onSatDateTapped"
+											  NumberOfTapsRequired="1"/>
+                    </Frame.GestureRecognizers>
 					<AbsoluteLayout>
 
 						<Label Text="СБ"
@@ -257,8 +281,8 @@
 									 AbsoluteLayout.LayoutBounds ="0.5, 0, 0.4, 0.4"
 									 AbsoluteLayout.LayoutFlags="All"/>
 
-						<Image x:Name="shedule_polygon_image_6"
-									 AbsoluteLayout.LayoutBounds ="0.5, 0.9, 1, 0.5"
+						<Image x:Name="shedule_polygon_image_sat"
+									 AbsoluteLayout.LayoutBounds ="0.5, 0.82, 1, 0.5"
 									 AbsoluteLayout.LayoutFlags="All"
 									 IsVisible="False"/>
 
@@ -275,6 +299,10 @@
 							 Margin="0"
 							 Padding="0"
 							 BackgroundColor="Transparent">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="onSunDateTapped"
+											  NumberOfTapsRequired="1"/>
+                    </Frame.GestureRecognizers>
 					<AbsoluteLayout>
 
 						<Label Text="ВС"
@@ -285,8 +313,8 @@
 									 AbsoluteLayout.LayoutBounds ="0.5, 0, 0.4, 0.4"
 									 AbsoluteLayout.LayoutFlags="All"/>
 
-						<Image x:Name="shedule_polygon_image_7"
-									 AbsoluteLayout.LayoutBounds ="0.5, 0.9, 1, 0.5"
+						<Image x:Name="shedule_polygon_image_sun"
+									 AbsoluteLayout.LayoutBounds ="0.5, 0.82, 1, 0.5"
 									 AbsoluteLayout.LayoutFlags="All"
 									 IsVisible="False"/>
 
