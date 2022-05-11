@@ -39,37 +39,48 @@
 
     <script type="text/javascript">
 
-        var mbAttr = ' ';
-        var mbUrl = 'Tiles/{z}/{x}/{y}.png';
+        // Create campus map
+        var map = L.map('map', { zoomControl: false }).setView([60.0074614, 30.3729735], 15);
+        
+        // Add tiles to map
+        var TilesPath = 'Tiles/{z}/{x}/{y}.png';
+        L.tileLayer(TilesPath, { id: 'main', minZoom: 15, maxZoom: 17 }).addTo(map);
 
-        var map = L.map('map').setView([60.0074614, 30.3729735], 15);
-
+        // Set up map bounds
         var southWest = L.latLng(59.9935, 30.3113);
         var northEast = L.latLng(60.0210, 30.4431);
         var bounds = L.latLngBounds(southWest, northEast);
-
         map.setMaxBounds(bounds);
         map.on('drag', function() {
             map.panInsideBounds(bounds, { animate: false });
         });
 
-        L.tileLayer(mbUrl, { id: 'OSM', minZoom: 15, maxZoom: 17}).addTo(map);
-        document.getElementsByClassName( 'leaflet-control-attribution' )[0].style.display = 'none';
+        // Add marker layer to map
         var markerGroup = new L.LayerGroup();
         map.addLayer(markerGroup);
-        markerGroup.addTo(map);
 
+        // Hide leaflet attribution
+        document.getElementsByClassName('leaflet-control-attribution')[0].style.display = 'none';
+
+
+        // What building map need to be open
         var mapIDtoBeOpen = 0;
 
-        // Main building
+        // ### Main building ###
+        // set Lat Lng
         var mbLatLng = new L.LatLng(60.0073469194067, 30.3729136737511);
+        // set up popup
         var popupMb = L.popup();
-        popupMb.setLatLng(mbLatLng)
-            .setContent('<a href="index.html">Главное здание</a>');
+        popupMb.setLatLng(mbLatLng).setContent('<a href="index.html">Главное здание</a>');
+        // create marker
         var markerMb = L.marker(mbLatLng);
+        // bind popup to marker
         markerMb.bindPopup(popupMb).openPopup();
+        // add marker to maker layer
         markerGroup.addLayer(markerMb);
 
+        // Event handler for popupopen event
+        // Sets building map to be open depend on event source object
         map.on('popupopen', function (e) {
             var marker = e.popup._source;
             switch (marker.getLatLng())
@@ -83,8 +94,17 @@
             }
         });
 
+        // Returns current building map to be open
         function getMapIDtoBeOpen() {
             return mapIDtoBeOpen;
+        }
+
+        function showMarkers() {
+            map.addLayer(markerGroup);
+        }
+
+        function hideMarkers() {
+            map.removeLayer(markerGroup);
         }
 
     </script>
