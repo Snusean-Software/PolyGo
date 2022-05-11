@@ -6,7 +6,7 @@
      Shell.NavBarIsVisible="False">
   <ContentPage.Content>
     <StackLayout>
-            <WebView x:Name="webView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="100" Navigating="webviewReloading"/>
+            <WebView x:Name="webView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="100" Navigating="openBuildingMap"/>
     </StackLayout>
   </ContentPage.Content>
 </ContentPage>

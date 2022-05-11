@@ -20,12 +20,20 @@ namespace PolyGo.Models.Navigation
       m11corpus = 2,
     }
 
+    public static Dictionary<MapID, string> CorpusNames = new Dictionary<MapID, string>();
+
     public static List<string> ImMainBuilding = new List<string>
-        {
-          "PolyGo.Resources.map.mb.floor_1.png",
-          "PolyGo.Resources.map.mb.floor_2.png",
-          "PolyGo.Resources.map.mb.floor_3.png"
-        };
+    {
+      "PolyGo.Resources.map.mb.floor_1.png",
+      "PolyGo.Resources.map.mb.floor_2.png",
+      "PolyGo.Resources.map.mb.floor_3.png"
+    };
+
+    static MapConstants()
+    {
+      CorpusNames[MapID.mMainBuilding] = "Главное здание";
+      CorpusNames[MapID.m11corpus] = "11 корпус";
+    }
 
     public static List<string> ImgSource(MapID mapID)
     {

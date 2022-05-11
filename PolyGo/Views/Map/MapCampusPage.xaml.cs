@@ -50,7 +50,7 @@ namespace PolyGo.Views.Maps
       }
     }
 
-    async void webviewReloading(object sender, WebNavigatingEventArgs e)
+    async void openBuildingMap(object sender, WebNavigatingEventArgs e)
     {
       Console.WriteLine("Nice");
       string result = await webView.EvaluateJavaScriptAsync($"getMapIDtoBeOpen()");
@@ -64,5 +64,18 @@ namespace PolyGo.Views.Maps
           break;
       }
     }
+
+    // Не работает
+    void showMarkers()
+    {
+      webView.Eval(string.Format("showMarkers()"));
+    }
+
+    // Не работает
+    void hideMarkers()
+    {
+      webView.Eval(string.Format("hideMarkers()"));
+    }
+
   }
 }
