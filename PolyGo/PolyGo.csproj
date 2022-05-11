@@ -21,6 +21,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\map\campus\campus.osm.pbf" />
 	  <None Remove="Resources\map\down_button.png" />
 	  <None Remove="Resources\map\graph_edges.txt" />
 	  <None Remove="Resources\map\Graph_Nodes.txt" />
@@ -39,6 +40,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <EmbeddedResource Include="Resources\map\campus\campus.osm.pbf" />
 	  <EmbeddedResource Include="Resources\map\down_button.png" />
 	  <EmbeddedResource Include="Resources\map\graph_nodes.txt" />
 	  <EmbeddedResource Include="Resources\map\mb\floor_1.png" />

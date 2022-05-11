@@ -7,6 +7,15 @@
   <ContentPage.Content>
     <StackLayout>
             <WebView x:Name="webView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="100" Navigating="openBuildingMap"/>
-    </StackLayout>
+            <StackLayout>
+                <Button x:Name="Hide" Text="hide marker" Clicked="hideMarkers"/>
+            </StackLayout>
+            <StackLayout>
+                <Button x:Name="Show" Text="show marker" Clicked="showMarkers"/>
+            </StackLayout>
+            <StackLayout>
+                <Button x:Name="Route" Text="route (take 5 seconds)" Clicked="showRoute"/>
+            </StackLayout>
+        </StackLayout>
   </ContentPage.Content>
 </ContentPage>

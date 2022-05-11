@@ -107,6 +107,10 @@
             map.removeLayer(markerGroup);
         }
 
+        function addGeoJson(data) {
+            L.geoJson(data).addTo(map);
+        }
+
     </script>
 </body>
 </html>
