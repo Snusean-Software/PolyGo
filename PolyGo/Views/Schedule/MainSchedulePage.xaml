@@ -113,7 +113,7 @@
 							 Margin="0"
 							 Padding="0">
 					<Frame.GestureRecognizers>
-						<TapGestureRecognizer Tapped="onMonDateTapped"
+						<TapGestureRecognizer Tapped="onPolygonDateTapped"
 											  NumberOfTapsRequired="1"/>
 					</Frame.GestureRecognizers>
 					<AbsoluteLayout>
@@ -144,7 +144,7 @@
 							 Margin="0"
 							 Padding="0">
 					<Frame.GestureRecognizers>
-						<TapGestureRecognizer Tapped="onTueDateTapped"
+						<TapGestureRecognizer Tapped="onPolygonDateTapped"
 											  NumberOfTapsRequired="1"/>
 					</Frame.GestureRecognizers>
 					<AbsoluteLayout>
@@ -175,7 +175,7 @@
 							 Margin="0"
 							 Padding="0">
 					<Frame.GestureRecognizers>
-						<TapGestureRecognizer Tapped="onWedDateTapped"
+						<TapGestureRecognizer Tapped="onPolygonDateTapped"
 											  NumberOfTapsRequired="1"/>
 					</Frame.GestureRecognizers>
 					<AbsoluteLayout>
@@ -206,7 +206,7 @@
 							 Margin="0"
 							 Padding="0">
 					<Frame.GestureRecognizers>
-						<TapGestureRecognizer Tapped="onThuDateTapped"
+						<TapGestureRecognizer Tapped="onPolygonDateTapped"
 											  NumberOfTapsRequired="1"/>
 					</Frame.GestureRecognizers>
 					<AbsoluteLayout>
@@ -237,7 +237,7 @@
 							 Margin="0"
 							 Padding="0">
 					<Frame.GestureRecognizers>
-						<TapGestureRecognizer Tapped="onFriDateTapped"
+						<TapGestureRecognizer Tapped="onPolygonDateTapped"
 											  NumberOfTapsRequired="1"/>
 					</Frame.GestureRecognizers>
 					<AbsoluteLayout>
@@ -268,7 +268,7 @@
 							 Margin="0"
 							 Padding="0">
 					<Frame.GestureRecognizers>
-						<TapGestureRecognizer Tapped="onSatDateTapped"
+						<TapGestureRecognizer Tapped="onPolygonDateTapped"
 											  NumberOfTapsRequired="1"/>
 					</Frame.GestureRecognizers>
 					<AbsoluteLayout>
@@ -300,7 +300,7 @@
 							 Padding="0"
 							 BackgroundColor="Transparent">
 					<Frame.GestureRecognizers>
-						<TapGestureRecognizer Tapped="onSunDateTapped"
+						<TapGestureRecognizer Tapped="onPolygonDateTapped"
 											  NumberOfTapsRequired="1"/>
 					</Frame.GestureRecognizers>
 					<AbsoluteLayout>

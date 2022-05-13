@@ -136,51 +136,37 @@ namespace PolyGo.Views.Schedule
 				}
 			}
 		}
-		private void onMonDateTapped(object sender, EventArgs e)
+		private void onPolygonDateTapped(object sender, EventArgs e)
 		{
-			changePolygonPosition(0);
-			var str_weekStart = defineWeekForDay(date_Picker.Date);
-			loadSchedule(str_weekStart);
-			calculateNowDayOfWheek();
-		}
-		private void onTueDateTapped(object sender, EventArgs e)
-		{
-			changePolygonPosition(1);
-			var str_weekStart = defineWeekForDay(date_Picker.Date);
-			loadSchedule(str_weekStart);
-			calculateNowDayOfWheek();
-		}
-		private void onWedDateTapped(object sender, EventArgs e)
-		{
-			changePolygonPosition(2);
-			var str_weekStart = defineWeekForDay(date_Picker.Date);
-			loadSchedule(str_weekStart);
-			calculateNowDayOfWheek();
-		}
-		private void onThuDateTapped(object sender, EventArgs e)
-		{
-			changePolygonPosition(3);
-			var str_weekStart = defineWeekForDay(date_Picker.Date);
-			loadSchedule(str_weekStart);
-			calculateNowDayOfWheek();
-		}
-		private void onFriDateTapped(object sender, EventArgs e)
-		{
-			changePolygonPosition(4);
-			var str_weekStart = defineWeekForDay(date_Picker.Date);
-			loadSchedule(str_weekStart);
-			calculateNowDayOfWheek();
-		}
-		private void onSatDateTapped(object sender, EventArgs e)
-		{
-			changePolygonPosition(5);
-			var str_weekStart = defineWeekForDay(date_Picker.Date);
-			loadSchedule(str_weekStart);
-			calculateNowDayOfWheek();
-		}
-		private void onSunDateTapped(object sender, EventArgs e)
-		{
-			changePolygonPosition(6);
+			Frame fr = sender as Frame;
+			var al = fr.Children[0] as AbsoluteLayout;
+			var label = al.Children[0] as Label;
+
+			switch(label.Text)
+			{
+				case "ПН":
+					changePolygonPosition(0);
+					break;
+				case "ВТ":
+					changePolygonPosition(1);
+					break;
+				case "СР":
+					changePolygonPosition(2);
+					break;
+				case "ЧТ":
+					changePolygonPosition(3);
+					break;
+				case "ПТ":
+					changePolygonPosition(4);
+					break;
+				case "СБ":
+					changePolygonPosition(5);
+					break;
+				case "ВС":
+					changePolygonPosition(6);
+					break;
+			}
+
 			var str_weekStart = defineWeekForDay(date_Picker.Date);
 			loadSchedule(str_weekStart);
 			calculateNowDayOfWheek();
