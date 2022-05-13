@@ -34,6 +34,7 @@
 	  <None Remove="Resources\map\start_to_finish_image.png" />
 	  <None Remove="Resources\map\up_button.png" />
 	  <None Remove="Resources\schedule\Data\FacultyGroups.db3" />
+	  <None Remove="Resources\schedule\Data\RouteDatabase.db3" />
 	  <None Remove="Resources\schedule\no_lessons_image.png" />
 	  <None Remove="Resources\schedule\sdo_link_button.png" />
 	  <None Remove="Resources\schedule\shedule_polygon_image.png" />
@@ -51,6 +52,7 @@
 	  <EmbeddedResource Include="Resources\map\start_to_finish_image.png" />
 	  <EmbeddedResource Include="Resources\map\up_button.png" />
 	  <EmbeddedResource Include="Resources\schedule\Data\FacultyGroups.db3" />
+	  <EmbeddedResource Include="Resources\schedule\Data\RouteDatabase.db3" />
 	  <EmbeddedResource Include="Resources\schedule\no_lessons_image.png" />
 	  <EmbeddedResource Include="Resources\schedule\sdo_link_button.png" />
 	  <EmbeddedResource Include="Resources\schedule\shedule_polygon_image.png" />
