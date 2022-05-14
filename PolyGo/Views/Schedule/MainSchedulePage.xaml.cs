@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
-
 using PolyGo.SupportFuncs;
 using PolyGo.Models.Schedule;
 
@@ -289,7 +288,13 @@ namespace PolyGo.Views.Schedule
 		}
 		private void onGroupsOfLessonTapped(object sender, EventArgs e)
 		{
-
+			(((sender as Label).Parent as AbsoluteLayout).Children[7] as Frame).IsVisible = true;
+			(((sender as Label).Parent as AbsoluteLayout).Children[8] as ButtonClose).IsVisible = true;
+		}
+		private void close_groups(object sender, EventArgs e)
+        {
+			(((sender as ButtonClose).Parent as AbsoluteLayout).Children[7] as Frame).IsVisible = false;
+			(((sender as ButtonClose).Parent as AbsoluteLayout).Children[8] as ButtonClose).IsVisible = false;
 		}
 		/// <summary>
 		/// Returns start of week which day belongs to
@@ -377,7 +382,7 @@ namespace PolyGo.Views.Schedule
 			base.OnAppearing();
 			configurePolygons();
 
-			ScheduleData = App.SchdlDatabase.GetDataForSchedule();
+			ScheduleData = App.SchdlDatabase.GetAllData();
 
 			var str_weekStart = defineWeekForDay(date_Picker.Date);
 			loadSchedule(str_weekStart);
@@ -407,4 +412,12 @@ namespace PolyGo.Views.Schedule
 			};
 		}
 	}
+
+	public class ButtonClose : ImageButton
+    {
+		public ButtonClose()
+        {
+            Source = ImageSource.FromResource("PolyGo.Resources.schedule.close_groups_button.png", GetType().Assembly);
+		}
+    }
 }
