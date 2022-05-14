@@ -93,6 +93,10 @@
 							 Padding="0"
 							 Margin="0"
 							 Spacing="0">
+		<!--<StackLayout.GestureRecognizers>
+			<SwipeGestureRecognizer Direction="Left" Swiped="leftSwipe"/>
+			<SwipeGestureRecognizer Direction="Right" Swiped="rightSwipe"/>
+		</StackLayout.GestureRecognizers>-->
 
 		<Frame BackgroundColor="#E1F17B"
 					 Margin="0"
@@ -364,9 +368,8 @@
 		<CollectionView x:Name="myColl" HeightRequest="1300">
 			<CollectionView.ItemTemplate>
 				<DataTemplate>
-                    <ScrollView Orientation="Vertical">
+					<ScrollView Orientation="Vertical">
 						<StackLayout>
-
 							<Frame x:Name="lesson_Frame" Style="{StaticResource lessonFrameStyle}" IsVisible="true">
 								<AbsoluteLayout>
 									<Label x:Name="type_of_lesson" Style="{StaticResource typeOfLessonLabelStyle}"
@@ -392,33 +395,32 @@
                                                          Link="{Binding lms_url}" 
 														 Style="{StaticResource sdoLinkOfLessonImageButtonStyle}"/>
 
-                                    <Frame x:Name="list_of_groups_of_lesson"
+									<Frame x:Name="list_of_groups_of_lesson"
 										   BackgroundColor="#FFFDF3"
                                            Margin="5"
-                                           Padding="0"
-                                           AbsoluteLayout.LayoutBounds="0.1,1,0.7,0.4"
+                                           Padding="3"
+                                           AbsoluteLayout.LayoutBounds="0.1,1,0.7,0.45"
                                            AbsoluteLayout.LayoutFlags="All"
                                            CornerRadius="5"
                                            IsVisible="False">
-                                        
-                                        <ScrollView Orientation="Horizontal">
-                                            <StackLayout Orientation="Horizontal">
+
+										<ScrollView Orientation="Horizontal">
+											<StackLayout Orientation="Horizontal">
 												<Label x:Name="group_name"
 																   Text="{Binding GroupsString}"
 																   TextColor="#3C3C3C"
 																   FontAttributes="Italic"
-																   HorizontalTextAlignment="Start"/>
+																   HorizontalTextAlignment="Start">
+													<Label.GestureRecognizers>
+														<TapGestureRecognizer Tapped="onGroupsOfLessonTapped2"
+                                                                  NumberOfTapsRequired="1"/>
+													</Label.GestureRecognizers>
+												</Label>
 											</StackLayout>
-                                        </ScrollView>
-                                        
-                                    </Frame>
+										</ScrollView>
 
-                                    <schedule:ButtonClose AbsoluteLayout.LayoutBounds="0.73,0.61,0.05,0.12"
-                                                          AbsoluteLayout.LayoutFlags="All"
-                                                          Clicked="close_groups"
-                                                          IsVisible="False"/>
-
-                                </AbsoluteLayout>
+									</Frame>
+								</AbsoluteLayout>
 							</Frame>
 
 						</StackLayout>
