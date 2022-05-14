@@ -33,6 +33,7 @@
 	  <None Remove="Resources\map\mb_floor_3_image.png" />
 	  <None Remove="Resources\map\start_to_finish_image.png" />
 	  <None Remove="Resources\map\up_button.png" />
+	  <None Remove="Resources\schedule\close_groups_button.png" />
 	  <None Remove="Resources\schedule\Data\FacultyGroups.db3" />
 	  <None Remove="Resources\schedule\Data\RouteDatabase.db3" />
 	  <None Remove="Resources\schedule\no_lessons_image.png" />
@@ -51,6 +52,7 @@
 	  <EmbeddedResource Include="Resources\map\graph_edges.txt" />
 	  <EmbeddedResource Include="Resources\map\start_to_finish_image.png" />
 	  <EmbeddedResource Include="Resources\map\up_button.png" />
+	  <EmbeddedResource Include="Resources\schedule\close_groups_button.png" />
 	  <EmbeddedResource Include="Resources\schedule\Data\FacultyGroups.db3" />
 	  <EmbeddedResource Include="Resources\schedule\Data\RouteDatabase.db3" />
 	  <EmbeddedResource Include="Resources\schedule\no_lessons_image.png" />

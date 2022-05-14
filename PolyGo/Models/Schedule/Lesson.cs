@@ -68,14 +68,50 @@ namespace PolyGo.Models.Schedule
         typeObj.name = value;
       }
     }
-
-    public Lesson()
+    public string GroupsString
+		{ 
+          get
+		    {
+            string result = string.Empty;
+             int c = 1;
+        
+            foreach (var gr in groups)
+				{
+          string sep = " ";
+          if (c % 3 == 0) sep = "\r\n";
+          result += gr.name + sep;
+          ++c;
+				}
+            return result;
+		    }
+        }
+    public string Location
 		{
+			get
+			{
+        if (auditories.Count != 0)
+          return auditories[0].building_name + ", ауд. " + auditories[0].name;
+        else
+          return null;
+      }
+		}
+    public string Teacher
+        {
+            get
+            {
+                if(teachers.Count != 0) 
+                    return teachers[0].full_name;
+                else 
+                    return null;
+            }
+        }
+    public Lesson()
+	{
       groups = new List<Group>();
       teachers = new List<Teacher>(); 
       auditories = new List<Auditory>();
 
       typeObj = new TypeObj();
-		}
+	}
   }
 }
