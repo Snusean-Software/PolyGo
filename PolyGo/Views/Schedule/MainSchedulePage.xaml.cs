@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
-
 using PolyGo.SupportFuncs;
 using PolyGo.Models.Schedule;
 
@@ -58,6 +57,14 @@ namespace PolyGo.Views.Schedule
 					}
 			}
 		}
+		//private void leftSwipe(object sender, EventArgs e)
+		//{
+		//	if(nowDayOfWheek != 0)changePolygonPosition(nowDayOfWheek - 1);
+		//}
+		//private void rightSwipe(object sender, EventArgs e)
+		//{
+		//	if(nowDayOfWheek != 6)changePolygonPosition(nowDayOfWheek + 1);
+		//}
 		private void calculateNowDayOfWheek()
 		{
 			switch (date_Picker.Date.DayOfWeek)
@@ -289,7 +296,11 @@ namespace PolyGo.Views.Schedule
 		}
 		private void onGroupsOfLessonTapped(object sender, EventArgs e)
 		{
-
+			(((sender as Label).Parent as AbsoluteLayout).Children[7] as Frame).IsVisible = true;
+		}
+		private void onGroupsOfLessonTapped2(object sender, EventArgs e)
+		{
+			((((sender as Label).Parent as StackLayout).Parent as ScrollView).Parent as Frame).IsVisible = false;
 		}
 		/// <summary>
 		/// Returns start of week which day belongs to
@@ -377,7 +388,7 @@ namespace PolyGo.Views.Schedule
 			base.OnAppearing();
 			configurePolygons();
 
-			ScheduleData = App.SchdlDatabase.GetDataForSchedule();
+			ScheduleData = App.SchdlDatabase.GetAllData();
 
 			var str_weekStart = defineWeekForDay(date_Picker.Date);
 			loadSchedule(str_weekStart);

@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:schedule="clr-namespace:PolyGo.Views.Schedule"
-						 x:Class="PolyGo.Views.Schedule.MainSchedulePage"
-            Shell.NavBarIsVisible="False"
-            >
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:schedule="clr-namespace:PolyGo.Views.Schedule"
+			 x:Class="PolyGo.Views.Schedule.MainSchedulePage"
+             Shell.NavBarIsVisible="False">
 
 	<ContentPage.Resources>
 
@@ -61,7 +61,7 @@
 		</Style>
 
 		<Style x:Key="groupsOfLessonLabelStyle" TargetType="Label">
-			<Setter Property="AbsoluteLayout.LayoutBounds" Value="0.35, 0.71, 0.8, 0.14"/>
+			<Setter Property="AbsoluteLayout.LayoutBounds" Value="0.12, 0.71, 0.4, 0.14"/>
 			<Setter Property="AbsoluteLayout.LayoutFlags" Value="All"/>
 			<Setter Property="TextColor" Value="#3C3C3C"/>
 			<Setter Property="Text" Value="Список групп ▼"/>
@@ -93,6 +93,10 @@
 							 Padding="0"
 							 Margin="0"
 							 Spacing="0">
+		<!--<StackLayout.GestureRecognizers>
+			<SwipeGestureRecognizer Direction="Left" Swiped="leftSwipe"/>
+			<SwipeGestureRecognizer Direction="Right" Swiped="rightSwipe"/>
+		</StackLayout.GestureRecognizers>-->
 
 		<Frame BackgroundColor="#E1F17B"
 					 Margin="0"
@@ -364,9 +368,8 @@
 		<CollectionView x:Name="myColl" HeightRequest="1300">
 			<CollectionView.ItemTemplate>
 				<DataTemplate>
-					<ScrollView>
+					<ScrollView Orientation="Vertical">
 						<StackLayout>
-
 							<Frame x:Name="lesson_Frame" Style="{StaticResource lessonFrameStyle}" IsVisible="true">
 								<AbsoluteLayout>
 									<Label x:Name="type_of_lesson" Style="{StaticResource typeOfLessonLabelStyle}"
@@ -377,19 +380,46 @@
 												 Text="{Binding time_start}"/>
 									<Label x:Name="name_of_lesson" Style="{StaticResource nameOfLessonLabelStyle}"
 												 Text="{Binding subject}"/>
-									<!--<Label x:Name="teacher_of_lesson" Style="{StaticResource teacherOfLessonLabelStyle}"
-												 Text="{Binding teacherOfLesson}"/>-->
-									<!--<Label x:Name="groups_of_lesson" Style="{StaticResource groupsOfLessonLabelStyle}"
-												 Text="{Binding groups}">
-										<Label.GestureRecognizers>
-											<TapGestureRecognizer Tapped="onGroupsOfLessonTapped"
-                                      NumberOfTapsRequired="1"/>
-										</Label.GestureRecognizers>
-									</Label>-->
-									<!--<Label x:Name="location_of_lesson" Style="{StaticResource locationOfLessonLabelStyle}"
-												 Text="{Binding locationOfLesson}"/>-->
-									<schedule:ButtonLink Link="{Binding lms_url}" x:Name="sdo_link_of_lesson" 
-																			 Style="{StaticResource sdoLinkOfLessonImageButtonStyle}"/>
+									<Label x:Name="teacher_of_lesson" Style="{StaticResource teacherOfLessonLabelStyle}"
+												 Text="{Binding Teacher}"/>
+                                    <Label x:Name="groups_of_lesson" Style="{StaticResource groupsOfLessonLabelStyle}"
+												 Text="Список групп ▼">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="onGroupsOfLessonTapped"
+                                                                  NumberOfTapsRequired="1"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                    <Label x:Name="location_of_lesson" Style="{StaticResource locationOfLessonLabelStyle}"
+												 Text="{Binding Location}"/>
+                                    <schedule:ButtonLink x:Name="sdo_link_of_lesson"
+                                                         Link="{Binding lms_url}" 
+														 Style="{StaticResource sdoLinkOfLessonImageButtonStyle}"/>
+
+									<Frame x:Name="list_of_groups_of_lesson"
+										   BackgroundColor="#FFFDF3"
+                                           Margin="5"
+                                           Padding="3"
+                                           AbsoluteLayout.LayoutBounds="0.1,1,0.7,0.45"
+                                           AbsoluteLayout.LayoutFlags="All"
+                                           CornerRadius="5"
+                                           IsVisible="False">
+
+										<ScrollView Orientation="Horizontal">
+											<StackLayout Orientation="Horizontal">
+												<Label x:Name="group_name"
+																   Text="{Binding GroupsString}"
+																   TextColor="#3C3C3C"
+																   FontAttributes="Italic"
+																   HorizontalTextAlignment="Start">
+													<Label.GestureRecognizers>
+														<TapGestureRecognizer Tapped="onGroupsOfLessonTapped2"
+                                                                  NumberOfTapsRequired="1"/>
+													</Label.GestureRecognizers>
+												</Label>
+											</StackLayout>
+										</ScrollView>
+
+									</Frame>
 								</AbsoluteLayout>
 							</Frame>
 
