@@ -22,6 +22,11 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\FA_Solid_900.otf" />
+	  <None Remove="Resources\Fonts\Montserrat_Black.ttf" />
+	  <None Remove="Resources\Fonts\Montserrat_Bold.ttf" />
+	  <None Remove="Resources\Fonts\Montserrat_Regular.ttf" />
+	  <None Remove="Resources\Fonts\Roboto-Regular.ttf" />
+	  <None Remove="Resources\Fonts\Roboto_Thin.ttf" />
 	  <None Remove="Resources\map\campus\campus.osm.pbf" />
 	  <None Remove="Resources\map\down_button.png" />
 	  <None Remove="Resources\map\graph_edges.txt" />
@@ -39,11 +44,18 @@
 	  <None Remove="Resources\schedule\no_lessons_image.png" />
 	  <None Remove="Resources\schedule\sdo_link_button.png" />
 	  <None Remove="Resources\schedule\shedule_polygon_image.png" />
+	  <None Remove="Resources\SetUp\first_background_image.png" />
+	  <None Remove="Resources\SetUp\second_background_image.png" />
 	  <None Remove="Views\Map\index.html" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <EmbeddedResource Include="Resources\Fonts\FA_Solid_900.otf" />
+	  <EmbeddedResource Include="Resources\Fonts\Montserrat_Black.ttf" />
+	  <EmbeddedResource Include="Resources\Fonts\Montserrat_Bold.ttf" />
+	  <EmbeddedResource Include="Resources\Fonts\Montserrat_Regular.ttf" />
+	  <EmbeddedResource Include="Resources\Fonts\Roboto-Regular.ttf" />
+	  <EmbeddedResource Include="Resources\Fonts\Roboto_Thin.ttf" />
 	  <EmbeddedResource Include="Resources\map\campus\campus.osm.pbf" />
 	  <EmbeddedResource Include="Resources\map\down_button.png" />
 	  <EmbeddedResource Include="Resources\map\graph_nodes.txt" />
@@ -58,6 +70,8 @@
 	  <EmbeddedResource Include="Resources\schedule\no_lessons_image.png" />
 	  <EmbeddedResource Include="Resources\schedule\sdo_link_button.png" />
 	  <EmbeddedResource Include="Resources\schedule\shedule_polygon_image.png" />
+	  <EmbeddedResource Include="Resources\SetUp\first_background_image.png" />
+	  <EmbeddedResource Include="Resources\SetUp\second_background_image.png" />
 	  <EmbeddedResource Include="Views\Map\index.html" />
 	</ItemGroup>
 
@@ -91,6 +105,9 @@
 	<EmbeddedResource Update="Shells\InitialSetupShell.xaml">
 	<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	</EmbeddedResource>
+	<EmbeddedResource Update="Views\InitialSetup\GroupNumberPage.xaml">
+	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	</EmbeddedResource>
 	<EmbeddedResource Update="Views\InitialSetup\IsStudentPage.xaml">
 	<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	</EmbeddedResource>
@@ -102,6 +119,9 @@
 	</EmbeddedResource>
 	<EmbeddedResource Update="Views\InitialSetup\TeacherListPage.xaml">
 	<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Views\InitialSetup\WelcomePage.xaml">
+	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	</EmbeddedResource>
 	<EmbeddedResource Update="Views\Map\Map11corpusPage.xaml">
 	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

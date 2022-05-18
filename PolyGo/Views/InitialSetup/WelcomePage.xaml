@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Name="content_page" 
+						 xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+						 xmlns:resources="clr-namespace:PolyGo.Resx"
+             x:Class="PolyGo.Views.InitialSetup.WelcomePage"
+						 Shell.NavBarIsVisible="False">
+    <ContentPage.Content>
+		<StackLayout>
+			
+			<Label Margin="30, 220, 0, 0"
+						 Text="{x:Static resources:AppResources.Hello}"
+						 FontFamily="MonBlack"
+						 FontSize="64"
+						 HorizontalOptions="Start"
+						 TextColor="#1E1E1F"/>
+			
+			<Label Margin="30, 0, 50, 0"
+						 Text="{x:Static resources:AppResources.Greeting}"
+						 FontFamily="MonReg"
+						 FontSize="18"
+						 HorizontalOptions="Start"
+						 TextColor="#1E1E1F"/>
+			
+			<Label Margin="30, 0, 50, 0"
+						 Text="{x:Static resources:AppResources.WhoRyou}"
+						 FontFamily="RobThin"
+						 FontSize="13"
+						 HorizontalOptions="Start"
+						 TextColor="#1E1E1F"/>
+			
+			<Button BackgroundColor="#BED33B"
+							CornerRadius="10"
+							Margin="30, 0, 30, 0"
+							Text="{x:Static resources:AppResources.IamStudent}"
+							TextColor="#FFFEF8"
+							FontSize="22"
+							FontFamily="MonRegular"
+							Clicked="choice_Student"/>
+			
+			<Button BackgroundColor="#BED33B"
+							CornerRadius="10"
+							Margin="30, 0, 30, 0"
+							Text="{x:Static resources:AppResources.IamTeacher}"
+							TextColor="#FFFEF8"
+							FontSize="22"
+							FontFamily="MonRegular"
+							Clicked="choice_Teacher"/>
+
+			<Button BackgroundColor="Transparent"
+							Margin="30, 140, 30, 0"
+							Text="{x:Static resources:AppResources.ChangeLan}"
+							TextColor="#707074"
+							FontSize="15"
+							FontFamily="MonRegular"
+							Clicked="change_Lan"/>
+
+		</StackLayout>
+    </ContentPage.Content>
+</ContentPage>

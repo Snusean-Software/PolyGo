@@ -3,10 +3,8 @@
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 		xmlns:is="clr-namespace:PolyGo.Views.InitialSetup"
 		x:Class="PolyGo.Shells.InitialSetupShell">
-	<Tab>
-        
+
 		<ShellContent
-			ContentTemplate="{DataTemplate is:LangSelectionPage}"/>
+			ContentTemplate="{DataTemplate is:WelcomePage}"/>
         
-	</Tab>
 </Shell>
