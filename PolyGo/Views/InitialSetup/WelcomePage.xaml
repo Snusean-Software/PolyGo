@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Name="content_page" 
+						 xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+						 xmlns:resources="clr-namespace:PolyGo.Resx"
+             x:Class="PolyGo.Views.InitialSetup.WelcomePage"
+						 Shell.NavBarIsVisible="False">
+    <ContentPage.Content>
+		<AbsoluteLayout>
+
+			<Label AbsoluteLayout.LayoutBounds="0.5, 0.32, 0.8, 0.12"
+						 AbsoluteLayout.LayoutFlags="All"
+						 Text="{x:Static resources:AppResources.Hello}"
+						 FontFamily="MonBlack"
+						 FontSize="64"
+						 HorizontalOptions="Start"
+						 TextColor="#1E1E1F"/>
+
+			<Label AbsoluteLayout.LayoutBounds="0.44, 0.47, 0.75, 0.15"
+						 AbsoluteLayout.LayoutFlags="All"
+						 Text="{x:Static resources:AppResources.Greeting}"
+						 FontFamily="MonReg"
+						 FontSize="18"
+						 HorizontalOptions="Start"
+						 TextColor="#1E1E1F"/>
+
+			<Label AbsoluteLayout.LayoutBounds="0.37, 0.56, 0.7, 0.03"
+						 AbsoluteLayout.LayoutFlags="All"
+						 Text="{x:Static resources:AppResources.WhoRyou}"
+						 FontFamily="RobThin"
+						 FontSize="13"
+						 HorizontalOptions="Start"
+						 TextColor="#1E1E1F"/>
+
+			<Button AbsoluteLayout.LayoutBounds="0.37, 0.62, 0.7, 0.07"
+						  AbsoluteLayout.LayoutFlags="All"
+							BackgroundColor="#BED33B"
+							CornerRadius="10"
+							Text="{x:Static resources:AppResources.IamStudent}"
+							TextColor="#FFFEF8"
+							FontSize="22"
+							FontFamily="MonRegular"
+							Clicked="choice_Student"/>
+
+			<Button AbsoluteLayout.LayoutBounds="0.37, 0.72, 0.7, 0.07"
+						  AbsoluteLayout.LayoutFlags="All"
+							BackgroundColor="#BED33B"
+							CornerRadius="10"
+							Text="{x:Static resources:AppResources.IamTeacher}"
+							TextColor="#FFFEF8"
+							FontSize="22"
+							FontFamily="MonRegular"
+							Clicked="choice_Teacher"/>
+
+			<Button AbsoluteLayout.LayoutBounds="0.5, 0.94, 0.7, 0.05"
+						  AbsoluteLayout.LayoutFlags="All"
+							BackgroundColor="Transparent"
+							Text="{x:Static resources:AppResources.ChangeLan}"
+							TextColor="#707074"
+							FontSize="15"
+							FontFamily="MonRegular"
+							Clicked="change_Lan"/>
+
+		</AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -19,7 +19,7 @@
 									Shell.UnselectedColor="#707074"
 									ContentTemplate="{DataTemplate schedule:MainSchedulePage}">
 			<ShellContent.Icon>
-				<FontImageSource FontFamily="AW" Glyph="&#xf133;"/>
+				<FontImageSource FontFamily="AW" Glyph="&#xf133;"/> 
 			</ShellContent.Icon>
 		</ShellContent>
 

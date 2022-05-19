@@ -61,6 +61,15 @@ namespace PolyGo.Resx {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Switch me to English.
+        /// </summary>
+        public static string ChangeLan {
+            get {
+                return ResourceManager.GetString("ChangeLan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Найдите себя в списке.
         /// </summary>
         public static string ChooseYouInList {
@@ -111,6 +120,43 @@ namespace PolyGo.Resx {
         public static string FinishSetup {
             get {
                 return ResourceManager.GetString("FinishSetup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Приветствуем в Polygo. 
+        ///Чтобы приложением было удобно пользоваться, давай настроим его..
+        /// </summary>
+        public static string Greeting {
+            get {
+                return ResourceManager.GetString("Greeting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Привет!.
+        /// </summary>
+        public static string Hello {
+            get {
+                return ResourceManager.GetString("Hello", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Я СТУДЕНТ.
+        /// </summary>
+        public static string IamStudent {
+            get {
+                return ResourceManager.GetString("IamStudent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Я ПРЕПОДАВАТЕЛЬ.
+        /// </summary>
+        public static string IamTeacher {
+            get {
+                return ResourceManager.GetString("IamTeacher", resourceCulture);
             }
         }
         
@@ -210,6 +256,15 @@ namespace PolyGo.Resx {
         public static string Teacher {
             get {
                 return ResourceManager.GetString("Teacher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на укажи, кто ты, а дальше мы подскажем.
+        /// </summary>
+        public static string WhoRyou {
+            get {
+                return ResourceManager.GetString("WhoRyou", resourceCulture);
             }
         }
         
