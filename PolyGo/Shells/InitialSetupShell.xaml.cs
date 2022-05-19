@@ -14,6 +14,7 @@ namespace PolyGo.Shells
 			Routing.RegisterRoute(nameof(IsStudentPage), typeof(IsStudentPage));
 			Routing.RegisterRoute(nameof(TeacherListPage), typeof(TeacherListPage));
 			Routing.RegisterRoute(nameof(NameAndGroupPage), typeof(NameAndGroupPage));
+			Routing.RegisterRoute(nameof(GroupNumberPage), typeof(GroupNumberPage));
 		}
 	}
 }

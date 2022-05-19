@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+
 namespace PolyGo.Views.InitialSetup
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
@@ -22,12 +23,15 @@ namespace PolyGo.Views.InitialSetup
 
 		private async void choice_Student(object sender, EventArgs e)
 		{
-			await Shell.Current.GoToAsync($"{nameof(GroupNumberPage)}");
+			App.user.IsStudent = true;
+			await Shell.Current.GoToAsync($"{nameof(GroupNumberPage)}?");
 		}
 		private async void choice_Teacher(object sender, EventArgs e)
 		{
-			await Shell.Current.GoToAsync($"{nameof(GroupNumberPage)}");
+			App.user.IsStudent = false;
+			await Shell.Current.GoToAsync($"{nameof(TeacherListPage)}?");
 		}
+
 		private void change_Lan(object sender, EventArgs e)
 		{
 			if(App.user.Language == "ru-RU")

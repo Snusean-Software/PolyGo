@@ -6,10 +6,55 @@
              x:Class="PolyGo.Views.InitialSetup.GroupNumberPage"
 						 Shell.NavBarIsVisible="False"
 						 xmlns:resources="clr-namespace:PolyGo.Resx">
-	
-    <ContentPage.Content>
-        <StackLayout>
-            
-        </StackLayout>
-    </ContentPage.Content>
+
+	<ContentPage.Content>
+		<AbsoluteLayout>
+
+			<Label AbsoluteLayout.LayoutBounds="0.5, 0.02, 1, 0.03"
+						 AbsoluteLayout.LayoutFlags="All"
+						 Text="введи номер своей группы"
+						 FontFamily="MonReg"
+						 FontSize="14"
+						 HorizontalOptions="Center"
+						 TextColor="#1E1E1F"/>
+
+			<Frame AbsoluteLayout.LayoutBounds="0.5, 0.06, 0.85, 0.07"
+						 AbsoluteLayout.LayoutFlags="All"
+						 Margin="0,0,0,0"
+						 Padding="10,0,10,0"
+						 CornerRadius="15"
+						 HasShadow="True">
+				<Entry x:Name="entry" 
+							 Text=""
+							 TextColor="#707074"
+							 MaxLength="14"
+						   Placeholder="введите номер группы"
+						 	 PlaceholderColor="#707074"
+							 ClearButtonVisibility="WhileEditing"
+							 Completed ="checkIfGroup"/>
+			</Frame>
+			
+			<Button AbsoluteLayout.LayoutBounds="0.1, 0.15, 0.13, 0.06"
+						  AbsoluteLayout.LayoutFlags="All"
+							BackgroundColor="#FFFEF8"
+							CornerRadius="15"
+							Text="&#x2190;"
+							FontFamily="AW"
+							TextColor="#707074"
+							FontSize="22"/>
+
+			<Button AbsoluteLayout.LayoutBounds="0.7, 0.15, 0.65, 0.06"
+						  AbsoluteLayout.LayoutFlags="All"
+							BackgroundColor="#AABC3B"
+							CornerRadius="10"
+							Text="ПРОДОЛЖИТЬ"
+							TextColor="#FFFEF8"
+							FontSize="18"
+							FontFamily="MonRegular"
+							Clicked="groupChosen">
+
+			</Button>
+
+		</AbsoluteLayout>
+	</ContentPage.Content>
 </ContentPage>

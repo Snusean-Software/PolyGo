@@ -24,6 +24,7 @@ namespace PolyGo.Views.Profile
 	
 			InitializeComponent();
 
+			content_page.BackgroundImageSource = ImageSource.FromResource("PolyGo.Resources.SetUp.first_background_image.png", GetType().Assembly);
 			user = MainAppSupportFuncs.ParseAccFile();
 			AFD.Name = !(user.Name is null);
 			AFD.IsStudent = !(user.IsStudent is null);
