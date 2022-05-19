@@ -41,7 +41,8 @@
 							Text="&#x2190;"
 							FontFamily="AW"
 							TextColor="#707074"
-							FontSize="22"/>
+							FontSize="22"
+							Clicked="isReturnButtonClicked"/>
 
 			<Button AbsoluteLayout.LayoutBounds="0.7, 0.15, 0.65, 0.06"
 						  AbsoluteLayout.LayoutFlags="All"

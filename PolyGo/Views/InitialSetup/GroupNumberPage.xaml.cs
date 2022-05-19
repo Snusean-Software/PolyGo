@@ -24,6 +24,10 @@ namespace PolyGo.Views.InitialSetup
 		{
 
 		}
+		private async void isReturnButtonClicked(object sender, EventArgs e)
+		{
+			await Shell.Current.GoToAsync($"{nameof(WelcomePage)}?");
+		}
 		private void groupChosen(object sender, EventArgs e)
 		{
 			App.user.GroupNum = entry.Text;
