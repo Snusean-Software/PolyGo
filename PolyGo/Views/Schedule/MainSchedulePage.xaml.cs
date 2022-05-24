@@ -37,6 +37,7 @@ namespace PolyGo.Views.Schedule
 
 			var currentWeekDate = dateTimeToString(date_Picker.Date); ///yyyy.mm.dd
 			App.SchdlDatabase.ClearOldWeeks(currentWeekDate);
+
 			parseSchedule();
 		}
 		private async void parseSchedule()
