@@ -6,20 +6,42 @@
 		 xmlns:profile="clr-namespace:PolyGo.Views.Profile"
 		 xmlns:resources="clr-namespace:PolyGo.Resx"
 		 x:Class="PolyGo.Shells.AppShell">
+
+	<Shell.Resources>
+		
+	</Shell.Resources>
 	
 	<TabBar>
-     
+
 		<ShellContent Title="{x:Static resources:AppResources.Schedule}"
-			Icon="icon_feed.png"
-			ContentTemplate="{DataTemplate schedule:MainSchedulePage}"/>
+									Shell.BackgroundColor="#FFFEF8"
+									Shell.TitleColor="#1E1E1F"
+									Shell.UnselectedColor="#707074"
+									ContentTemplate="{DataTemplate schedule:MainSchedulePage}">
+			<ShellContent.Icon>
+				<FontImageSource FontFamily="AW" Glyph="&#xf133;"/> 
+			</ShellContent.Icon>
+		</ShellContent>
 
 		<ShellContent Title="{x:Static resources:AppResources.Map}"
-			Icon="icon_feed.png"
-			ContentTemplate="{DataTemplate maps:MapCampusPage}"/>
+									Shell.BackgroundColor="#FFFEF8"
+									Shell.TitleColor="#1E1E1F"
+									Shell.UnselectedColor="#707074"
+									ContentTemplate="{DataTemplate maps:MapCampusPage}">
+			<ShellContent.Icon>
+				<FontImageSource FontFamily="AW" Glyph="&#xf279;"/>
+			</ShellContent.Icon>
+		</ShellContent>
 
 		<ShellContent Title="{x:Static resources:AppResources.Profile}"
-			Icon="icon_feed.png"
-			ContentTemplate="{DataTemplate profile:MainProfilePage}"/>
-        
+									Shell.BackgroundColor="#FFFEF8"
+									Shell.TitleColor="#1E1E1F"
+									Shell.UnselectedColor="#707074"
+									ContentTemplate="{DataTemplate profile:MainProfilePage}">
+			<ShellContent.Icon>
+				<FontImageSource FontFamily="AW" Glyph="&#xf007;"/>
+			</ShellContent.Icon>
+		</ShellContent>
+
 	</TabBar>
 </Shell>

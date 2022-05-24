@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ChangeLan" xml:space="preserve">
+    <value>Switch me to English</value>
+  </data>
   <data name="ChooseYouInList" xml:space="preserve">
     <value>Найдите себя в списке</value>
   </data>
@@ -137,6 +140,19 @@
   </data>
   <data name="FinishSetup" xml:space="preserve">
     <value>Закончить настройку</value>
+  </data>
+  <data name="Greeting" xml:space="preserve">
+    <value>Приветствуем в Polygo. 
+Чтобы приложением было удобно пользоваться, давай настроим его.</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Привет!</value>
+  </data>
+  <data name="IamStudent" xml:space="preserve">
+    <value>Я СТУДЕНТ</value>
+  </data>
+  <data name="IamTeacher" xml:space="preserve">
+    <value>Я ПРЕПОДАВАТЕЛЬ</value>
   </data>
   <data name="Map" xml:space="preserve">
     <value>Карта</value>
@@ -170,6 +186,9 @@
   </data>
   <data name="Teacher" xml:space="preserve">
     <value>Преподаватель</value>
+  </data>
+  <data name="WhoRyou" xml:space="preserve">
+    <value>укажи, кто ты, а дальше мы подскажем</value>
   </data>
   <data name="YouAre" xml:space="preserve">
     <value>Вы...</value>
