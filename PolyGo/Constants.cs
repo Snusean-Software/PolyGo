@@ -9,6 +9,9 @@ namespace PolyGo
     public const string MapDatabaseFilename = "MapDatabase.db3";
     public const string AccountFilename = "Account.txt";
 
+    public const string FacultyGroupsDatabaseFilename = "FacultyGroupsDatabase.db3";
+    public const string RoutsDatabaseFilename = "RoutsDatabase.db3";
+
     private static string basePath =
       Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
@@ -32,6 +35,23 @@ namespace PolyGo
       get
       {
         return Path.Combine(basePath, AccountFilename);
+      }
+    }
+
+    //For adapter classes
+    public static string FacultyGroupsDatabasePath
+    {
+      get
+      {
+        return Path.Combine(basePath, FacultyGroupsDatabaseFilename);
+      }
+    }
+
+    public static string RoutsDatabasePath
+    {
+      get
+      {
+        return Path.Combine(basePath, RoutsDatabaseFilename);
       }
     }
   }

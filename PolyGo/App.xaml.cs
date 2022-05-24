@@ -15,9 +15,11 @@ namespace PolyGo
 
 	  static ScheduleDatabase scheduleDatabase;
 		static MapDatabase mapDatabase;
+		static FacultyGroupsDatabaseAdapter facultyGroupsDatabase;
+		static RoutesDatabaseAdapter rtsDatabase;
 
 		// Create the database connection as a singleton.
-	  internal static ScheduleDatabase SchdlDatabase
+		internal static ScheduleDatabase SchdlDatabase
 		{
 			get
 			{
@@ -38,6 +40,30 @@ namespace PolyGo
 					mapDatabase = new MapDatabase();
 				}
 				return mapDatabase;
+			}
+		}
+
+		internal static FacultyGroupsDatabaseAdapter FgDatabase
+		{
+			get
+			{
+				if (facultyGroupsDatabase == null)
+				{
+					facultyGroupsDatabase = new FacultyGroupsDatabaseAdapter();
+				}
+				return facultyGroupsDatabase;
+			}
+		}
+
+		internal static RoutesDatabaseAdapter RtsDatabase
+		{
+			get
+			{
+				if (rtsDatabase == null)
+				{
+					rtsDatabase = new RoutesDatabaseAdapter();
+				}
+				return rtsDatabase;
 			}
 		}
 
