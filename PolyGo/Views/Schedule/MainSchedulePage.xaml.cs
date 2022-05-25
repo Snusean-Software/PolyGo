@@ -277,12 +277,14 @@ namespace PolyGo.Views.Schedule
 		}
 		private void onDateSelected(object sender, EventArgs e)
 		{
+			nolessons_Image.IsVisible = false;
 			myColl.ItemsSource = null;
 			clearShedulePolygons();
 			configurePolygons();
 
 			var str_weekStart = defineWeekForDay(date_Picker.Date);
 			loadSchedule(str_weekStart);
+
 			calculateNowDayOfWheek();
 		}
 		private void clearShedulePolygons()
@@ -347,15 +349,18 @@ namespace PolyGo.Views.Schedule
 			{
 				if (rt.week_date_start == str_weekStart)
 				{
+					bool noScheduleForThisDay = true;
 					foreach (var day in rt.days)
 					{
 						var dayDate = dateTimeToString(date_Picker.Date).Replace('.', '-'); //yyyy-mm-dd
 						if (day.date == dayDate)
 						{
 							myColl.ItemsSource = day.lessons;
+							noScheduleForThisDay = false;
 							break;
 						}
 					}
+					if(noScheduleForThisDay) nolessons_Image.IsVisible = true;
 
 					flag_ScheduleNotLoad = false;
 					break;
