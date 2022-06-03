@@ -11,6 +11,9 @@ namespace PolyGo.Views.Maps
 	public partial class MapMainBuildingPage : ContentPage
 	{
 		Map map = new Map(MapConstants.MapID.mMainBuilding);
+
+		List<Node> Places = new List<Node>();
+
 		public MapMainBuildingPage()
 		{
 			InitializeComponent();
@@ -18,12 +21,28 @@ namespace PolyGo.Views.Maps
 			up_Button.Source = ImageSource.FromResource("PolyGo.Resources.map.up_button.png", GetType().Assembly);
 			down_Button.Source = ImageSource.FromResource("PolyGo.Resources.map.down_button.png", GetType().Assembly);
 			content_page.BackgroundColor = Color.Ivory;
+
+			foreach(var nd in App.MpDatabase.getNodes((int)MapConstants.MapID.mMainBuilding))
+			{
+				if (nd.Classroom != "-") Places.Add(nd);
+			}
 		}
 
 		MapConstants.Floor floor = MapConstants.Floor.First;
-		string startID = "null";
-		string endID = "null";
-
+		string StartID
+		{
+			get
+			{
+				return start.Text;
+			}
+		}
+		string EndID
+		{
+			get
+			{
+					return finish.Text;
+			}
+		}
 		private void onUpButtonClicked(object sender, EventArgs e)
 		{
 			switch (floor)
@@ -64,60 +83,61 @@ namespace PolyGo.Views.Maps
 					break;
 			}
 		}
-	//	private void startChange(object sender, EventArgs e)
-	//	//{
-	//	//	if (start.Text.Length > 0) startFrame.IsVisible = true;
-	//	//	List<FacultyGroup> places = new List<FacultyGroup>();
-	//	//	int counter = 0;
-	//	//	foreach (var gr in Groups)
-	//	//	{
-	//	//		if (gr.Name.StartsWith(entry.Text))
-	//	//		{
-	//	//			grps.Add(gr);
-	//	//			++counter;
-	//	//			if (counter > 10) break;
-	//	//		}
-	//	//	}
-	//	//	groups.ItemsSource = grps;
-	//	//	if (grps.Count == 0) startFrame.IsVisible = false;
-	//	}
-		
-	//private void finishChange(object sender, EventArgs e)
-	//{
-	//	//{
-	//	//	if (entry.Text.Length > 0) groupsFrame.IsVisible = true;
-	//	//	List<FacultyGroup> grps = new List<FacultyGroup>();
-	//	//	int counter = 0;
-	//	//	foreach (var gr in Groups)
-	//	//	{
-	//	//		if (gr.Name.StartsWith(entry.Text))
-	//	//		{
-	//	//			grps.Add(gr);
-	//	//			++counter;
-	//	//			if (counter > 10) break;
-	//	//		}
-	//	//	}
-	//	//	groups.ItemsSource = grps;
-	//	//	if (grps.Count == 0) groupsFrame.IsVisible = false;
-	//	endID = finish.Text.ToString();
-	//}
+		private void startChange(object sender, EventArgs e)
+		{
+			if (start.Text.Length > 0) startFrame.IsVisible = true;
+			List<Node> pls = new List<Node>();
+			int counter = 0;
+			foreach (var pl in Places)
+			{
+				if (pl.Classroom.StartsWith(start.Text))
+				{
+					pls.Add(pl);
+					++counter;
+					if (counter > 10) break;
+				}
+			}
+			startPoints.ItemsSource = pls;
+			if (pls.Count == 0) startFrame.IsVisible = false;
+		}
 
-	private void startChange(object sender, EventArgs e)
-	{
-		startID = start.Text.ToString();
-	}
 	private void finishChange(object sender, EventArgs e)
 	{
-		endID = finish.Text.ToString();
-	}
+			if (finish.Text.Length > 0) finishFrame.IsVisible = true;
+			List<Node> pls = new List<Node>();
+			int counter = 0;
+			foreach (var pl in Places)
+			{
+				if (pl.Classroom.StartsWith(finish.Text))
+				{
+					pls.Add(pl);
+					++counter;
+					if (counter > 10) break;
+				}
+			}
+			finishPoints.ItemsSource = pls;
+			if (pls.Count == 0) finishFrame.IsVisible = false;
+		}
 	private void routChosen(object sender, EventArgs e)
 		{
 			map.clearMap();
-			if (!map.drawPath(startID, endID))
+			if (!map.drawPath(StartID, EndID))
 			{
 				// TODO error нет такого (таких) узлов
 			}
 			floor_Image.Source = ImageSource.FromStream(() => map.getMapStream(floor));
+		}
+		private void onStartTapped(object sender, EventArgs e)
+		{
+			var label = sender as Label;
+			start.Text = label.Text;
+			startFrame.IsVisible = false;
+		}
+		private void onFinishTapped(object sender, EventArgs e)
+		{
+			var label = sender as Label;
+			finish.Text = label.Text;
+			finishFrame.IsVisible = false;
 		}
 	}
 }
