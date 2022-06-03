@@ -1,19 +1,18 @@
-﻿using PolyGo.SupportFuncs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using PolyGo.Data;
+using PolyGo.Models.Schedule;
+using PolyGo.SupportFuncs;
+using System.Collections.Generic;
 
 namespace PolyGo.Views.InitialSetup
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class GroupNumberPage : ContentPage
 	{
+		private List<FacultyGroup> Groups = App.FgDatabase.FacultyGroups;
 		public GroupNumberPage()
 		{
 			InitializeComponent();
@@ -28,15 +27,33 @@ namespace PolyGo.Views.InitialSetup
 		private void groupChosen(object sender, EventArgs e)
 		{
 			App.user.GroupNum = entry.Text;
+			App.user.LinkSchedule = Groups.Find(x => x.Name == entry.Text).URL;
 			InSetupSupportFuncs.GoToMainShell(App.user);
 		}
-		//public class noLineEntry : Entry
-		//{
 
-		//	public noLineEntry()
-		//	{
-		//		this.Control.SetBackground(null);
-		//	}
-		//}
+		private void GroupNumberChange(object sender, EventArgs e)
+		{
+			if (entry.Text.Length > 0) groupsFrame.IsVisible = true;
+			List<FacultyGroup> grps = new List<FacultyGroup>();
+			int counter = 0;
+			foreach (var gr in Groups)
+			{
+				if (gr.Name.StartsWith(entry.Text))
+				{
+					grps.Add(gr);
+					++counter;
+					if (counter > 10) break;
+				}
+			}
+			groups.ItemsSource = grps;
+			if(grps.Count == 0) groupsFrame.IsVisible = false;
+		}
+
+		private void onGroupTapped(object sender, EventArgs e)
+		{
+			var label = sender as Label;
+			entry.Text = label.Text;
+			groupsFrame.IsVisible = false;
+		}
 	}
 }

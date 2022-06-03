@@ -15,7 +15,6 @@
 			<Setter Property="VerticalTextAlignment" Value="Center"/>
 			<Setter Property="Padding" Value="15,0,15,0"/>
 			<Setter Property="BackgroundColor" Value="#FFFEF8"/>
-			<Setter Property="Text" Value="example"/>
 		</Style>
 	</ContentPage.Resources>
 
@@ -59,19 +58,25 @@
 						     IsVisible="False">
 				<!-- Становится видимым при введённом символе -->
 
-				<!--<CollectionView x:Name="groups">
-							<CollectionView.ItemTemplate>
-								<DataTemplate>-->
-				<ScrollView Orientation="Vertical">
-					<StackLayout Spacing="0">
-						<Label x:Name="finishName" Style="{StaticResource labelStyle}"
-											 IsVisible="False"/>
-						<!-- Становится видимым при введённом символе -->
-					</StackLayout>
-				</ScrollView>
-				<!--</DataTemplate>
-							</CollectionView.ItemTemplate>
-						</CollectionView>-->
+				<CollectionView x:Name="groups">
+					<CollectionView.ItemTemplate>
+						<DataTemplate>
+							<ScrollView Orientation="Vertical">
+								<StackLayout Spacing="0">
+									<Label x:Name="groupName" Text="{Binding Name}"
+												 Style="{StaticResource labelStyle}">
+										<Label.GestureRecognizers>
+											<TapGestureRecognizer Tapped="onGroupTapped"
+																						NumberOfTapsRequired="1"/>
+										</Label.GestureRecognizers>
+									</Label>
+
+									<!-- Становится видимым при введённом символе -->
+								</StackLayout>
+							</ScrollView>
+						</DataTemplate>
+					</CollectionView.ItemTemplate>
+				</CollectionView>
 
 			</Frame>
 			<Frame AbsoluteLayout.LayoutBounds="0.5, 0.06, 0.9, 0.07" 
@@ -90,7 +95,8 @@
 						   Placeholder="введите номер группы"
 						 	 PlaceholderColor="#707074"
 							 ClearButtonVisibility="WhileEditing"
-							 FontSize="20"/>
+							 FontSize="20"
+							 TextChanged="GroupNumberChange"/>
 
 			</Frame>
 

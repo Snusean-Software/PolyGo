@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using System;
+using SQLite;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -34,6 +35,9 @@ namespace PolyGo.Data
 				List<FacultyGroup> fgs = new List<FacultyGroup>();
 				foreach (var fg in database.Table<FacultyGroup>())
 				{
+					fg.Name = fg.Name.Trim('\"');
+					string[] arr = fg.URL.Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries);
+					fg.URL = arr[arr.Length - 1];
 					fgs.Add(fg);
 				}
 

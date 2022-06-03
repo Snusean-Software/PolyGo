@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using PolyGo.Models.Navigation;
+using System.Collections.Generic;
 
 namespace PolyGo.Views.Maps
 {
@@ -63,15 +64,53 @@ namespace PolyGo.Views.Maps
 					break;
 			}
 		}
-		private void startChange(object sender, EventArgs e)
-		{
-			startID = start.Text.ToString();
-		}
-		private void finishChange(object sender, EventArgs e)
-		{
-			endID = finish.Text.ToString();
-		}
-		private void routChosen(object sender, EventArgs e)
+	//	private void startChange(object sender, EventArgs e)
+	//	//{
+	//	//	if (start.Text.Length > 0) startFrame.IsVisible = true;
+	//	//	List<FacultyGroup> places = new List<FacultyGroup>();
+	//	//	int counter = 0;
+	//	//	foreach (var gr in Groups)
+	//	//	{
+	//	//		if (gr.Name.StartsWith(entry.Text))
+	//	//		{
+	//	//			grps.Add(gr);
+	//	//			++counter;
+	//	//			if (counter > 10) break;
+	//	//		}
+	//	//	}
+	//	//	groups.ItemsSource = grps;
+	//	//	if (grps.Count == 0) startFrame.IsVisible = false;
+	//	}
+		
+	//private void finishChange(object sender, EventArgs e)
+	//{
+	//	//{
+	//	//	if (entry.Text.Length > 0) groupsFrame.IsVisible = true;
+	//	//	List<FacultyGroup> grps = new List<FacultyGroup>();
+	//	//	int counter = 0;
+	//	//	foreach (var gr in Groups)
+	//	//	{
+	//	//		if (gr.Name.StartsWith(entry.Text))
+	//	//		{
+	//	//			grps.Add(gr);
+	//	//			++counter;
+	//	//			if (counter > 10) break;
+	//	//		}
+	//	//	}
+	//	//	groups.ItemsSource = grps;
+	//	//	if (grps.Count == 0) groupsFrame.IsVisible = false;
+	//	endID = finish.Text.ToString();
+	//}
+
+	private void startChange(object sender, EventArgs e)
+	{
+		startID = start.Text.ToString();
+	}
+	private void finishChange(object sender, EventArgs e)
+	{
+		endID = finish.Text.ToString();
+	}
+	private void routChosen(object sender, EventArgs e)
 		{
 			map.clearMap();
 			if (!map.drawPath(startID, endID))
