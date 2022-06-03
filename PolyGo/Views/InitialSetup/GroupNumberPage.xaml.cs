@@ -20,20 +20,16 @@ namespace PolyGo.Views.InitialSetup
 			content_page.BackgroundImageSource = ImageSource.FromResource("PolyGo.Resources.SetUp.second_background_image.png", GetType().Assembly);
 		}
 
-		private void checkIfGroup(object sender, EventArgs e)
-		{
-
-		}
 		private async void isReturnButtonClicked(object sender, EventArgs e)
 		{
 			await Shell.Current.GoToAsync($"{nameof(WelcomePage)}?");
 		}
+
 		private void groupChosen(object sender, EventArgs e)
 		{
 			App.user.GroupNum = entry.Text;
 			InSetupSupportFuncs.GoToMainShell(App.user);
 		}
-		
 		//public class noLineEntry : Entry
 		//{
 
