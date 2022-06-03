@@ -93,10 +93,12 @@ namespace PolyGo.Models.Navigation
         using (SKCanvas bitmapCanvas =
           new SKCanvas(Bitmaps[Nodes[path[NodesDrawen]].Floor - 1]))
         {
+          SKColor color;
+          SKColor.TryParse("#AABC3B", out color);
           var painter = new SKPaint
           {
             IsAntialias = true,
-            Color = SKColors.Red,
+            Color = color,
             Style = SKPaintStyle.Fill
           };
           while (NodesDrawen + 1 != path.Count &&
@@ -106,13 +108,13 @@ namespace PolyGo.Models.Navigation
             Node b = Nodes[path[NodesDrawen + 1]];
             if (Math.Abs(a.X - b.X) > Math.Abs(a.Y - b.Y))
             {
-              bitmapCanvas.DrawRect(Math.Min(a.X, b.X), Math.Min(a.Y, b.Y),
-                Math.Abs(a.X - b.X), 5, painter);
+              bitmapCanvas.DrawRoundRect(Math.Min(a.X, b.X), Math.Min(a.Y, b.Y),
+                Math.Abs(a.X - b.X) + 5, 5, 5, 5, painter);
             }
             else
             {
-              bitmapCanvas.DrawRect(Math.Min(a.X, b.X), Math.Min(a.Y, b.Y),
-                5, Math.Abs(a.Y - b.Y), painter);
+              bitmapCanvas.DrawRoundRect(Math.Min(a.X, b.X), Math.Min(a.Y, b.Y),
+                5, Math.Abs(a.Y - b.Y) + 5, 5, 5, painter);
             }
             NodesDrawen++;
           }

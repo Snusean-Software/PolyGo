@@ -20,6 +20,8 @@ namespace PolyGo.Views.Maps
 		}
 
 		MapConstants.Floor floor = MapConstants.Floor.First;
+		string startID = "null";
+		string endID = "null";
 
 		private void onUpButtonClicked(object sender, EventArgs e)
 		{
@@ -63,15 +65,20 @@ namespace PolyGo.Views.Maps
 		}
 		private void startChange(object sender, EventArgs e)
 		{
-
+			startID = start.Text.ToString();
 		}
 		private void finishChange(object sender, EventArgs e)
 		{
-
+			endID = finish.Text.ToString();
 		}
 		private void routChosen(object sender, EventArgs e)
 		{
-
+			map.clearMap();
+			if (!map.drawPath(startID, endID))
+			{
+				// TODO error нет такого (таких) узлов
+			}
+			floor_Image.Source = ImageSource.FromStream(() => map.getMapStream(floor));
 		}
 	}
 }
