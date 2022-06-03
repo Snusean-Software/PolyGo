@@ -76,7 +76,6 @@ namespace PolyGo
 
 		protected override void OnStart()
 		{
-			File.Delete(Constants.AccountPath);
 			FileInfo accInf = new FileInfo(Constants.AccountPath);
 			if (!accInf.Exists)
 			{

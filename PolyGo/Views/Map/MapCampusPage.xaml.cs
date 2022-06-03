@@ -3,16 +3,35 @@ using System.Reflection;
 using System.IO;
 using Xamarin.Forms;
 
+using PolyGo.Models.Navigation;
 using PolyGo.Models.Navigation.CustomRender;
 using Itinero;
 using Itinero.IO.Osm;
 using Itinero.Osm.Vehicles;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using PolyGo.Models.Navigation.Campus;
 
 namespace PolyGo.Views.Maps
 {
   public partial class MapCampusPage : ContentPage
   {
+    List<Place> Places = App.RtsDatabase.Places;
+    List<Models.Navigation.Campus.Route> Routes = App.RtsDatabase.Routes;
+    string StartID
+    {
+      get
+      {
+        return start.Text;
+      }
+    }
+    string EndID
+    {
+      get
+      {
+        return finish.Text;
+      }
+    }
     public MapCampusPage()
     {
       InitializeComponent();
@@ -99,6 +118,61 @@ namespace PolyGo.Views.Maps
       var s = JsonConvert.DeserializeObject(geoJson);
 
       await webView.EvaluateJavaScriptAsync($"addGeoJson({s})");
+    }
+
+    private void startChange(object sender, EventArgs e)
+    {
+      if (start.Text.Length > 0) startFrame.IsVisible = true;
+      List<Place> pls = new List<Place>();
+      int counter = 0;
+      foreach (var pl in Places)
+      {
+        if (pl.Name.StartsWith(start.Text))
+        {
+          pls.Add(pl);
+          ++counter;
+          if (counter > 10) break;
+        }
+      }
+      startPoints.ItemsSource = pls;
+      if (pls.Count == 0) startFrame.IsVisible = false;
+    }
+
+    private void finishChange(object sender, EventArgs e)
+    {
+      if (finish.Text.Length > 0) finishFrame.IsVisible = true;
+      List<Place> pls = new List<Place>();
+      int counter = 0;
+      foreach (var pl in Places)
+      {
+        if (pl.Name.StartsWith(finish.Text))
+        {
+          pls.Add(pl);
+          ++counter;
+          if (counter > 10) break;
+        }
+      }
+      finishPoints.ItemsSource = pls;
+      if (pls.Count == 0) finishFrame.IsVisible = false;
+    }
+    private async void routChosen(object sender, EventArgs e)
+    {
+      var temp = JsonConvert.DeserializeObject(Routes.Find((x => x.Start.StartsWith(StartID) && x.End.StartsWith(EndID))).GeoJSON); //КОСТЫЛЬ, ТАК НЕПРАВИЛЬНО
+
+      await webView.EvaluateJavaScriptAsync($"hideMarkers()");
+      await webView.EvaluateJavaScriptAsync($"addGeoJson({temp})");
+    }
+    private void onStartTapped(object sender, EventArgs e)
+    {
+      var label = sender as Label;
+      start.Text = label.Text;
+      startFrame.IsVisible = false;
+    }
+    private void onFinishTapped(object sender, EventArgs e)
+    {
+      var label = sender as Label;
+      finish.Text = label.Text;
+      finishFrame.IsVisible = false;
     }
   }
 }

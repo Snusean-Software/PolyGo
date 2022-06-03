@@ -1,21 +1,134 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-		 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-		 xmlns:map="clr-namespace:PolyGo.Models.Navigation.CustomRender"
-		 x:Class="PolyGo.Views.Maps.MapCampusPage"
-     Shell.NavBarIsVisible="False">
-  <ContentPage.Content>
-    <StackLayout>
-            <WebView x:Name="webView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="100" Navigating="openBuildingMap"/>
-            <StackLayout>
-                <Button x:Name="Hide" Text="hide marker" Clicked="hideMarkers"/>
-            </StackLayout>
-            <StackLayout>
-                <Button x:Name="Show" Text="show marker" Clicked="showMarkers"/>
-            </StackLayout>
-            <StackLayout>
-                <Button x:Name="Route" Text="route (take 5 seconds)" Clicked="showRoute"/>
-            </StackLayout>
-        </StackLayout>
-  </ContentPage.Content>
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Name="content_page"
+						 xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PolyGo.Views.Maps.MapCampusPage"
+             xmlns:pinch="clr-namespace:Xamarin.Forms.PinchZoomImage;assembly=Xamarin.Forms.PinchZoomImage"
+             Shell.NavBarIsVisible="False">
+
+	<ContentPage.Resources>
+		<Style x:Key="labelStyle" TargetType="Label">
+			<Setter Property="TextColor" Value="#707074"/>
+			<Setter Property="FontSize" Value="19"/>
+			<Setter Property="HeightRequest" Value="35"/>
+			<Setter Property="VerticalTextAlignment" Value="Center"/>
+			<Setter Property="Padding" Value="15,0,15,0"/>
+			<Setter Property="BackgroundColor" Value="#FFFEF8"/>
+			<Setter Property="Text" Value="example"/>
+		</Style>
+	</ContentPage.Resources>
+
+	<ContentPage.Content>
+
+		<AbsoluteLayout VerticalOptions="CenterAndExpand">
+			<WebView x:Name="webView" Navigating="openBuildingMap" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="600"/>
+
+			<Button AbsoluteLayout.LayoutBounds="0.5, 0.2, 0.65, 0.06"
+						  AbsoluteLayout.LayoutFlags="All"
+							BackgroundColor="#AABC3B"
+							CornerRadius="10"
+							Text="ПРОДОЛЖИТЬ"
+							TextColor="#FFFEF8"
+							FontSize="18"
+							FontFamily="MonRegular"
+							Clicked="routChosen">
+
+			</Button>
+			
+			<Frame x:Name="finishFrame" AbsoluteLayout.LayoutBounds="0.5, 0.3, 0.8, 0.5" 
+                 AbsoluteLayout.LayoutFlags="All"
+						     Margin="0,0,0,0"
+						     Padding="0,0,0,0"
+						     BackgroundColor="Transparent"
+						     IsVisible="False">
+
+				<CollectionView x:Name="finishPoints">
+					<CollectionView.ItemTemplate>
+						<DataTemplate>
+							<ScrollView Orientation="Vertical">
+								<StackLayout Spacing="0">
+									<Label x:Name="finishName" Text="{Binding Name}" Style="{StaticResource labelStyle}">
+										<Label.GestureRecognizers>
+											<TapGestureRecognizer Tapped="onFinishTapped"
+																						NumberOfTapsRequired="1"/>
+										</Label.GestureRecognizers>
+									</Label>
+								</StackLayout>
+							</ScrollView>
+						</DataTemplate>
+					</CollectionView.ItemTemplate>
+				</CollectionView>
+
+			</Frame>
+			<Frame AbsoluteLayout.LayoutBounds="0.5, 0.09, 0.9, 0.07" 
+                 AbsoluteLayout.LayoutFlags="All"
+						     Margin="0,0,0,0"
+						     Padding="10,0,10,0"
+						     CornerRadius="10"
+						     HasShadow="True"
+						     BackgroundColor="#FFFEF8">
+
+
+				<Entry x:Name="finish" 
+						     Text=""
+							   TextColor="#707074"
+		  				   MaxLength="56"
+							   Placeholder="Конец маршрута"
+							   PlaceholderColor="#707074"
+							   ClearButtonVisibility="WhileEditing"
+							   TextChanged="finishChange"/>
+			</Frame>
+
+
+
+
+
+
+
+			<Frame x:Name="startFrame" AbsoluteLayout.LayoutBounds="0.5, 0.13, 0.8, 0.5" 
+                 AbsoluteLayout.LayoutFlags="All"
+						     Margin="0,0,0,0"
+						     Padding="0,0,0,0"
+						     BackgroundColor="Transparent"
+						     IsVisible="False">
+
+				<CollectionView x:Name="startPoints">
+					<CollectionView.ItemTemplate>
+						<DataTemplate>
+							<ScrollView Orientation="Vertical">
+								<StackLayout Spacing="0">
+									<Label x:Name="startName" Text="{Binding Name}" Style="{StaticResource labelStyle}">
+										<Label.GestureRecognizers>
+											<TapGestureRecognizer Tapped="onStartTapped"
+																						NumberOfTapsRequired="1"/>
+										</Label.GestureRecognizers>
+									</Label>
+
+								</StackLayout>
+							</ScrollView>
+						</DataTemplate>
+					</CollectionView.ItemTemplate>
+				</CollectionView>
+			</Frame>
+
+			<Frame AbsoluteLayout.LayoutBounds="0.5, 0, 0.9, 0.07" 
+                 AbsoluteLayout.LayoutFlags="All"
+						     Margin="0,0,0,0"
+						     Padding="10,0,10,0"
+						     CornerRadius="10"
+						     HasShadow="True"
+						     BackgroundColor="#FFFEF8">
+
+
+				<Entry x:Name="start" 
+						     Text=""
+							   TextColor="#707074"
+		  				   MaxLength="56"
+							   Placeholder="Начало маршрута"
+							   PlaceholderColor="#707074"
+							   ClearButtonVisibility="WhileEditing"
+							   TextChanged="startChange"/>
+			</Frame>
+		</AbsoluteLayout>
+	</ContentPage.Content>
 </ContentPage>
