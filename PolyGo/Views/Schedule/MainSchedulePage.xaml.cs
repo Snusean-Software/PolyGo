@@ -278,6 +278,7 @@ namespace PolyGo.Views.Schedule
 		private void onDateSelected(object sender, EventArgs e)
 		{
 			nolessons_Image.IsVisible = false;
+			myColl.IsVisible = true;
 			myColl.ItemsSource = null;
 			clearShedulePolygons();
 			configurePolygons();
@@ -360,8 +361,12 @@ namespace PolyGo.Views.Schedule
 							break;
 						}
 					}
-					if(noScheduleForThisDay) nolessons_Image.IsVisible = true;
-
+					if(noScheduleForThisDay)
+					{
+						myColl.IsVisible = false;
+						nolessons_Image.IsVisible = true;
+					}
+						
 					flag_ScheduleNotLoad = false;
 					break;
 				}
