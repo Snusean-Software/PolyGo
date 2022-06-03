@@ -16,15 +16,15 @@ namespace PolyGo.Views.Maps
 			floor_Image.Source = ImageSource.FromStream(() => map.getMapStream(MapConstants.Floor.First));
 			up_Button.Source = ImageSource.FromResource("PolyGo.Resources.map.up_button.png", GetType().Assembly);
 			down_Button.Source = ImageSource.FromResource("PolyGo.Resources.map.down_button.png", GetType().Assembly);
-			decoration.Source = ImageSource.FromResource("PolyGo.Resources.map.start_to_finish_image.png", GetType().Assembly);
+			content_page.BackgroundColor = Color.Ivory;
 		}
 
 		MapConstants.Floor floor = MapConstants.Floor.First;
 
 		private void onUpButtonClicked(object sender, EventArgs e)
 		{
-			switch(floor)
-      {
+			switch (floor)
+			{
 				case MapConstants.Floor.First:
 					floor = MapConstants.Floor.Second;
 					floor_Image.Source = ImageSource.FromStream(() => map.getMapStream(floor));
@@ -60,6 +60,18 @@ namespace PolyGo.Views.Maps
 					floor_Number.Text = (Convert.ToInt32(floor) + 1).ToString();
 					break;
 			}
+		}
+		private void startChange(object sender, EventArgs e)
+		{
+
+		}
+		private void finishChange(object sender, EventArgs e)
+		{
+
+		}
+		private void routChosen(object sender, EventArgs e)
+		{
+
 		}
 	}
 }

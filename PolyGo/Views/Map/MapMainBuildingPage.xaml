@@ -1,71 +1,159 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage x:Name="content_page"
+						 xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PolyGo.Views.Maps.MapMainBuildingPage"
              xmlns:pinch="clr-namespace:Xamarin.Forms.PinchZoomImage;assembly=Xamarin.Forms.PinchZoomImage"
              Shell.NavBarIsVisible="False">
 
-    <ContentPage.Content>
-       
-        <AbsoluteLayout VerticalOptions="CenterAndExpand">
+	<ContentPage.Resources>
+		<Style x:Key="labelStyle" TargetType="Label">
+			<Setter Property="TextColor" Value="#707074"/>
+			<Setter Property="FontSize" Value="19"/>
+			<Setter Property="HeightRequest" Value="35"/>
+			<Setter Property="VerticalTextAlignment" Value="Center"/>
+			<Setter Property="Padding" Value="15,0,15,0"/>
+			<Setter Property="BackgroundColor" Value="#FFFEF8"/>
+			<Setter Property="Text" Value="example"/>
+		</Style>
+	</ContentPage.Resources>
 
-            <BoxView Color="Ivory"
-                     AbsoluteLayout.LayoutBounds="1, 1, 1, 0.85" 
-                     AbsoluteLayout.LayoutFlags="All"/>
+	<ContentPage.Content>
 
-            <pinch:PinchZoom AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1" 
+		<AbsoluteLayout VerticalOptions="CenterAndExpand">
+
+
+			<pinch:PinchZoom AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1" 
                              AbsoluteLayout.LayoutFlags="All">
-                <pinch:PinchZoom.Content>
-                    <Image x:Name="floor_Image"/>
-                </pinch:PinchZoom.Content>
-            </pinch:PinchZoom>
-
-            <BoxView Color="#E1F17B"
-                     AbsoluteLayout.LayoutBounds="1, 0, 1, 0.15" 
-                     AbsoluteLayout.LayoutFlags="All"/>
+				<pinch:PinchZoom.Content>
+					<Image x:Name="floor_Image"/>
+				</pinch:PinchZoom.Content>
+			</pinch:PinchZoom>
 
 
-            <ImageButton x:Name="up_Button" 
+
+
+			<ImageButton x:Name="up_Button" 
                          Clicked="onUpButtonClicked"
                          AbsoluteLayout.LayoutBounds="0.05, 0.90, 0.1, 0.1" 
                          AbsoluteLayout.LayoutFlags="All"
                          BackgroundColor="Color.Transparent"/>
-            
-            <ImageButton x:Name="down_Button"
+
+			<ImageButton x:Name="down_Button"
                          Clicked="onDownButtonClicked"
                          AbsoluteLayout.LayoutBounds="0.05, 1, 0.1, 0.1" 
                          AbsoluteLayout.LayoutFlags="All"
                          BackgroundColor="Color.Transparent"/>
 
-            <Button  Text="Start" 
-                     AbsoluteLayout.LayoutBounds="0.95, 0.01, 0.87, 0.06" 
-                     AbsoluteLayout.LayoutFlags="All" 
-                     BackgroundColor="Color.Transparent"
-                     TextColor="#1E1E1F"
-                     BorderWidth="1"
-                     BorderColor="Gray"
-                     CornerRadius="15"/>
-            
-            <Button  Text="Finish"
-                     AbsoluteLayout.LayoutBounds="0.95, 0.084, 0.87, 0.06" 
-                     AbsoluteLayout.LayoutFlags="All"
-                     BackgroundColor="Color.Transparent"
-                     TextColor="#1E1E1F"
-                     BorderWidth="1"
-                     BorderColor="Gray"
-                     CornerRadius="15"/>
+			<Button AbsoluteLayout.LayoutBounds="0.5, 0.2, 0.65, 0.06"
+						  AbsoluteLayout.LayoutFlags="All"
+							BackgroundColor="#AABC3B"
+							CornerRadius="10"
+							Text="ПРОДОЛЖИТЬ"
+							TextColor="#FFFEF8"
+							FontSize="18"
+							FontFamily="MonRegular"
+							Clicked="routChosen">
 
-            <Image x:Name="decoration"
-                   AbsoluteLayout.LayoutBounds="0.007, 0.015, 0.1, 0.12" 
-                   AbsoluteLayout.LayoutFlags="All"/>
+			</Button>
 
-            <Label x:Name="floor_Number" 
+
+			<Frame AbsoluteLayout.LayoutBounds="0.5, 0.3, 0.8, 0.5" 
+                 AbsoluteLayout.LayoutFlags="All"
+						     Margin="0,0,0,0"
+						     Padding="0,0,0,0"
+						     BackgroundColor="Transparent"
+						     IsVisible="False">
+
+				<!--<CollectionView x:Name="finishPoints">
+							<CollectionView.ItemTemplate>
+								<DataTemplate>-->
+				<ScrollView Orientation="Vertical">
+					<StackLayout Spacing="0">
+						<Label x:Name="finishName" Style="{StaticResource labelStyle}"/>
+					</StackLayout>
+				</ScrollView>
+				<!--</DataTemplate>
+							</CollectionView.ItemTemplate>
+						</CollectionView>-->
+
+			</Frame>
+			<Frame AbsoluteLayout.LayoutBounds="0.5, 0.09, 0.9, 0.07" 
+                 AbsoluteLayout.LayoutFlags="All"
+						     Margin="0,0,0,0"
+						     Padding="10,0,10,0"
+						     CornerRadius="10"
+						     HasShadow="True"
+						     BackgroundColor="#FFFEF8">
+
+
+				<Entry x:Name="finish" 
+						     Text=""
+							   TextColor="#707074"
+		  				   MaxLength="16"
+							   Placeholder="Конец маршрута"
+							   PlaceholderColor="#707074"
+							   ClearButtonVisibility="WhileEditing"
+							   TextChanged="finishChange"/>
+			</Frame>
+
+
+
+
+
+
+
+			<Frame AbsoluteLayout.LayoutBounds="0.5, 0.13, 0.8, 0.5" 
+                 AbsoluteLayout.LayoutFlags="All"
+						     Margin="0,0,0,0"
+						     Padding="0,0,0,0"
+						     BackgroundColor="Transparent"
+						     IsVisible="False">
+
+				<!--<CollectionView x:Name="startPoints">
+							<CollectionView.ItemTemplate>
+								<DataTemplate>-->
+				<ScrollView Orientation="Vertical">
+					<StackLayout Spacing="0">
+						<Label x:Name="startName" Style="{StaticResource labelStyle}"/>
+					</StackLayout>
+				</ScrollView>
+				<!--</DataTemplate>
+							</CollectionView.ItemTemplate>
+						</CollectionView>-->
+			</Frame>
+
+			<Frame AbsoluteLayout.LayoutBounds="0.5, 0, 0.9, 0.07" 
+                 AbsoluteLayout.LayoutFlags="All"
+						     Margin="0,0,0,0"
+						     Padding="10,0,10,0"
+						     CornerRadius="10"
+						     HasShadow="True"
+						     BackgroundColor="#FFFEF8">
+
+
+				<Entry x:Name="start" 
+						     Text=""
+							   TextColor="#707074"
+		  				   MaxLength="14"
+							   Placeholder="Начало маршрута"
+							   PlaceholderColor="#707074"
+							   ClearButtonVisibility="WhileEditing"
+							   TextChanged="startChange"/>
+			</Frame>
+
+
+
+
+
+
+			<Label x:Name="floor_Number" 
                    Text="1" 
                    TextColor="Black" 
                    FontSize="22"
                    AbsoluteLayout.LayoutBounds="0.085, 0.923, 30, 30" 
                    AbsoluteLayout.LayoutFlags="PositionProportional"/>
-            
-        </AbsoluteLayout>
-    </ContentPage.Content>
+
+		</AbsoluteLayout>
+	</ContentPage.Content>
 </ContentPage>
