@@ -1,11 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-	
+
 <ContentPage x:Name="content_page"
 	           xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PolyGo.Views.InitialSetup.GroupNumberPage"
 						 Shell.NavBarIsVisible="False"
 						 xmlns:resources="clr-namespace:PolyGo.Resx">
+
+	<ContentPage.Resources>
+		<Style x:Key="labelStyle" TargetType="Label">
+			<Setter Property="TextColor" Value="#707074"/>
+			<Setter Property="FontSize" Value="19"/>
+			<Setter Property="HeightRequest" Value="35"/>
+			<Setter Property="VerticalTextAlignment" Value="Center"/>
+			<Setter Property="Padding" Value="15,0,15,0"/>
+			<Setter Property="BackgroundColor" Value="#FFFEF8"/>
+			<Setter Property="Text" Value="example"/>
+		</Style>
+	</ContentPage.Resources>
 
 	<ContentPage.Content>
 		<AbsoluteLayout>
@@ -18,22 +30,6 @@
 						 HorizontalOptions="Center"
 						 TextColor="#1E1E1F"/>
 
-			<Frame AbsoluteLayout.LayoutBounds="0.5, 0.06, 0.85, 0.07"
-						 AbsoluteLayout.LayoutFlags="All"
-						 Margin="0,0,0,0"
-						 Padding="10,0,10,0"
-						 CornerRadius="15"
-						 HasShadow="True">
-				<Entry x:Name="entry" 
-							 Text=""
-							 TextColor="#707074"
-							 MaxLength="14"
-						   Placeholder="введите номер группы"
-						 	 PlaceholderColor="#707074"
-							 ClearButtonVisibility="WhileEditing"
-							 Completed ="checkIfGroup"/>
-			</Frame>
-			
 			<Button AbsoluteLayout.LayoutBounds="0.1, 0.15, 0.13, 0.06"
 						  AbsoluteLayout.LayoutFlags="All"
 							BackgroundColor="#FFFEF8"
@@ -55,6 +51,48 @@
 							Clicked="groupChosen">
 
 			</Button>
+
+			<Frame x:Name="groupsFrame" AbsoluteLayout.LayoutBounds="0.5, 0.25, 0.8, 0.5" 
+                 AbsoluteLayout.LayoutFlags="All"
+						     Margin="0,0,0,0"
+						     Padding="0,0,0,0"
+						     IsVisible="False">
+				<!-- Становится видимым при введённом символе -->
+
+				<!--<CollectionView x:Name="groups">
+							<CollectionView.ItemTemplate>
+								<DataTemplate>-->
+				<ScrollView Orientation="Vertical">
+					<StackLayout Spacing="0">
+						<Label x:Name="finishName" Style="{StaticResource labelStyle}"
+											 IsVisible="False"/>
+						<!-- Становится видимым при введённом символе -->
+					</StackLayout>
+				</ScrollView>
+				<!--</DataTemplate>
+							</CollectionView.ItemTemplate>
+						</CollectionView>-->
+
+			</Frame>
+			<Frame AbsoluteLayout.LayoutBounds="0.5, 0.06, 0.9, 0.07" 
+                 AbsoluteLayout.LayoutFlags="All"
+						     Margin="0,0,0,0"
+						     Padding="10,0,10,0"
+						     CornerRadius="15"
+						     HasShadow="True"
+						     BackgroundColor="#FFFEF8">
+
+
+				<Entry x:Name="entry" 
+							 Text=""
+							 TextColor="#707074"
+							 MaxLength="14"
+						   Placeholder="введите номер группы"
+						 	 PlaceholderColor="#707074"
+							 ClearButtonVisibility="WhileEditing"
+							 FontSize="20"/>
+
+			</Frame>
 
 		</AbsoluteLayout>
 	</ContentPage.Content>
