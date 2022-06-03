@@ -25,8 +25,12 @@ namespace PolyGo.SupportFuncs
 			if (user.IsStudent != null)
 			{
 				sw.WriteLine("IsStudent: {0}", user.IsStudent);
-				if ((bool)user.IsStudent 
-					&& user.GroupNum != null) sw.WriteLine("GroupNum: {0}", user.GroupNum);
+				if ((bool)user.IsStudent
+					&& user.GroupNum != null)
+				{
+					sw.WriteLine("GroupNum: {0}", user.GroupNum);
+					sw.WriteLine("Link: {0}", user.LinkSchedule);
+				}
 			}
 
 			sw.Flush();

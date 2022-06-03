@@ -15,7 +15,47 @@ namespace PolyGo
     private static string basePath =
       Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
-    public static string RefToSchedule = "https://ruz.spbstu.ru/api/v1/ruz/scheduler/33742";
+    public static string RefToSchedule
+		{
+			get
+			{
+        var accInfo = File.ReadAllText(AccountPath).Trim();
+        if (!accInfo.Contains("Link:")) return "BASED GIGACHAD";
+
+        string[] words = accInfo.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+        for (int i = 0; i < words.Length; ++i)
+        {
+          if (words[i].StartsWith("Link:"))
+          {
+            return "https://ruz.spbstu.ru/api/v1/ruz/scheduler/" + words[i].Substring(6);
+          }
+        }
+
+        return "base";
+			}
+		}
+
+    public static string IDcurrentGroup
+		{
+			get
+			{
+        var accInfo = File.ReadAllText(AccountPath).Trim();
+        if (!accInfo.Contains("Link:")) return "BASED GIGACHAD";
+
+        string[] words = accInfo.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+        for (int i = 0; i < words.Length; ++i)
+        {
+          if (words[i].StartsWith("Link:"))
+          {
+            return words[i].Substring(6);
+          }
+        }
+
+        return "base";
+      }
+		}
     public static string ScheduleDatabasePath
     {
       get

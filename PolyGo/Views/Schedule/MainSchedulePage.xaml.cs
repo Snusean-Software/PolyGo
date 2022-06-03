@@ -348,7 +348,7 @@ namespace PolyGo.Views.Schedule
 			bool flag_ScheduleNotLoad = true;
 			foreach (var rt in ScheduleData)
 			{
-				if (rt.week_date_start == str_weekStart)
+				if (rt.group_id.ToString() == Constants.IDcurrentGroup && rt.week_date_start == str_weekStart)
 				{
 					bool noScheduleForThisDay = true;
 					foreach (var day in rt.days)

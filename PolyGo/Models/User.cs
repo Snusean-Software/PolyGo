@@ -10,6 +10,7 @@ namespace PolyGo.Models
 		public bool? IsStudent { get; set; }
   	public string GroupNum { get; set; }
 		public string Language { get; set; }
+		public string LinkSchedule { get; set; }
 	}
 }
 
