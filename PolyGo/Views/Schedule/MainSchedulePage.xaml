@@ -68,7 +68,7 @@
 		</Style>
 
 		<Style x:Key="locationOfLessonLabelStyle" TargetType="Label">
-			<Setter Property="AbsoluteLayout.LayoutBounds" Value="0.175, 0.96, 0.6, 0.14"/>
+			<Setter Property="AbsoluteLayout.LayoutBounds" Value="0.3, 0.96, 0.75, 0.14"/>
 			<Setter Property="AbsoluteLayout.LayoutFlags" Value="All"/>
 			<Setter Property="TextColor" Value="#3C3C3C"/>
 			<Setter Property="Text" Value="DL, ауд. Дистанционно"/>
@@ -80,11 +80,6 @@
 			<Setter Property="AbsoluteLayout.LayoutFlags" Value="All"/>
 		</Style>
 
-		<Style x:Key="noLessonsImageStyle" TargetType="Image">
-			<Setter Property="IsVisible" Value="False"/>
-			<Setter Property="AbsoluteLayout.LayoutBounds" Value="0.5, 0.5, 1, 1"/>
-			<Setter Property="AbsoluteLayout.LayoutFlags" Value="All"/>
-		</Style>
 
 	</ContentPage.Resources>
 
@@ -359,11 +354,13 @@
 			</AbsoluteLayout>
 
 		</Frame>
-
-		<Image x:Name="nolessons_Image" Style="{StaticResource noLessonsImageStyle}"
+		
+		<Image x:Name="nolessons_Image"
 							 Margin="20"
 							 VerticalOptions="Center"
-							 HeightRequest="600"/>
+							 HeightRequest="569"
+					     IsVisible="false"/>
+
 
 		<CollectionView x:Name="myColl" HeightRequest="1300">
 			<CollectionView.ItemTemplate>
