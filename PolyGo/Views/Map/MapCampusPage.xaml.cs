@@ -127,7 +127,7 @@ namespace PolyGo.Views.Maps
       int counter = 0;
       foreach (var pl in Places)
       {
-        if (pl.Name.StartsWith(start.Text.ToLower()))
+        if (pl.Name.ToLower().StartsWith(start.Text))
         {
           pls.Add(pl);
           ++counter;
@@ -145,7 +145,7 @@ namespace PolyGo.Views.Maps
       int counter = 0;
       foreach (var pl in Places)
       {
-        if (pl.Name.StartsWith(finish.Text.ToLower()))
+        if (pl.Name.ToLower().StartsWith(finish.Text))
         {
           pls.Add(pl);
           ++counter;
@@ -159,7 +159,6 @@ namespace PolyGo.Views.Maps
     {
       var temp = JsonConvert.DeserializeObject(Routes.Find((x => x.Start.StartsWith(StartID) && x.End.StartsWith(EndID))).GeoJSON); //КОСТЫЛЬ, ТАК НЕПРАВИЛЬНО
 
-      await webView.EvaluateJavaScriptAsync($"hideMarkers()");
       await webView.EvaluateJavaScriptAsync($"addGeoJson({temp})");
     }
     private void onStartTapped(object sender, EventArgs e)
