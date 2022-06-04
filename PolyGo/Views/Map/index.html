@@ -107,8 +107,11 @@
             map.removeLayer(markerGroup);
         }
 
+        var geoJsonGroup = new L.LayerGroup();
         function addGeoJson(data) {
-          L.geoJson(data).addTo(map);
+            geoJsonGroup.clearLayers();
+            geoJsonGroup.addLayer(L.geoJson(data));
+            map.addLayer(geoJsonGroup);
         }
 
     </script>
