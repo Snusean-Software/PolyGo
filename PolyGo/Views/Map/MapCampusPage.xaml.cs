@@ -127,7 +127,7 @@ namespace PolyGo.Views.Maps
       int counter = 0;
       foreach (var pl in Places)
       {
-        if (pl.Name.ToLower().StartsWith(start.Text))
+        if (pl.Name.ToLower().StartsWith(start.Text.ToLower()))
         {
           pls.Add(pl);
           ++counter;
@@ -145,7 +145,7 @@ namespace PolyGo.Views.Maps
       int counter = 0;
       foreach (var pl in Places)
       {
-        if (pl.Name.ToLower().StartsWith(finish.Text))
+        if (pl.Name.ToLower().StartsWith(finish.Text.ToLower()))
         {
           pls.Add(pl);
           ++counter;
