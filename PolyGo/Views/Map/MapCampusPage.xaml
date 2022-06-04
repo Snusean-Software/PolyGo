@@ -9,7 +9,7 @@
 	<ContentPage.Resources>
 		<Style x:Key="labelStyle" TargetType="Label">
 			<Setter Property="TextColor" Value="#707074"/>
-			<Setter Property="FontSize" Value="19"/>
+			<Setter Property="FontSize" Value="15"/>
 			<Setter Property="HeightRequest" Value="35"/>
 			<Setter Property="VerticalTextAlignment" Value="Center"/>
 			<Setter Property="Padding" Value="15,0,15,0"/>
@@ -21,7 +21,12 @@
 	<ContentPage.Content>
 
 		<AbsoluteLayout VerticalOptions="CenterAndExpand">
-			<WebView x:Name="webView" Navigating="openBuildingMap" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="600"/>
+			<WebView x:Name="webView" 
+							 Navigating="openBuildingMap" 
+							 HorizontalOptions="FillAndExpand" 
+							 VerticalOptions="FillAndExpand" 
+							 AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1"
+						   AbsoluteLayout.LayoutFlags="All"/>
 
 			<Button AbsoluteLayout.LayoutBounds="0.5, 0.2, 0.65, 0.06"
 						  AbsoluteLayout.LayoutFlags="All"
