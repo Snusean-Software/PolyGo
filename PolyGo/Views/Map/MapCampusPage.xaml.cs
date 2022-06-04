@@ -159,7 +159,6 @@ namespace PolyGo.Views.Maps
     {
       var temp = JsonConvert.DeserializeObject(Routes.Find((x => x.Start.StartsWith(StartID) && x.End.StartsWith(EndID))).GeoJSON); //КОСТЫЛЬ, ТАК НЕПРАВИЛЬНО
 
-      await webView.EvaluateJavaScriptAsync($"hideMarkers()");
       await webView.EvaluateJavaScriptAsync($"addGeoJson({temp})");
     }
     private void onStartTapped(object sender, EventArgs e)
