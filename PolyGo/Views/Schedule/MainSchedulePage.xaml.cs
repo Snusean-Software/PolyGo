@@ -300,7 +300,7 @@ namespace PolyGo.Views.Schedule
 		}
 		private void onGroupsOfLessonTapped(object sender, EventArgs e)
 		{
-			(((sender as Label).Parent as AbsoluteLayout).Children[7] as Frame).IsVisible = true;
+			(((sender as Label).Parent as AbsoluteLayout).Children[9] as Frame).IsVisible = true;
 		}
 		private void onGroupsOfLessonTapped2(object sender, EventArgs e)
 		{
@@ -364,7 +364,7 @@ namespace PolyGo.Views.Schedule
 					if(noScheduleForThisDay)
 					{
 						myColl.IsVisible = false;
-						nolessons_Image.IsVisible = true;
+						//nolessons_Image.IsVisible = true;
 					}
 						
 					flag_ScheduleNotLoad = false;
