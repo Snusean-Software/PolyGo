@@ -364,7 +364,7 @@ namespace PolyGo.Views.Schedule
 					if(noScheduleForThisDay)
 					{
 						myColl.IsVisible = false;
-						//nolessons_Image.IsVisible = true;
+						nolessons_Image.IsVisible = true;
 					}
 						
 					flag_ScheduleNotLoad = false;
@@ -394,6 +394,7 @@ namespace PolyGo.Views.Schedule
 				}
 			}
 		}
+
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
